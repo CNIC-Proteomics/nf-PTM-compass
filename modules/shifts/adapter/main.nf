@@ -7,7 +7,7 @@ process SHIFTS_ADAPTER {
 
     output:
     path("${input_file.baseName}_SHIFTS.feather"), emit: ofile
-    path("${input_file.baseName}_log.txt"), emit: log
+    // path("${input_file.baseName}_log.txt"), emit: log
 
     script:
     """

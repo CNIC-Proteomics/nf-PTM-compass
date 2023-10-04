@@ -19,8 +19,8 @@
 
 include { SHIFTS_ADAPTER }              from '../modules/shifts/adapter/main'
 include { SHIFTS_DUPLICATE_REMOVER }    from '../modules/shifts/duplicateremover/main'
-// include { SHIFTS_DM_CALIBRATOR }     from '../modules/shifts/dmcalibrator/main'
-// include { SHIFTS_PEAK_MODELLER }     from '../modules/shifts/peakmodeller/main'
+include { SHIFTS_DM_CALIBRATOR }     from '../modules/shifts/dmcalibrator/main'
+include { SHIFTS_PEAK_MODELLER }     from '../modules/shifts/peakmodeller/main'
 
 
 //
@@ -49,14 +49,19 @@ workflow SHIFTS {
     // SUBMODULE: adapter the input files
     //
     SHIFTS_ADAPTER(input_file)
-
-
     //
     // SUBMODULE: remove duplicates
     //
     SHIFTS_DUPLICATE_REMOVER(SHIFTS_ADAPTER.out.ofile)
+    //
+    // SUBMODULE: DM calibrator
+    //
+    SHIFTS_DM_CALIBRATOR(SHIFTS_DUPLICATE_REMOVER.out.ofile)
+    //
+    // SUBMODULE: Peak modelller
+    //
+    SHIFTS_PEAK_MODELLER(SHIFTS_DM_CALIBRATOR.out.ofile)
 
- 
 }
 
 /*

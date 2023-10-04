@@ -8,10 +8,10 @@ PTM-compass workflow
 ```
 nextflow \
     run main.nf   \
-        -profile base \
-        -params-file params.shifts_solver.yml \
-        --input_files "/home/jmrodriguezc/projects/PTMs_nextflow/tests/test2/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
-        --outdir  "/home/jmrodriguezc/projects/PTMs_nextflow/tests/test2/Recom/outdir" \
+        -profile singularity \
+        --params_shifts "/home/jmrodriguezc/ptm-compass/SHIFTS.ini" \
+        --input_files "/home/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
+        --outdir  "/home/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/outdir" \
         -resume
 
 ```
@@ -20,8 +20,8 @@ nextflow \
 nextflow -config nextflow.config \
     run shifts_solver.nf \
         -params-file params.shifts_solver.yml \
-        --input_files "/home/jmrodriguezc/projects/PTMs_nextflow/tests/test2/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
-        --output_dir  "/home/jmrodriguezc/projects/PTMs_nextflow/tests/test2/Recom/outdir" \
+        --input_files "/home/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
+        --output_dir  "/home/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/outdir" \
         -resume
 -->
 

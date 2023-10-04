@@ -6,7 +6,7 @@ process SHIFTS_DUPLICATE_REMOVER {
     path input_file
 
     output:
-    path "${input_file.baseName}_Unique.feather"
+    path "${input_file.baseName}_Unique.feather", emit: ofile
 
     script:
     """
