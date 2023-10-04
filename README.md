@@ -17,12 +17,16 @@ nextflow \
 ```
 
 <!--
-nextflow -config nextflow.config \
-    run shifts_solver.nf \
-        -params-file params.shifts_solver.yml \
-        --input_files "/home/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
-        --output_dir  "/home/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/outdir" \
+
+nextflow \
+    run main.nf   \
+        -profile singularity \
+        --params_shifts "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/ptm-compass/SHIFTS.ini" \
+        --input_files "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
+        --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/outdir2" \
         -resume
+
+        
 -->
 
 
