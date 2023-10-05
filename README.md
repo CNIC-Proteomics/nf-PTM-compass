@@ -17,13 +17,13 @@ nextflow \
 ```
 
 <!--
-
+In DOCKER
 nextflow \
     run main.nf   \
         -profile singularity \
-        --params_shifts "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/ptm-compass/SHIFTS.ini" \
-        --input_files "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
-        --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/outdir2" \
+        --params_shifts "/mnt/tierra/ptm-compass/SHIFTS.ini" \
+        --input_files "/mnt/tierra/tests/test2/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
+        --outdir  "/mnt/tierra/tests/test2/Recom/outdir" \
         -resume
 
         
