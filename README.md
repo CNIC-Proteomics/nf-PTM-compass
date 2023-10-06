@@ -3,8 +3,10 @@ PTM-compass workflow
 
 
 # Usage
-In DOCKER:
+In production (Docker):
 ```
+cd /opt/PTM-compass
+
 nextflow \
     run main.nf   \
         -profile singularity \
@@ -14,8 +16,24 @@ nextflow \
         -resume
 ```
 
-Using Ubuntu (WSL):
+
+Debugging (Docker):
 ```
+cd /mnt/tierra/PTM-compass
+
+nextflow \
+    run main.nf   \
+        -profile singularity \
+        --params_shifts "/mnt/tierra/PTM-compass/SHIFTS.ini" \
+        --input_files "/mnt/tierra/PTM-compass/tests/test1/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
+        --outdir  "/mnt/tierra/PTM-compass/tests/test1" \
+        -resume
+```
+
+Debugging using Ubuntu (WSL):
+```
+cd /home/jmrodriguezc/projects/PTM-compass
+
 nextflow \
     run main.nf   \
         -profile singularity \
