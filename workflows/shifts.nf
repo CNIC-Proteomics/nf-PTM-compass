@@ -60,7 +60,9 @@ workflow SHIFTS {
     //
     // SUBMODULE: Peak modelller
     //
-    SHIFTS_PEAK_MODELLER(SHIFTS_DM_CALIBRATOR.out.ofile)
+    // SHIFTS_PEAK_MODELLER(SHIFTS_DM_CALIBRATOR.out.ofile)
+    SHIFTS_PEAK_MODELLER(SHIFTS_DM_CALIBRATOR.out.collect())
+
 
 }
 

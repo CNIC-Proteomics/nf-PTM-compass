@@ -3,32 +3,32 @@ PTM-compass workflow
 
 
 # Usage
-<!-- nextflow  -c nextflow.config  -bg -q -log demuxRun.log run demuxWithUMI.nf -resume  -params-file 230208_A02012_0014_AHMKVTDRX2.params.yam -->
-
+In DOCKER:
 ```
 nextflow \
     run main.nf   \
         -profile singularity \
-        --params_shifts "/home/jmrodriguezc/ptm-compass/SHIFTS.ini" \
-        --input_files "/home/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
-        --outdir  "/home/jmrodriguezc/projects/ptm-compass/tests/test2/Recom/outdir" \
+        --params_shifts "/mnt/tierra/PTM-compass/SHIFTS.ini" \
+        --input_files "/mnt/tierra/PTM-compass/tests/test1/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
+        --outdir  "/mnt/tierra/PTM-compass/tests/test1" \
+        -resume
+```
+
+Using Ubuntu (WSL):
+```
+nextflow \
+    run main.nf   \
+        -profile singularity \
+        --params_shifts "/home/jmrodriguezc/projects/PTM-compass/SHIFTS.ini" \
+        --input_files "/home/jmrodriguezc/projects/PTM-compass/tests/test1/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
+        --outdir  "/home/jmrodriguezc/projects/PTM-compass/tests/test1" \
         -resume
 
 ```
+
+
 
 <!--
-In DOCKER
-nextflow \
-    run main.nf   \
-        -profile singularity \
-        --params_shifts "/mnt/tierra/ptm-compass/SHIFTS.ini" \
-        --input_files "/mnt/tierra/tests/test2/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
-        --outdir  "/mnt/tierra/tests/test2/Recom/outdir" \
-        -resume
-
-        
--->
-
 
 # iSanXoT workflow for PTMs
 
@@ -51,3 +51,4 @@ p2pq                      (peptido a proteína, sin pasar por qf… )
 
 y aquí echo en falta pdm2pdmq, que es lo que haríamos con el wf antiguo, y vendría bien para comparar.
 
+ -->
