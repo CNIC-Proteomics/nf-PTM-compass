@@ -8,15 +8,16 @@ In production (Docker):
 cd /opt/PTM-compass
 
 nextflow \
+    -log "/var/log/nextflow/nextflow.log" \
     run main.nf   \
         -profile singularity \
-        --params_shifts "/mnt/tierra/PTM-compass/SHIFTS.ini" \
+        --params_shifts "/mnt/tierra/PTM-compass/params/SHIFTS.ini" \
         --input_files "/mnt/tierra/PTM-compass/tests/test1/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
         --outdir  "/mnt/tierra/PTM-compass/tests/test1" \
         -resume
 ```
 
-
+<!-- 
 Debugging (Docker):
 ```
 cd /mnt/tierra/PTM-compass
@@ -42,7 +43,7 @@ nextflow \
         --outdir  "/home/jmrodriguezc/projects/PTM-compass/tests/test1" \
         -resume
 
-```
+``` -->
 
 
 
