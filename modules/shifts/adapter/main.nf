@@ -11,7 +11,7 @@ process SHIFTS_ADAPTER {
 
     script:
     """
-    python /usr/local/shifts_v4/SHIFTSadapter.py -i "${input_file}"
+    source ${SHIFTS_HOME}/env/bin/active && python ${SHIFTS_HOME}/SHIFTSadapter.py -i "${input_file}"
     mv "${input_file.getParent()}/${input_file.baseName}_SHIFTS.feather" "${input_file.getParent()}/${input_file.baseName}_log.txt" .
     """
 }

@@ -11,7 +11,7 @@ process SHIFTS_DM_CALIBRATOR {
 
     script:
     """
-    python /usr/local/shifts_v4/DMcalibrator.py -i "${input_file}" -c "${params.params_shifts}"
+    python ${SHIFTS_HOME}/DMcalibrator.py -i "${input_file}" -c "${params.params_shifts}"
     """
 
 }

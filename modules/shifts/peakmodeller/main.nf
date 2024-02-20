@@ -12,6 +12,6 @@ process SHIFTS_PEAK_MODELLER {
 
     script:
     """
-    python /usr/local/shifts_v4/PeakModeller.py -i "*_Unique_calibrated.feather" -c "${params.params_shifts}"
+    python ${SHIFTS_HOME}/PeakModeller.py -i "*_Unique_calibrated.feather" -c "${params.params_shifts}"
     """
 }

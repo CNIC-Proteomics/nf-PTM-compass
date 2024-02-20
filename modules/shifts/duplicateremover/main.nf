@@ -11,6 +11,6 @@ process SHIFTS_DUPLICATE_REMOVER {
 
     script:
     """
-    python /usr/local/shifts_v4/DuplicateRemover.py -i "${input_file}" -s scan -n num -x xcorr_corr -p sp_score
+    python ${SHIFTS_HOME}/DuplicateRemover.py -i "${input_file}" -s scan -n num -x xcorr_corr -p sp_score
     """
 }
