@@ -73,7 +73,7 @@ workflow SHIFTS {
     //
     // SUBMODULE: Peak inspector
     //
-    SHIFTS_PEAK_INSPECTOR(SHIFTS_PEAK_MODELLER.out.oDMtable)
+    // SHIFTS_PEAK_INSPECTOR(SHIFTS_PEAK_MODELLER.out.oDMtable)
     //
     // SUBMODULE: Peak selector
     //
