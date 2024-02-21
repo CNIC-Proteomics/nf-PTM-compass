@@ -1,4 +1,4 @@
-process SHIFTS_PEAK_INSPECTOR {
+process SHIFTS_RECOM_FILTERER {
 
     label 'process_medium'
 
