@@ -21,6 +21,13 @@ include { SHIFTS_ADAPTER }              from '../modules/shifts/adapter/main'
 include { SHIFTS_DUPLICATE_REMOVER }    from '../modules/shifts/duplicateremover/main'
 include { SHIFTS_DM_CALIBRATOR }     from '../modules/shifts/dmcalibrator/main'
 include { SHIFTS_PEAK_MODELLER }     from '../modules/shifts/peakmodeller/main'
+include { SHIFTS_PEAK_INSPECTOR }     from '../modules/shifts/peakinspector/main'
+include { SHIFTS_PEAK_SELECTOR }     from '../modules/shifts/peakselector/main'
+include { SHIFTS_RECOM_FILTERER }     from '../modules/shifts/recomfilterer/main'
+include { SHIFTS_PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/main'
+
+
+
 
 
 //
@@ -62,6 +69,26 @@ workflow SHIFTS {
     //
     // SHIFTS_PEAK_MODELLER(SHIFTS_DM_CALIBRATOR.out.ofile)
     SHIFTS_PEAK_MODELLER(SHIFTS_DM_CALIBRATOR.out.ofile.collect())
+    //
+    // SUBMODULE: Peak inspector
+    //
+    SHIFTS_PEAK_INSPECTOR(SHIFTS_PEAK_MODELLER.out.oDMtable)
+    //
+    // SUBMODULE: Peak selector
+    //
+    SHIFTS_PEAK_SELECTOR(SHIFTS_PEAK_MODELLER.out.ohistogram)
+    //
+    // SUBMODULE: Recom filterer
+    //
+    SHIFTS_RECOM_FILTERER(SHIFTS_PEAK_MODELLER.out.oDMtable)
+    //
+    // SUBMODULE: Peak assignator
+    //
+    SHIFTS_PEAK_ASSIGNATOR(SHIFTS_RECOM_FILTERER.out.ofile,SHIFTS_PEAK_SELECTOR.out.ofile)
+    //
+    // SUBMODULE: Peak fdrer
+    //
+    SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.ofile)
 
 
 }
