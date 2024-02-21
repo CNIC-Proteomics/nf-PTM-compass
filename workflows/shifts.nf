@@ -81,15 +81,15 @@ workflow SHIFTS {
     //
     // SUBMODULE: Recom filterer
     //
-    SHIFTS_RECOM_FILTERER(SHIFTS_PEAK_MODELLER.out.oDMtable)
+    // SHIFTS_RECOM_FILTERER(SHIFTS_PEAK_MODELLER.out.oDMtable)
     //
     // SUBMODULE: Peak assignator
     //
-    SHIFTS_PEAK_ASSIGNATOR(SHIFTS_RECOM_FILTERER.out.ofile,SHIFTS_PEAK_SELECTOR.out.ofile)
+    // SHIFTS_PEAK_ASSIGNATOR(SHIFTS_RECOM_FILTERER.out.ofile,SHIFTS_PEAK_SELECTOR.out.ofile)
     //
     // SUBMODULE: Peak fdrer
     //
-    SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.ofile)
+    // SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.ofile)
 
 
 }
