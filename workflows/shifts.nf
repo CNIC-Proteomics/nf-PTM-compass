@@ -25,6 +25,7 @@ include { SHIFTS_PEAK_INSPECTOR }     from '../modules/shifts/peakinspector/main
 include { SHIFTS_PEAK_SELECTOR }     from '../modules/shifts/peakselector/main'
 include { SHIFTS_RECOM_FILTERER }     from '../modules/shifts/recomfilterer/main'
 include { SHIFTS_PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/main'
+include { SHIFTS_PEAK_FDRER }     from '../modules/shifts/peakfdrer/main'
 
 
 
