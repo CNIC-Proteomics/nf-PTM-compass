@@ -118,9 +118,9 @@ workflow {
     if ( 'ptm_compass' == params.wkf ) {
         // CNIC_WORKFLOW()
         PTM_COMPASS()
-    } elif ( 'shifts' == params.wkf ) {
+    } else if ( 'shifts' == params.wkf ) {
         SHIFTS()
-    } elif ( 'solver' == params.wkf ) {
+    } else if ( 'solver' == params.wkf ) {
         SOLVER()
     } else {
         println "Define a correctly workflow: [ptm_compass,shifts,solver]"
