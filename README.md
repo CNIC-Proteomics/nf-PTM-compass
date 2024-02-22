@@ -15,6 +15,7 @@ nextflow \
         --params_exp "/mnt/tierra/nf-PTM-compass/tests/test2/experiment_table.txt" \
         --params_shifts "/mnt/tierra/nf-PTM-compass/tests/test2/SHIFTS.ini" \
         -resume
+        
 nextflow \
     -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
