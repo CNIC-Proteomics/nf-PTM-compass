@@ -115,12 +115,12 @@ def multiqc_report = []
 workflow {
 
     // Select the type of workflow
-    if ( 'ptm_compass' == ${params.wkf} ) {
+    if ( 'ptm_compass' == params.wkf ) {
         // CNIC_WORKFLOW()
         PTM_COMPASS()
-    } elif ( 'shifts' == ${params.wkf} ) {
+    } elif ( 'shifts' == params.wkf ) {
         SHIFTS()
-    } elif ( 'solver' == ${params.wkf} ) {
+    } elif ( 'solver' == params.wkf ) {
         SOLVER()
     } else {
         println "Define a correctly workflow: [ptm_compass,shifts,solver]"
