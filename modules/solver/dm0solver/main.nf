@@ -12,6 +12,6 @@ process SOLVER_DM0SOLVER {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakModeller.py -i "${input_file}" -a "${input_file2}" -c "${params.params_file}"
+    source ${SOLVER_HOME}/env/bin/activate && python ${SOLVER_HOME}/DM0SOlver_V2.py -i "${input_file}" -a "${input_file2}" -c "${params.params_file}"
     """
 }
