@@ -27,7 +27,7 @@ include { SOLVER_PROTEIN_ASSIGNER }    from '../modules/solver/proteinassigner/m
 ========================================================================================
 */
 
-workflow SHIFTS {
+workflow SOLVER {
 
     take:
     input_file
