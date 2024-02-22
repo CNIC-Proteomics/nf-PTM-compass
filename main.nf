@@ -33,6 +33,9 @@ include { PTM_COMPASS } from './workflows/ptmcompass'
 //
 
 workflow CNIC_WORKFLOW {
+    // Define a variable to track process order
+    process_order = 0
+
     PTM_COMPASS()
 }
 
