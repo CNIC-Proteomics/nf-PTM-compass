@@ -78,12 +78,21 @@ workflow SHIFTS {
     //
     SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.oPeakassign)
 
+    // return channels
+    ch_DMtable         = SHIFTS_PEAK_MODELLER.out.oDMtable
+    ch_Histogram       = SHIFTS_PEAK_MODELLER.out.oHistogram
+    ch_Apexlist        = SHIFTS_PEAK_SELECTOR.out.oApexlist
+    ch_Recomfiltered   = SHIFTS_RECOM_FILTERER.out.oRecomfiltered
+    ch_Peakassign      = SHIFTS_PEAK_ASSIGNATOR.out.oPeakassign
+    ch_FDRfiltered     = SHIFTS_PEAK_FDRER.out.oFDRfiltered
+
     emit:
-    DMtable         = oDMtable
-    Histogram      = oHistogram
-    Recomfiltered   = oRecomfiltered
-    Peakassign      = oPeakassign
-    Apexlist        = oApexlist
+    DMtable         = ch_DMtable
+    Histogram       = ch_Histogram
+    Apexlist        = ch_Apexlist
+    Recomfiltered   = ch_Recomfiltered
+    Peakassign      = ch_Peakassign
+    FDRfiltered     = ch_FDRfiltered
 }
 
 /*

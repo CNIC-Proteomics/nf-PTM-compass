@@ -97,7 +97,7 @@ workflow PTM_COMPASS {
     //
     // WORKFLOW: Run SOLVER analysis pipeline
     //
-    SOLVER(SHIFTS.out.oFDRfiltered, SHIFTS.out.oApexlist)
+    SOLVER(SHIFTS.out.FDRfiltered, SHIFTS.out.Apexlist)
 }
 
 /*
