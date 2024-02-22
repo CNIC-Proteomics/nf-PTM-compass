@@ -28,24 +28,11 @@ include { SHIFTS_PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/ma
 include { SHIFTS_PEAK_FDRER }     from '../modules/shifts/peakfdrer/main'
 
 
-
-
-
-//
-// SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
-//
-// include { INPUT_CHECK } from '../subworkflows/input_check'
-
-
-
 /*
 ========================================================================================
     RUN MAIN WORKFLOW
 ========================================================================================
 */
-
-// Info required for completion email and summary
-def multiqc_report = []
 
 workflow SHIFTS {
 
@@ -93,22 +80,6 @@ workflow SHIFTS {
 
 
 }
-
-/*
-========================================================================================
-    COMPLETION EMAIL AND SUMMARY
-========================================================================================
-*/
-
-// workflow.onComplete {
-//     if (params.email || params.email_on_fail) {
-//         NfcoreTemplate.email(workflow, params, summary_params, projectDir, log, multiqc_report)
-//     }
-//     NfcoreTemplate.summary(workflow, params, log)
-//     if (params.hook_url) {
-//         NfcoreTemplate.IM_notification(workflow, params, summary_params, projectDir, log)
-//     }
-// }
 
 /*
 ========================================================================================

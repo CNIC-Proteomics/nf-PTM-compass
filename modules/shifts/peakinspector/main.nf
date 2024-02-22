@@ -11,6 +11,6 @@ process SHIFTS_PEAK_INSPECTOR {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakInspector.py -i "${input_file}" -c "${params.params_shifts}"
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakInspector.py -i "${input_file}" -c "${params.params_file}"
     """
 }

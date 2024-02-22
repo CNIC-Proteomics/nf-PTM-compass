@@ -12,6 +12,6 @@ process SHIFTS_PEAK_FDRER {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakFDRer.py -i "${input_file}" -e "${params.params_exp}" -c "${params.params_shifts}"
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakFDRer.py -i "${input_file}" -e "${params.params_exp}" -c "${params.params_file}"
     """
 }

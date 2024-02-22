@@ -12,6 +12,6 @@ process SHIFTS_PEAK_ASSIGNATOR {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakAssignator.py -i "${input_file}" -a "${input_file2}" -c "${params.params_shifts}"
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakAssignator.py -i "${input_file}" -a "${input_file2}" -c "${params.params_file}"
     """
 }

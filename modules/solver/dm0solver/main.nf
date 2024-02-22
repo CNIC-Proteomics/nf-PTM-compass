@@ -1,4 +1,4 @@
-process SOLVER_PEAK_MODELLER {
+process SOLVER_DM0SOLVER {
 
     label 'process_medium'
 
@@ -12,6 +12,6 @@ process SOLVER_PEAK_MODELLER {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakModeller.py -i "*_Unique_calibrated.feather" -c "${params.params_shifts}"
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakModeller.py -i "*_Unique_calibrated.feather" -c "${params.params_file}"
     """
 }
