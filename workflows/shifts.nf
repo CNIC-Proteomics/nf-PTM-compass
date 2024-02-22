@@ -78,7 +78,12 @@ workflow SHIFTS {
     //
     SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.oPeakassign)
 
-
+    emit:
+    DMtable         = oDMtable
+    Histogram      = oHistogram
+    Recomfiltered   = oRecomfiltered
+    Peakassign      = oPeakassign
+    Apexlist        = oApexlist
 }
 
 /*
