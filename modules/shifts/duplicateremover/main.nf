@@ -10,7 +10,6 @@ process SHIFTS_DUPLICATE_REMOVER {
     path "*_log.txt", emit: log
 
     script:
-    process_order++
     """
     source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/DuplicateRemover.py -i "${input_file}" -s scan -n num -x xcorr_corr -p sp_score
     """
