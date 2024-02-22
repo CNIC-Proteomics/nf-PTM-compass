@@ -6,8 +6,8 @@ process SHIFTS_PEAK_FDRER {
     path input_file
 
     output:
-    path "${input_file.baseName}_FDRfiltered.tsv", emit: ofile
-    path "${input_file.baseName}_FDR.tsv", emit: ofile
+    path "${input_file.baseName}_FDRfiltered.tsv", emit: oFDRfiltered
+    path "${input_file.baseName}_FDR.tsv", emit: oFDR
     path "*_log.txt", emit: log
 
     script:
