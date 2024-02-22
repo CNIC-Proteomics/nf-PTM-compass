@@ -1,3 +1,6 @@
+// Import the variables from variables.nf
+include { process_order } from 'variables.nf'
+
 process SHIFTS_ADAPTER {
 
     label 'process_medium'
