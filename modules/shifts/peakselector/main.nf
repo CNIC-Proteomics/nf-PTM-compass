@@ -6,7 +6,7 @@ process SHIFTS_PEAK_SELECTOR {
     path input_file
 
     output:
-    path "PeakModeller_ApexList.txt", emit: ofile
+    path "PeakModeller_ApexList.txt", emit: oApexlist
     path "*_log.txt", emit: log
 
     script:

@@ -30,17 +30,18 @@ include { SOLVER_PROTEIN_ASSIGNER }    from '../modules/solver/proteinassigner/m
 workflow SOLVER {
 
     take:
-    input_file
+    peakfdrer
+    apexlist
 
     main:
     //
-    // SUBMODULE: adapter the input files
+    // SUBMODULE: DM0 solver
     //
-    SOLVER_DM0SOLVER(input_file)
+    SOLVER_DM0SOLVER(peakfdrer, apexlist)
     //
     // SUBMODULE: remove duplicates
     //
-    SOLVER_PROTEIN_ASSIGNER(SOLVER_DM0SOLVER.out.ofile)
+    // SOLVER_PROTEIN_ASSIGNER(SOLVER_DM0SOLVER.out.ofile)
 }
 
 /*

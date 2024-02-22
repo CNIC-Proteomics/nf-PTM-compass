@@ -7,7 +7,7 @@ process SHIFTS_PEAK_ASSIGNATOR {
     path input_file2
 
     output:
-    path "${input_file.baseName}_PeakAssignation.feather", emit: ofile
+    path "${input_file.baseName}_PeakAssignation.feather", emit: oPeakassign
     path "*_log.txt", emit: log
 
     script:

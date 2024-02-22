@@ -97,7 +97,7 @@ workflow PTM_COMPASS {
     //
     // WORKFLOW: Run SOLVER analysis pipeline
     //
-    SOLVER(CREATE_INPUT_CHANNEL.out.input_file)
+    SOLVER(SHIFTS.out.oFDRfiltered, SHIFTS.out.oApexlist)
 }
 
 /*
@@ -123,7 +123,7 @@ workflow {
     } else if ( 'solver' == params.wkf ) {
         SOLVER()
     } else {
-        println "Define a correctly workflow: [ptm_compass,shifts,solver]"
+        println "Define a correct workflow: [ptm_compass,shifts,solver]"
     }
 
 }

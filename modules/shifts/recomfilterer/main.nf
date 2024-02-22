@@ -6,7 +6,7 @@ process SHIFTS_RECOM_FILTERER {
     path input_file
 
     output:
-    path "${input_file.baseName}_RECOMfiltered.feather", emit: ofile
+    path "${input_file.baseName}_RECOMfiltered.feather", emit: oRecomfiltered
     path "*_log.txt", emit: log
 
     script:

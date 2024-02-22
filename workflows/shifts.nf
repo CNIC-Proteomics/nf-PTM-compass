@@ -64,7 +64,7 @@ workflow SHIFTS {
     //
     // SUBMODULE: Peak selector
     //
-    SHIFTS_PEAK_SELECTOR(SHIFTS_PEAK_MODELLER.out.ohistogram)
+    SHIFTS_PEAK_SELECTOR(SHIFTS_PEAK_MODELLER.out.oHistogram)
     //
     // SUBMODULE: Recom filterer
     //
@@ -72,11 +72,11 @@ workflow SHIFTS {
     //
     // SUBMODULE: Peak assignator
     //
-    SHIFTS_PEAK_ASSIGNATOR(SHIFTS_RECOM_FILTERER.out.ofile,SHIFTS_PEAK_SELECTOR.out.ofile)
+    SHIFTS_PEAK_ASSIGNATOR(SHIFTS_RECOM_FILTERER.out.oRecomfiltered,SHIFTS_PEAK_SELECTOR.out.oApexlist)
     //
     // SUBMODULE: Peak fdrer
     //
-    SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.ofile)
+    SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.oPeakassign)
 
 
 }

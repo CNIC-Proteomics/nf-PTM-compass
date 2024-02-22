@@ -7,7 +7,7 @@ process SHIFTS_PEAK_MODELLER {
 
     output:
     path "PeakModeller_DMTable.feather", emit: oDMtable
-    path "PeakModeller_DMHistogram.tsv", emit: ohistogram
+    path "PeakModeller_DMHistogram.tsv", emit: oHistogram
     path "*_log.txt", emit: log
 
     script:
