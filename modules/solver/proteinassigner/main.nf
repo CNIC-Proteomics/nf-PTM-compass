@@ -1,4 +1,4 @@
-process SOLVER_PROTEIN_ASSIGNER {
+process PROTEIN_ASSIGNER {
 
     label 'process_medium'
 

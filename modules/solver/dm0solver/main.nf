@@ -1,4 +1,4 @@
-process SOLVER_DM0SOLVER {
+process DM0SOLVER {
     tag '01'
     label 'process_medium'
 
