@@ -20,12 +20,14 @@ workflow CREATE_INPUT_CHANNEL_SHIFTS {
     println "INPUTS $inputs"
 
     // create channels from input files
-    ch_re_files = Channel.fromPath("$inputs.re_files")
-    ch_exp_table = Channel.fromPath("$inputs.exp_tables")
+    re_files = Channel.fromPath("$inputs.re_files")
+    exp_table = Channel.fromPath("$inputs.exp_tables")
+
+    println "INPUTS $exp_table"
 
     emit:
-    ch_re_files   = ch_re_files
-    ch_exp_table  = ch_exp_table
+    ch_re_files   = re_files
+    ch_exp_table  = exp_table
 }
 
 workflow CREATE_INPUT_CHANNEL_SOLVER {
@@ -42,11 +44,11 @@ workflow CREATE_INPUT_CHANNEL_SOLVER {
     //new Yaml().load(inputs).each({ k, v -> params[k] = v })
     println "INPUTS $inputs"
 
-    // create channels from input files
-    ch_re_files = Channel.fromPath("$inputs.re_files")
-    ch_exp_table = Channel.fromPath("$inputs.exp_tables")
+    // // create channels from input files
+    // ch_re_files = Channel.fromPath("$inputs.re_files")
+    // ch_exp_table = Channel.fromPath("$inputs.exp_tables")
 
-    emit:
-    ch_re_files   = ch_re_files
-    ch_exp_table  = ch_exp_table
+    // emit:
+    // ch_re_files   = ch_re_files
+    // ch_exp_table  = ch_exp_table
 }

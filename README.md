@@ -17,7 +17,7 @@ nextflow \
         -resume
         
 nextflow \
-    -log "/tmp/nf-ptm-compass.log" \
+    -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
         --wkf "ptm_compass" \
         --inputs "/mnt/tierra/nf-PTM-compass/tests/test2/inputs_ptmcompass.yml" \
