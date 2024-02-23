@@ -81,7 +81,6 @@ workflow PTM_COMPASS {
     )
     // WORKFLOW: Run SHIFTS analysis pipeline
     //
-    println "CHANNEL: $CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table"
     SHIFTS(CREATE_INPUT_CHANNEL_SHIFTS.out.ch_re_files, CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table)
     //
     // WORKFLOW: Run SOLVER analysis pipeline
