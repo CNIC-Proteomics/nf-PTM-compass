@@ -4,7 +4,7 @@ process SHIFTS_PEAK_FDRER {
 
     input:
     path input_file
-    path exp_table
+    val  exp_table // get the value of path
 
     output:
     path "${input_file.baseName}_FDRfiltered.tsv", emit: oFDRfiltered

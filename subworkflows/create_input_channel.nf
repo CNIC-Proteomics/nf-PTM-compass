@@ -17,13 +17,10 @@ workflow CREATE_INPUT_CHANNEL_SHIFTS {
     inputs = new Yaml().load(f)
     // add the input files into params variable
     //new Yaml().load(inputs).each({ k, v -> params[k] = v })
-    println "INPUTS $inputs"
 
     // create channels from input files
     re_files = Channel.fromPath("$inputs.re_files")
     exp_table = Channel.fromPath("$inputs.exp_tables")
-
-    println "INPUTS $exp_table"
 
     emit:
     ch_re_files   = re_files

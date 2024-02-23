@@ -77,7 +77,7 @@ workflow SHIFTS {
     //
     // SUBMODULE: Peak fdrer
     //
-    SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.oPeakassign,exp_table)
+    SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.oPeakassign, exp_table)
 
     // return channels
     ch_DMtable         = SHIFTS_PEAK_MODELLER.out.oDMtable
