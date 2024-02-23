@@ -37,7 +37,8 @@ include { SHIFTS_PEAK_FDRER }     from '../modules/shifts/peakfdrer/main'
 workflow SHIFTS {
 
     take:
-    re_files , exp_table
+    re_files
+    exp_table
 
     main:
     //
