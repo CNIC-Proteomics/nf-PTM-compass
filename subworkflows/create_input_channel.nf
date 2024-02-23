@@ -20,7 +20,7 @@ workflow CREATE_INPUT_CHANNEL_SHIFTS {
 
     // create channels from input files
     re_files = Channel.fromPath("${inputs.re_files}", checkIfExists: true)
-    exp_table = Channel.fromPath("${inputs.exp_tables}", checkIfExists: true)
+    exp_table = Channel.fromPath("${inputs.exp_table}", checkIfExists: true)
 
     emit:
     ch_re_files   = re_files
