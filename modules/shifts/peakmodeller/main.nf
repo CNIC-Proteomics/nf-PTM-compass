@@ -1,5 +1,5 @@
 process SHIFTS_PEAK_MODELLER {
-
+    tag '04'
     label 'process_high'
 
     input:

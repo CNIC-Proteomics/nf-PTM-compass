@@ -1,5 +1,5 @@
 process SHIFTS_PEAK_ASSIGNATOR {
-
+    tag '08'
     label 'process_medium'
 
     input:

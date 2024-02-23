@@ -1,5 +1,5 @@
 process SHIFTS_PEAK_INSPECTOR {
-
+    tag '05'
     label 'process_medium'
 
     input:

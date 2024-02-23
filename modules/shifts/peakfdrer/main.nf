@@ -1,5 +1,5 @@
 process SHIFTS_PEAK_FDRER {
-
+    tag '09'
     label 'process_high'
 
     input:

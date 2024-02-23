@@ -1,5 +1,5 @@
 process SHIFTS_DM_CALIBRATOR {
-
+    tag '03'
     label 'process_medium'
 
     input:
