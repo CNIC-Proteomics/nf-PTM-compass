@@ -1,5 +1,5 @@
 process SHIFTS_DUPLICATE_REMOVER {
-    tag '02'
+    // tag '02'
     label 'process_medium'
 
     input:
