@@ -1,6 +1,6 @@
 process SHIFTS_PEAK_FDRER {
 
-    label 'process_medium'
+    label 'process_high'
 
     input:
     path input_file
