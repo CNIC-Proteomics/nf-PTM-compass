@@ -8,12 +8,20 @@ Debugging using Ubuntu (Docker - backend):
 cd /usr/local/nf-PTM-compass
 
 nextflow \
-    -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
+    -log "/tmp/nf-ptm-compass.log" \
     run main.nf   \
         --wkf "ptm_compass" \
-        --input_files "/mnt/tierra/nf-PTM-compass/tests/test2/Recom/JAL_*.txt" \
+        --inputs "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/inputs_ptmcompass.yml" \
+        --outdir  "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2" \
+        --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params.ini" \
+        -resume
+        
+nextflow \
+    -log "/tmp/nf-ptm-compass.log" \
+    run main.nf   \
+        --wkf "ptm_compass" \
+        --inputs "/mnt/tierra/nf-PTM-compass/tests/test2/inputs_ptmcompass.yml" \
         --outdir  "/mnt/tierra/nf-PTM-compass/tests/test2" \
-        --params_exp "/mnt/tierra/nf-PTM-compass/tests/test2/experiment_table.txt" \
         --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/params.ini" \
         -resume
 
@@ -22,6 +30,7 @@ nextflow \
     run main.nf   \
         --wkf "solver" \
         --input_files "/mnt/tierra/nf-PTM-compass/tests/test2/Recom/JAL_*.txt" \
+        PeakModeller_DMTable_RECOMfiltered.feather
         --outdir  "/mnt/tierra/nf-PTM-compass/tests/test2" \
         --params_exp "/mnt/tierra/nf-PTM-compass/tests/test2/experiment_table.txt" \
         --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/params.ini" \

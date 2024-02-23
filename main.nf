@@ -32,9 +32,10 @@ include { SOLVER } from './workflows/solver'
 
 
 //
-// SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
+// SUBWORKFLOW: Consisting of a mix of local
 //
-include { CREATE_INPUT_CHANNEL } from './subworkflows/create_input_channel'
+include { CREATE_INPUT_CHANNEL_SHIFTS } from './subworkflows/create_input_channel'
+include { CREATE_INPUT_CHANNEL_SOLVER } from './subworkflows/create_input_channel'
 
 
 //
@@ -49,51 +50,38 @@ workflow SHIFTS_WORKFLOW {
     //
     // SUBWORKFLOW: Create input channel
     //
-    CREATE_INPUT_CHANNEL (
-        params.input_files
+    CREATE_INPUT_CHANNEL_SHIFTS (
+        params.inputs
     )
     //
     // WORKFLOW: Run SHIFTS analysis pipeline
     //
-    SHIFTS(CREATE_INPUT_CHANNEL.out.input_file)
+    SHIFTS(CREATE_INPUT_CHANNEL_SHIFTS.out.ch_re_files, CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table)
 }
 
 workflow SOLVER_WORKFLOW {
     //
     // SUBWORKFLOW: Create input channel
     //
-    CREATE_INPUT_CHANNEL (
-        params.input_files
+    CREATE_INPUT_CHANNEL_SOLVER (
+        params.inputs
     )
     //
-    // WORKFLOW: Run SHIFTS analysis pipeline
+    // WORKFLOW: Run SOLVER analysis pipeline
     //
-    SOLVER(CREATE_INPUT_CHANNEL.out.input_file)
+    SOLVER(INPUT_CHANNEL_SOLVER.out.ch_FDRfiltered, INPUT_CHANNEL_SOLVER.out.ch_Apexlist)
 }
 
 workflow PTM_COMPASS {
     //
-    // SUBWORKFLOW: Read in samplesheet, validate and stage input files
-    //
-    //
     // SUBWORKFLOW: Create input channel
     //
-    CREATE_INPUT_CHANNEL (
-        params.input_files
+    CREATE_INPUT_CHANNEL_SHIFTS (
+        params.inputs
     )
-    //
-    // SUBWORKFLOW: File preparation
-    //
-    // // Create output dirs
-    // if ( 'output_dir' in params ) {
-    //     output_dir = "$params.output_dir"
-    //     r = file(output_dir).mkdirs()
-    //     println r ? "OK creating the directory: $output_dir" : "Cannot create directory: $output_dir"
-    // }
-    //
     // WORKFLOW: Run SHIFTS analysis pipeline
     //
-    SHIFTS(CREATE_INPUT_CHANNEL.out.input_file)
+    SHIFTS(CREATE_INPUT_CHANNEL_SHIFTS.out.ch_re_files, CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table)
     //
     // WORKFLOW: Run SOLVER analysis pipeline
     //

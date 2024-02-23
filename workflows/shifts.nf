@@ -37,13 +37,14 @@ include { SHIFTS_PEAK_FDRER }     from '../modules/shifts/peakfdrer/main'
 workflow SHIFTS {
 
     take:
-    input_file
+    re_files
+    exp_table
 
     main:
     //
     // SUBMODULE: adapter the input files
     //
-    SHIFTS_ADAPTER(input_file)
+    SHIFTS_ADAPTER(re_files)
     //
     // SUBMODULE: remove duplicates
     //
@@ -76,7 +77,7 @@ workflow SHIFTS {
     //
     // SUBMODULE: Peak fdrer
     //
-    SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.oPeakassign)
+    SHIFTS_PEAK_FDRER(SHIFTS_PEAK_ASSIGNATOR.out.oPeakassign,exp_table)
 
     // return channels
     ch_DMtable         = SHIFTS_PEAK_MODELLER.out.oDMtable

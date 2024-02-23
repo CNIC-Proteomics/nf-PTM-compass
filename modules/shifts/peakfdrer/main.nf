@@ -4,6 +4,7 @@ process SHIFTS_PEAK_FDRER {
 
     input:
     path input_file
+    path exp_table
 
     output:
     path "${input_file.baseName}_FDRfiltered.tsv", emit: oFDRfiltered
@@ -12,6 +13,6 @@ process SHIFTS_PEAK_FDRER {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakFDRer.py -i "${input_file}" -e "${params.params_exp}" -c "${params.params_file}"
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakFDRer.py -i "${input_file}" -e "${exp_table}" -c "${params.params_file}"
     """
 }
