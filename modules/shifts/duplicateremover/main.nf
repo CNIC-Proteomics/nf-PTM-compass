@@ -1,4 +1,4 @@
-process SHIFTS_DUPLICATE_REMOVER {
+process DUPLICATE_REMOVER {
     tag '02'
     label 'process_medium'
 

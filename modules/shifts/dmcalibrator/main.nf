@@ -1,4 +1,4 @@
-process SHIFTS_DM_CALIBRATOR {
+process DM_CALIBRATOR {
     tag '03'
     label 'process_medium'
 

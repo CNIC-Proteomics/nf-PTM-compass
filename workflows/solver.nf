@@ -17,8 +17,8 @@
 ========================================================================================
 */
 
-include { SOLVER_DM0SOLVER }              from '../modules/solver/dm0solver/main'
-include { SOLVER_PROTEIN_ASSIGNER }    from '../modules/solver/proteinassigner/main'
+include { DM0SOLVER }              from '../modules/solver/dm0solver/main'
+include { PROTEIN_ASSIGNER }    from '../modules/solver/proteinassigner/main'
 
 
 /*
@@ -37,11 +37,11 @@ workflow SOLVER {
     //
     // SUBMODULE: DM0 solver
     //
-    SOLVER_DM0SOLVER(peakfdrer, apexlist)
+    DM0SOLVER(peakfdrer, apexlist)
     //
     // SUBMODULE: remove duplicates
     //
-    // SOLVER_PROTEIN_ASSIGNER(SOLVER_DM0SOLVER.out.ofile)
+    // PROTEIN_ASSIGNER(DM0SOLVER.out.ofile)
 }
 
 /*

@@ -1,4 +1,4 @@
-process SHIFTS_PEAK_MODELLER {
+process PEAK_MODELLER {
     tag '04'
     label 'process_high'
 

@@ -1,5 +1,5 @@
-process SHIFTS_ADAPTER {
-    // tag '01'
+process ADAPTER {
+    tag '01'
     label 'process_medium'
 
     input:

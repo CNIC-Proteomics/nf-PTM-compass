@@ -1,4 +1,4 @@
-process SHIFTS_PEAK_FDRER {
+process PEAK_FDRER {
     tag '09'
     label 'process_high'
 

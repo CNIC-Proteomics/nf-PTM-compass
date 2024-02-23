@@ -1,4 +1,4 @@
-process SHIFTS_PEAK_ASSIGNATOR {
+process PEAK_ASSIGNATOR {
     tag '08'
     label 'process_medium'
 

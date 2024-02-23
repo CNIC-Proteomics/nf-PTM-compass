@@ -1,4 +1,4 @@
-process SHIFTS_RECOM_FILTERER {
+process RECOM_FILTERER {
     tag '07'
     label 'process_medium'
 

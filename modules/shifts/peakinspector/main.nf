@@ -1,4 +1,4 @@
-process SHIFTS_PEAK_INSPECTOR {
+process PEAK_INSPECTOR {
     tag '05'
     label 'process_medium'
 
