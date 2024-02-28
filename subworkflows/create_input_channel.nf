@@ -80,7 +80,6 @@ workflow CREATE_INPUT_CHANNEL_REFRAG {
     // create channels from input files
     raw_files = Channel.fromPath("${inputs.raw_files}", checkIfExists: true)
     msf_files = Channel.fromPath("${inputs.msf_files}", checkIfExists: true)
-
     // join two channels based on the file name
     msf_raw_files = joinChannelsFromFilename(raw_files, msf_files)
 
@@ -90,9 +89,11 @@ workflow CREATE_INPUT_CHANNEL_REFRAG {
         dm_file = Channel.value("${inputs.dm_file}")
     } else { exit 1, "ERROR: The 'dm_file' file does not exist" }
 
-
     // create channel for params file
-    params_file = Channel.fromPath("${params_file}", checkIfExists: true)
+    file = new File("${params_file}")
+    if ( file.exists() ) {
+        params_file = Channel.value("${params_file}")
+    } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
     emit:
     ch_msf_raw_files  = msf_raw_files
