@@ -13,6 +13,6 @@ process RE_FRAG {
 
     script:
     """
-    source ${REFRAG_HOME}/env/bin/activate && python ${REFRAG_HOME}/ReFrag.py -i "${msf_files}" -r "${raw_files}" -d "${dm_file}" -c "${params_file}"
+    source ${REFRAG_HOME}/env/bin/activate && python ${REFRAG_HOME}/ReFrag.py -i "${msf_files}" -r "${raw_files}" -d "${dm_file}" -c "${params_file}" -w 20
     """
 }
