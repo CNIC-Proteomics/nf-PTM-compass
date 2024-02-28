@@ -34,24 +34,24 @@ def joinChannelsFromFilename(files1, files2) {
 
     // create a list of tuples with the base name and the file name.
     // This channels is a list of channels (collect()), we have to flatten the list
-    files1 = files1
+    files1
                 // .flatten()
                 .map{  file -> tuple(file.baseName, file) }
                 .view()
-                // .set { files1 }
+                .set { files1 }
 
     // create a list of tuples with the base name and the file name.
-    files2 = files2
+    files2
                 .map { file -> tuple(file.baseName, file) }
                 .view()
-                // .set { files2 }
+                .set { files2 }
 
     // join both channels based on the first element (base name)
-    files3 = files1
+    files1
                 .join(files2)
-                .map { name, ident, mzml -> [ident, mzml] }
+                .map { name, f1, f2 -> [f1, f2] }
                 .view { "value: $it" }
-                // .set { ident_quant }
+                .set { files3 }
 
     return files3
 }
