@@ -78,6 +78,7 @@ workflow REFRAG_WORKFLOW {
     //
     // SUBWORKFLOW: Create input channels
     //
+    println "PARAM: ${params.params_file}"
     CREATE_INPUT_CHANNEL_REFRAG (
         params.inputs
         params.params_file
@@ -85,12 +86,12 @@ workflow REFRAG_WORKFLOW {
     //
     // WORKFLOW: ReFrag analysis
     //
-    REFRAG(
-        CREATE_INPUT_CHANNEL_REFRAG.out.ch_raws,
-        CREATE_INPUT_CHANNEL_REFRAG.out.ch_msf_files,
-        CREATE_INPUT_CHANNEL_REFRAG.out.ch_dm_file,
-        CREATE_INPUT_CHANNEL_REFRAG.out.ch_params_file
-    )
+    // REFRAG(
+    //     CREATE_INPUT_CHANNEL_REFRAG.out.ch_raws,
+    //     CREATE_INPUT_CHANNEL_REFRAG.out.ch_msf_files,
+    //     CREATE_INPUT_CHANNEL_REFRAG.out.ch_dm_file,
+    //     CREATE_INPUT_CHANNEL_REFRAG.out.ch_params_file
+    // )
 }
 
 workflow SHIFTS_WORKFLOW {
