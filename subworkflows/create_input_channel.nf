@@ -34,11 +34,11 @@ def joinChannelsFromFilename(files1, files2) {
 
     // create a list of tuples with the base name and the file name.
     // This channels is a list of channels (collect()), we have to flatten the list
-    files1.view()
-                // // .flatten()
-                // .map{  file -> tuple(file.baseName, file) }
-                // .view()
-                // .set { files1 }
+    files1
+            // .flatten()
+            .map{  file -> tuple(file.baseName, file) }
+            .view()
+            .set { files1 }
 
     // create a list of tuples with the base name and the file name.
     files2.view()
