@@ -23,7 +23,7 @@ nextflow \
         --wkf "refrag" \
         --inputs "/mnt/tierra/nf-PTM-compass/tests/test3/params/inputs_refrag.yml" \
         --outdir  "/mnt/tierra/nf-PTM-compass/tests/test3" \
-        -params-file "/mnt/tierra/nf-SearchEngine/tests/test3/params/params.yml" \
+        -params-file "/mnt/tierra/nf-PTM-compass/tests/test3/params/params.yml" \
         --params_file "/mnt/tierra/nf-PTM-compass/tests/test3/params/ptm-compass.ini" \
         -resume
 

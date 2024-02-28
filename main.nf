@@ -154,7 +154,7 @@ workflow {
     } else if ( 'solver' == params.wkf ) {
         SOLVER_WORKFLOW()
     } else {
-        println "Define a correct workflow: [ptm_compass,shifts,solver]"
+        println "Define a correct workflow: [ptm_compass,refrag,shifts,solver]"
     }
 
 }

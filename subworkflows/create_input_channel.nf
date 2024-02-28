@@ -57,7 +57,7 @@ workflow CREATE_INPUT_CHANNEL_REFRAG {
     dm_file = Channel.fromPath("${inputs.dm_file}", checkIfExists: true)
 
     // create channel for params file
-    params_file = Channel.fromPath("${params_file}", checkIfExists: true)
+    // params_file = Channel.fromPath("${params_file}", checkIfExists: true)
 
     emit:
     ch_raws           = raw_files
