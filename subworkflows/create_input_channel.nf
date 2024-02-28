@@ -53,7 +53,7 @@ def joinChannelsFromFilename(files1, files2) {
     //             .view { "value: $it" }
     //             .set { files3 }
 
-    return files3
+    // return files3
 }
 
 /*
