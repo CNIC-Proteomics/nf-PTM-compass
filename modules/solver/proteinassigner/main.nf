@@ -1,5 +1,5 @@
 process PROTEIN_ASSIGNER {
-
+    tag '02'
     label 'process_medium'
 
     input:
@@ -12,6 +12,7 @@ process PROTEIN_ASSIGNER {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakModeller.py -i "*_Unique_calibrated.feather" -c "${params.params_file}"
+    
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/ProteinAssigner_v4.py -i "*_Unique_calibrated.feather" -c "${params.params_file}"
     """
 }
