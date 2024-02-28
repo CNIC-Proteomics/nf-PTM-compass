@@ -26,7 +26,7 @@ nextflow.enable.dsl = 2
 ========================================================================================
 */
 
-// include { PTM_COMPASS } from './workflows/ptmcompass'
+include { REFRAG } from './workflows/refrag'
 include { SHIFTS } from './workflows/shifts'
 include { SOLVER } from './workflows/solver'
 
