@@ -48,16 +48,16 @@ def joinChannelsFromFilename(ifiles1, ifiles2) {
                 // .view()
                 // .set { files2 }
 
-    files2.view()
-    
-    // // join both channels based on the first element (base name)
-    // files1
-    //             .join(files2)
-    //             .map { name, f1, f2 -> [f1, f2] }
-    //             .view { "value: $it" }
-    //             .set { files3 }
+    // files2.view()
 
-    // return files3
+    // join both channels based on the first element (base name)
+    def files3 = files1
+                .join(files2)
+                .map { name, f1, f2 -> [f1, f2] }
+                .view { "value: $it" }
+                // .set { files3 }
+
+    return files3
 }
 
 /*
