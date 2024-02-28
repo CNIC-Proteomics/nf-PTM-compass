@@ -57,13 +57,14 @@ workflow CREATE_INPUT_CHANNEL_REFRAG {
     dm_file = Channel.fromPath("${inputs.dm_file}", checkIfExists: true)
 
     // create channel for params file
+    println "PARAM0: ${params_file}"
     params_file = Channel.fromPath("${params_file}", checkIfExists: true)
 
     emit:
     ch_raws           = raw_files
     ch_msf_files      = msf_files
     ch_dm_file        = dm_file
-    ch_params_file  = params_file
+    ch_params_file    = params_file
 }
 
 workflow CREATE_INPUT_CHANNEL_SHIFTS {
