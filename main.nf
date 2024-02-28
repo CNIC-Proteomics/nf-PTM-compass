@@ -32,31 +32,83 @@ include { SOLVER } from './workflows/solver'
 
 
 //
-// SUBWORKFLOW: Consisting of a mix of local
+// SUBWORKFLOW: Create input channels
 //
-include { CREATE_INPUT_CHANNEL_SHIFTS } from './subworkflows/create_input_channel'
-include { CREATE_INPUT_CHANNEL_SOLVER } from './subworkflows/create_input_channel'
+include {
+    CREATE_INPUT_CHANNEL_REFRAG;
+    CREATE_INPUT_CHANNEL_SHIFTS;
+    CREATE_INPUT_CHANNEL_SOLVER
+} from './subworkflows/create_input_channel'
 
 
+/*
+========================================================================================
+    DEFINED WORKFLOWS
+========================================================================================
+*/
+
 //
-// WORKFLOW: Run main ptm-compass analysis pipeline
+// WORKFLOW: Run main analysis pipeline
 //
 
-// workflow CNIC_WORKFLOW {
-//     PTM_COMPASS()
-// }
+workflow PTM_COMPASS {
+    //
+    // SUBWORKFLOW: Create input channel
+    //
+    CREATE_INPUT_CHANNEL_SHIFTS (
+        params.inputs
+        params.params_file
+    )
+    // WORKFLOW: Run SHIFTS analysis pipeline
+    //
+    SHIFTS(
+        CREATE_INPUT_CHANNEL_SHIFTS.out.ch_re_files,
+        CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table
+    )
+    //
+    // WORKFLOW: Run SOLVER analysis pipeline
+    //
+    SOLVER(
+        SHIFTS.out.FDRfiltered,
+        SHIFTS.out.Apexlist
+    )
+}
+
+workflow REFRAG_WORKFLOW {
+    //
+    // SUBWORKFLOW: Create input channels
+    //
+    CREATE_INPUT_CHANNEL_REFRAG (
+        params.inputs
+        params.params_file
+    )
+    //
+    // WORKFLOW: ReFrag analysis
+    //
+    REFRAG(
+        CREATE_INPUT_CHANNEL_REFRAG.out.ch_raws,
+        CREATE_INPUT_CHANNEL_REFRAG.out.ch_msf_files,
+        CREATE_INPUT_CHANNEL_REFRAG.out.ch_dm_file,
+        CREATE_INPUT_CHANNEL_REFRAG.out.ch_params_file
+    )
+}
 
 workflow SHIFTS_WORKFLOW {
     //
     // SUBWORKFLOW: Create input channel
     //
     CREATE_INPUT_CHANNEL_SHIFTS (
-        params.inputs
+        params.inputs,
+        params.params_file
     )
     //
     // WORKFLOW: Run SHIFTS analysis pipeline
     //
-    SHIFTS(CREATE_INPUT_CHANNEL_SHIFTS.out.ch_re_files, CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table)
+    SHIFTS(
+        CREATE_INPUT_CHANNEL_SHIFTS.out.ch_re_files,
+        CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table,
+        CREATE_INPUT_CHANNEL_SHIFTS.out.ch_params_file
+    )
 }
 
 workflow SOLVER_WORKFLOW {
@@ -69,24 +121,13 @@ workflow SOLVER_WORKFLOW {
     //
     // WORKFLOW: Run SOLVER analysis pipeline
     //
-    SOLVER(INPUT_CHANNEL_SOLVER.out.ch_FDRfiltered, INPUT_CHANNEL_SOLVER.out.ch_Apexlist)
+    SOLVER(
+        INPUT_CHANNEL_SOLVER.out.ch_FDRfiltered,
+        INPUT_CHANNEL_SOLVER.out.ch_Apexlist
+    )
 }
 
-workflow PTM_COMPASS {
-    //
-    // SUBWORKFLOW: Create input channel
-    //
-    CREATE_INPUT_CHANNEL_SHIFTS (
-        params.inputs
-    )
-    // WORKFLOW: Run SHIFTS analysis pipeline
-    //
-    SHIFTS(CREATE_INPUT_CHANNEL_SHIFTS.out.ch_re_files, CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table)
-    //
-    // WORKFLOW: Run SOLVER analysis pipeline
-    //
-    SOLVER(SHIFTS.out.FDRfiltered, SHIFTS.out.Apexlist)
-}
+
 
 /*
 ========================================================================================
@@ -106,10 +147,12 @@ workflow {
     if ( 'ptm_compass' == params.wkf ) {
         // CNIC_WORKFLOW()
         PTM_COMPASS()
+    } else if ( 'refrag' == params.wkf ) {
+        REFRAG_WORKFLOW()
     } else if ( 'shifts' == params.wkf ) {
-        SHIFTS()
+        SHIFTS_WORKFLOW()
     } else if ( 'solver' == params.wkf ) {
-        SOLVER()
+        SOLVER_WORKFLOW()
     } else {
         println "Define a correct workflow: [ptm_compass,shifts,solver]"
     }

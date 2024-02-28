@@ -2,12 +2,74 @@
 // Create channel for input files
 //
 
+/*
+========================================================================================
+    LOCAL FUNCIOTNS
+========================================================================================
+*/
+
 import org.yaml.snakeyaml.Yaml
 
+// Define a function to check which parameters are missing in the dictionary
+def getMissingParams(Map dictionary, List params) {
+    def missingParams = []
+    // Iterate over each parameter in the list
+    for (param in params) {
+        // Check if the parameter exists in the dictionary
+        if (!dictionary.containsKey(param)) {
+            // If parameter is missing, add it to the list of missing parameters
+            missingParams.add(param)
+        }
+    }
+    // Stop from the missing parameters
+    if (!missingParams.isEmpty()) {
+        exit 1, "ERROR: Missing parameters in dictionary: ${missingParams}"
+    }
+    // Return the list of missing parameters
+    return missingParams
+}
+
+/*
+========================================================================================
+    DEFINED WORKFLOWS
+========================================================================================
+*/
+
+workflow CREATE_INPUT_CHANNEL_REFRAG {
+    take:
+    input_files
+    params_file
+
+    main:
+
+    // read the file with input parameters
+    f = new FileInputStream(new File(input_files))
+    // create yaml
+    inputs = new Yaml().load(f)
+
+    // stop from the missing parameters
+    def requiredParams = ['raw_files','msf_files','dm_file']
+    getMissingParams(inputs, requiredParams)
+
+    // create channels from input files
+    raw_files = Channel.fromPath("${inputs.raw_files}", checkIfExists: true)
+    msf_files = Channel.fromPath("${inputs.msf_files}", checkIfExists: true)
+    dm_file = Channel.fromPath("${inputs.dm_file}", checkIfExists: true)
+
+    // create channel for params file
+    params_file = Channel.fromPath("${params_file}", checkIfExists: true)
+
+    emit:
+    ch_raws           = raw_files
+    ch_msf_files      = msf_files
+    ch_dm_file        = dm_file
+    ch_params_file  = params_file
+}
 
 workflow CREATE_INPUT_CHANNEL_SHIFTS {
     take:
     input_files
+    params_file
 
     main:
 
@@ -18,13 +80,21 @@ workflow CREATE_INPUT_CHANNEL_SHIFTS {
     // add the input files into params variable
     //new Yaml().load(inputs).each({ k, v -> params[k] = v })
 
+    // stop from the missing parameters
+    def requiredParams = ['re_files','exp_table']
+    getMissingParams(inputs, requiredParams)
+
     // create channels from input files
     re_files = Channel.fromPath("${inputs.re_files}", checkIfExists: true)
     exp_table = Channel.fromPath("${inputs.exp_table}", checkIfExists: true)
 
+    // create channel for params file
+    params_file = Channel.fromPath("${params_file}", checkIfExists: true)
+
     emit:
-    ch_re_files   = re_files
-    ch_exp_table  = exp_table
+    ch_re_files     = re_files
+    ch_exp_table    = exp_table
+    ch_params_file  = params_file
 }
 
 workflow CREATE_INPUT_CHANNEL_SOLVER {
@@ -37,8 +107,6 @@ workflow CREATE_INPUT_CHANNEL_SOLVER {
     f = new FileInputStream(new File(input_files))
     // create yaml
     inputs = new Yaml().load(f)
-    // add the input files into params variable
-    //new Yaml().load(inputs).each({ k, v -> params[k] = v })
     println "INPUTS $inputs"
 
     // // create channels from input files

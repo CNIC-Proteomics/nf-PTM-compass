@@ -1,4 +1,4 @@
-name: SHIFTS_ADAPTER
+name: ADAPTER
 description: A module to adapt the input for SHIFTS.
 keywords:
   - MSstats

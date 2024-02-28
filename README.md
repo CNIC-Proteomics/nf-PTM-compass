@@ -3,50 +3,52 @@ Nextflow pipeline for the PTM-compass workflow
 
 
 # Usage
+
 Debugging using Ubuntu (Docker - backend):
 ```
 cd /usr/local/nf-PTM-compass
 
 nextflow \
-    -log "/tmp/nf-ptm-compass.log" \
-    run main.nf   \
-        --wkf "ptm_compass" \
-        --inputs "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/inputs_ptmcompass.yml" \
-        --outdir  "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2" \
-        --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params.ini" \
-        -resume
-        
-nextflow \
     -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
         --wkf "ptm_compass" \
-        --inputs "/mnt/tierra/nf-PTM-compass/tests/test2/inputs_ptmcompass.yml" \
+        --inputs "/mnt/tierra/nf-PTM-compass/tests/test2/params/inputs_ptmcompass.yml" \
         --outdir  "/mnt/tierra/nf-PTM-compass/tests/test2" \
-        --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/params.ini" \
+        --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/params/ptm-compass.ini" \
         -resume
 
 nextflow \
     -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
-        --wkf "solver" \
-        --input_files "/mnt/tierra/nf-PTM-compass/tests/test2/Recom/JAL_*.txt" \
-        PeakModeller_DMTable_RECOMfiltered.feather
-        --outdir  "/mnt/tierra/nf-PTM-compass/tests/test2" \
-        --params_exp "/mnt/tierra/nf-PTM-compass/tests/test2/experiment_table.txt" \
-        --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/params.ini" \
+        --wkf "refrag" \
+        --inputs "/mnt/tierra/nf-PTM-compass/tests/test3/params/inputs_refrag.yml" \
+        --outdir  "/mnt/tierra/nf-PTM-compass/tests/test3" \
+        -params-file "/mnt/tierra/nf-SearchEngine/tests/test3/params/params.yml" \
+        --params_file "/mnt/tierra/nf-PTM-compass/tests/test3/params/ptm-compass.ini" \
         -resume
 
 nextflow \
     -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
-        --params_shifts "/mnt/tierra/nf-PTM-compass/params/SHIFTS.ini" \
-        --input_files "/mnt/tierra/nf-PTM-compass/tests/test1/Recom/JM_HuMarfanPlasma_TMT[0-9].txt" \
+        --wkf "ptm_compass" \
+        --inputs "/mnt/tierra/nf-PTM-compass/tests/test1/params/inputs_ptmcompass.yml" \
         --outdir  "/mnt/tierra/nf-PTM-compass/tests/test1" \
+        --params_file "/mnt/tierra/nf-PTM-compass/tests/test1/params/params.ini" \
         -resume
+
 ```
 
+In Production using the Web Server
 
 
+nextflow \
+    -log "/opt/nextflow/nextflow/log/nf-refrag.log" \
+    run main.nf   \
+        --inputs "/mnt/tierra/nf-ReFrag/tests/test1/params/inputs_refrag.yml" \
+        --outdir  "/mnt/tierra/nf-ReFrag/tests/test1" \
+        -params-file "/mnt/tierra/nf-ReFrag/tests/test1/params/params.yml" \
+        --params_file "/mnt/tierra/nf-ReFrag/tests/test1/params/ReFrag.ini" \
+        -resume
 
 
 <!--
