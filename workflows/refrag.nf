@@ -19,11 +19,12 @@ workflow REFRAG {
     msf_files
     dm_file
     params_file
-    
+
     main:
     //
     // SUBMODULE: execute ReFrag
     //
+    println "PARAM: ${params_file}"
     RE_FRAG(raw_files, msf_files, dm_file, params_file)
 
     // // return channels
