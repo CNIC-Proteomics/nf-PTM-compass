@@ -16,16 +16,15 @@ workflow REFRAG {
 
     take:
     raw_files
-    database
-    decoy_prefix
-    output_format
-    msf_params_file
-
+    msf_files
+    dm_file
+    params_file
+    
     main:
     //
     // SUBMODULE: execute ReFrag
     //
-    RE_FRAG(raw_files, database, decoy_prefix, output_format, msf_params_file)
+    RE_FRAG(raw_files, msf_files, dm_file, params_file)
 
     // // return channels
     // ch_ofile         = MSF.out.ofile
