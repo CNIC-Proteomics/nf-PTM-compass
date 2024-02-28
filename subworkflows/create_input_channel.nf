@@ -30,24 +30,26 @@ def getMissingParams(Map dictionary, List params) {
 }
 
 // def Join two channels based on the file name
-def joinChannelsFromFilename(files1, files2) {
+def joinChannelsFromFilename(ifiles1, ifiles2) {
 
     // create a list of tuples with the base name and the file name.
     // This channels is a list of channels (collect()), we have to flatten the list
-    def fs1 = files1
+    def files1 = ifiles1
             // .flatten()
             .map{  file -> tuple(file.baseName, file) }
             // .view()
             // .set { files1 }
 
-    fs1.view()
+    
 
     // create a list of tuples with the base name and the file name.
-    // files2
-    //             .map { file -> tuple(file.baseName, file) }
-    //             .view()
-    //             .set { files2 }
+    def files2 = ifiles2
+                .map { file -> tuple(file.baseName, file) }
+                // .view()
+                // .set { files2 }
 
+    files2.view()
+    
     // // join both channels based on the first element (base name)
     // files1
     //             .join(files2)
