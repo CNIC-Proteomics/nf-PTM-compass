@@ -15,8 +15,7 @@ include { RE_FRAG }               from '../modules/refrag/main'
 workflow REFRAG {
 
     take:
-    raw_files
-    msf_files
+    raw_msf_files
     dm_file
     params_file
 
@@ -24,7 +23,7 @@ workflow REFRAG {
     //
     // SUBMODULE: execute ReFrag
     //
-    RE_FRAG(raw_files, msf_files, dm_file, params_file)
+    RE_FRAG(raw_msf_files, dm_file, params_file)
 
     // return channels
     ch_ofile         = RE_FRAG.out.ofile

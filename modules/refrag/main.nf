@@ -2,8 +2,7 @@ process RE_FRAG {
     label 'process_high'
 
     input:
-    path raw_files
-    path msf_files
+    tuple path(raw_files), path(msf_files)
     path dm_file
     path params_file
 

@@ -29,32 +29,28 @@ def getMissingParams(Map dictionary, List params) {
     return missingParams
 }
 
-// def Join two channels based on the file name
+// Join two channels based on the file name
 def joinChannelsFromFilename(ifiles1, ifiles2) {
 
     // create a list of tuples with the base name and the file name.
-    // This channels is a list of channels (collect()), we have to flatten the list
-    // def files1 = ifiles1
-    ifiles1
+    def files1 = ifiles1
                     // .flatten()
                     .map{  file -> tuple(file.baseName, file) }
                     // .view()
-                    .set { ifiles1 }
+                    // .set { files1 }
 
     // create a list of tuples with the base name and the file name.
-    // def files2 = ifiles2
-    ifiles2
+    def files2 = ifiles2
                     .map { file -> tuple(file.baseName, file) }
                     // .view()
-                    .set { ifiles2 }
+                    // .set { files2 }
 
     // join both channels based on the first element (base name)
-    // def files3 = files1
-    ifiles1
+    def files3 = files1
                     .join(files2)
                     .map { name, f1, f2 -> [f1, f2] }
-                    .view { "value: $it" }
-                    .set { files3 }
+                    // .view { "value: $it" }
+                    // .set { files3 }
 
     return files3
 }
@@ -84,16 +80,28 @@ workflow CREATE_INPUT_CHANNEL_REFRAG {
     // create channels from input files
     raw_files = Channel.fromPath("${inputs.raw_files}", checkIfExists: true)
     msf_files = Channel.fromPath("${inputs.msf_files}", checkIfExists: true)
-    dm_file = Channel.fromPath("${inputs.dm_file}", checkIfExists: true)
+
+    // join two channels based on the file name
+    msf_raw_files = joinChannelsFromFilename(raw_files, msf_files)
+
+
+    // these files will be used multiple times; So, we have to create a Value Channel and then, check if file exists
+    File file = new File("${inputs.dm_file}")
+    if ( file.exists() ) {
+        dm_file = Channel.value("${inputs.dm_file}")
+    } else { exit 1, "ERROR: The 'dm_file' file does not exist" }
+
+    File file = new File("${inputs.dm_file}")
+    if ( file.exists() ) {
+        dm_file = Channel.value("${inputs.dm_file}")
+    } else { exit 1, "ERROR: The 'dm_file' file does not exist" }
+
 
     // create channel for params file
     params_file = Channel.fromPath("${params_file}", checkIfExists: true)
 
-    joined_msf_raw_files = joinChannelsFromFilename(raw_files, msf_files)
-
     emit:
-    ch_raws           = raw_files
-    ch_msf_files      = msf_files
+    ch_msf_raw_files  = msf_raw_files
     ch_dm_file        = dm_file
     ch_params_file    = params_file
 }
