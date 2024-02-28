@@ -5,13 +5,14 @@ process RE_FRAG {
     path raw_files
     path msf_files
     path dm_file
+    path params_file
 
     output:
-    path "${input_file.baseName}_REFRAG.tsv", emit: oRefrag
+    path "${raw_files.baseName}_REFRAG.tsv", emit: oRefrag
     path "*.log", emit: log
 
     script:
     """
-    source ${REFRAG_HOME}/env/bin/activate && python ${REFRAG_HOME}/ReFrag.py -i "${input_file}" -r "${exp_table}" -d "${dm_file}" -c "${params.params_file}"
+    source ${REFRAG_HOME}/env/bin/activate && python ${REFRAG_HOME}/ReFrag.py -i "${msf_files}" -r "${raw_files}" -d "${dm_file}" -c "${params_file}"
     """
 }
