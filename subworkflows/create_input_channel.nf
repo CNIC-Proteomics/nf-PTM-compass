@@ -84,13 +84,7 @@ workflow CREATE_INPUT_CHANNEL_REFRAG {
     // join two channels based on the file name
     msf_raw_files = joinChannelsFromFilename(raw_files, msf_files)
 
-
     // these files will be used multiple times; So, we have to create a Value Channel and then, check if file exists
-    File file = new File("${inputs.dm_file}")
-    if ( file.exists() ) {
-        dm_file = Channel.value("${inputs.dm_file}")
-    } else { exit 1, "ERROR: The 'dm_file' file does not exist" }
-
     File file = new File("${inputs.dm_file}")
     if ( file.exists() ) {
         dm_file = Channel.value("${inputs.dm_file}")
