@@ -8,7 +8,7 @@ process RE_FRAG {
     path params_file
 
     output:
-    path "${raw_files.baseName}_REFRAG.tsv", emit: oRefrag
+    path "${raw_files.baseName}_REFRAG.tsv", emit: ofile
     path "*.log", emit: log
 
     script:
