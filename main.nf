@@ -56,7 +56,7 @@ workflow PTM_COMPASS {
     // SUBWORKFLOW: Create input channel
     //
     CREATE_INPUT_CHANNEL_SHIFTS (
-        params.inputs
+        params.inputs,
         params.params_file
     )
     // WORKFLOW: Run SHIFTS analysis pipeline
@@ -115,7 +115,8 @@ workflow SOLVER_WORKFLOW {
     // SUBWORKFLOW: Create input channel
     //
     CREATE_INPUT_CHANNEL_SOLVER (
-        params.inputs
+        params.inputs,
+        params.params_file
     )
     //
     // WORKFLOW: Run SOLVER analysis pipeline

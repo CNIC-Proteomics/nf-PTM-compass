@@ -124,7 +124,10 @@ workflow CREATE_INPUT_CHANNEL_SHIFTS {
     exp_table = Channel.fromPath("${inputs.exp_table}", checkIfExists: true)
 
     // create channel for params file
-    params_file = Channel.fromPath("${params_file}", checkIfExists: true)
+    file = new File("${params_file}")
+    if ( file.exists() ) {
+        params_file = Channel.value("${params_file}")
+    } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
     emit:
     ch_re_files     = re_files
@@ -135,6 +138,7 @@ workflow CREATE_INPUT_CHANNEL_SHIFTS {
 workflow CREATE_INPUT_CHANNEL_SOLVER {
     take:
     input_files
+    params_file
 
     main:
 
@@ -144,11 +148,14 @@ workflow CREATE_INPUT_CHANNEL_SOLVER {
     inputs = new Yaml().load(f)
     println "INPUTS $inputs"
 
-    // // create channels from input files
-    // ch_re_files = Channel.fromPath("$inputs.re_files")
-    // ch_exp_table = Channel.fromPath("$inputs.exp_tables")
+    // create channel for params file
+    file = new File("${params_file}")
+    if ( file.exists() ) {
+        params_file = Channel.value("${params_file}")
+    } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
-    // emit:
-    // ch_re_files   = ch_re_files
-    // ch_exp_table  = ch_exp_table
+    emit:
+    ch_re_files     = re_files
+    ch_exp_table    = exp_table
+    ch_params_file  = params_file
 }
