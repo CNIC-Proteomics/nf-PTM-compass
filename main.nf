@@ -67,15 +67,15 @@ workflow PTM_COMPASS {
         CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_exp_table,
         CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_params_file
     )
-    // //
-    // // WORKFLOW: Run SOLVER analysis pipeline
-    // //
-    // SOLVER(
-    //     SHIFTS.out.FDRfiltered,
-    //     SHIFTS.out.Apexlist,
-    //     CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_database,
-    //     CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_params_file
-    // )
+    //
+    // WORKFLOW: Run SOLVER analysis pipeline
+    //
+    SOLVER(
+        SHIFTS.out.FDRfiltered,
+        SHIFTS.out.Apexlist,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_database,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_params_file
+    )
 }
 
 workflow REFRAG_WORKFLOW {
