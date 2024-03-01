@@ -21,12 +21,18 @@ def getMissingParams(Map dictionary, List params) {
             missingParams.add(param)
         }
     }
-    // Stop from the missing parameters
+    // Return the list of missing parameters
+    return missingParams
+}
+
+// Define a function to check which parameters are missing in the dictionary
+def printErrorMissingParams(Map dictionary, List params) {
+    // check which parameters are missing in the dict
+    def missingParams = getMissingParams(dictionary, params)
+    // stop from the missing parameters
     if (!missingParams.isEmpty()) {
         exit 1, "ERROR: Missing parameters in dictionary: ${missingParams}"
     }
-    // Return the list of missing parameters
-    return missingParams
 }
 
 // Join two channels based on the file name
@@ -77,28 +83,34 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
 
     // stop from the missing parameters
     def requiredParams = ['re_files','exp_table','database']
-    getMissingParams(inputs, requiredParams)
+    printErrorMissingParams(inputs, requiredParams)
 
     // create channels from input files
     re_files = Channel.fromPath("${inputs.re_files}", checkIfExists: true)
     exp_table = Channel.fromPath("${inputs.exp_table}", checkIfExists: true)
     database = Channel.fromPath("${inputs.database}", checkIfExists: true)
 
-    // create channel for params file
-    file = new File("${params_file}")
-    if ( file.exists() ) {
-        // def re_params_file = Channel.value("${params_file}")
+    // Check if parameters that are redefined exist
+    def redefinedParams = ['decoy_label']
+    // check which parameters are missing in the dict
+    def missingParams = getMissingParams(params, redefinedParams)
+    println "PARAMS: ${missingParams}"
 
-        // update the database file and decoy_prefix in the parameter file
-        def params_data = Utils.updateIniParams("${params_file}", ['decoy_prefix': ${params.decoy_label}] )
-        println "PARAMS_DATA: ${params_data}"
-        // create param string
-        def params_str = ""
-        params_data.each { key, value -> params_str += "$key = $value\n" }
-        // print the params data
-        def re_params_file = new File("TEST.params")
+    // // create channel for params file
+    // file = new File("${params_file}")
+    // if ( file.exists() ) {
+    //     // def re_params_file = Channel.value("${params_file}")
 
-    } else { exit 1, "ERROR: The 'parameter' file does not exist" }
+    //     // update the database file and decoy_prefix in the parameter file
+    //     def params_data = Utils.updateIniParams("${params_file}", ['decoy_prefix': ${params.decoy_label}] )
+    //     println "PARAMS_DATA: ${params_data}"
+    //     // create param string
+    //     def params_str = ""
+    //     params_data.each { key, value -> params_str += "$key = $value\n" }
+    //     // print the params data
+    //     def re_params_file = new File("TEST.params")
+
+    // } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
 
 
@@ -124,7 +136,7 @@ workflow CREATE_INPUT_CHANNEL_REFRAG {
 
     // stop from the missing parameters
     def requiredParams = ['raw_files','msf_files','dm_file']
-    getMissingParams(inputs, requiredParams)
+    printErrorMissingParams(inputs, requiredParams)
 
     // create channels from input files
     raw_files = Channel.fromPath("${inputs.raw_files}", checkIfExists: true)
@@ -166,7 +178,7 @@ workflow CREATE_INPUT_CHANNEL_SHIFTS {
 
     // stop from the missing parameters
     def requiredParams = ['re_files','exp_table']
-    getMissingParams(inputs, requiredParams)
+    printErrorMissingParams(inputs, requiredParams)
 
     // create channels from input files
     re_files = Channel.fromPath("${inputs.re_files}", checkIfExists: true)
