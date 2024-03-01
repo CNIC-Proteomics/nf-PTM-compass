@@ -94,24 +94,25 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     def redefinedParams = ['decoy_label']
     // check which parameters are missing in the dict
     def missingParams = getMissingParams(params, redefinedParams)
-    if (missingParams.isEmpty()) { // if 
-        // update the database file and decoy_prefix in the parameter file
-        def params_data = Utils.updateIniParams("${params_file}", ['decoy_prefix': ${params.decoy_label}] )
-        println "PARAMS_DATA: ${params_data}"
-        // create param string
-        def params_str = ""
-        params_data.each { key, value -> params_str += "$key = $value\n" }
-        // print the params data
-        def re_params_file = new File("TEST.params")
-    }
-    else {
-        // create channel for params file
-        file = new File("${params_file}")
-        if ( file.exists() ) {
-            params_file = Channel.value("${params_file}")
-        } else { exit 1, "ERROR: The 'parameter' file does not exist" }
+    println "MISSIN: ${missingParams}"
+    // if (missingParams.isEmpty()) {
+    //     // update the database file and decoy_prefix in the parameter file
+    //     def params_data = Utils.updateIniParams("${params_file}", ['decoy_prefix': ${params.decoy_label}] )
+    //     println "PARAMS_DATA: ${params_data}"
+    //     // create param string
+    //     def params_str = ""
+    //     params_data.each { key, value -> params_str += "$key = $value\n" }
+    //     // print the params data
+    //     def re_params_file = new File("TEST.params")
+    // }
+    // else {
+    //     // create channel for params file
+    //     file = new File("${params_file}")
+    //     if ( file.exists() ) {
+    //         params_file = Channel.value("${params_file}")
+    //     } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
-    }
+    // }
 
 
 
