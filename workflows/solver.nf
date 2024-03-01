@@ -32,6 +32,7 @@ workflow SOLVER {
     take:
     peakfdrer
     apexlist
+    database
     params_file
 
     main:
@@ -42,7 +43,7 @@ workflow SOLVER {
     //
     // SUBMODULE: remove duplicates
     //
-    PROTEIN_ASSIGNER(DM0SOLVER.out.ofile, params_file)
+    PROTEIN_ASSIGNER(DM0SOLVER.out.ofile, database, params_file)
 }
 
 /*
