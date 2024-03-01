@@ -39,6 +39,7 @@ workflow SHIFTS {
     take:
     re_files
     exp_table
+    params_file
 
     main:
     //
@@ -52,28 +53,27 @@ workflow SHIFTS {
     //
     // SUBMODULE: DM calibrator
     //
-    DM_CALIBRATOR(DUPLICATE_REMOVER.out.ofile)
+    DM_CALIBRATOR(DUPLICATE_REMOVER.out.ofile, params_file)
     //
     // SUBMODULE: Peak modelller
     //
-    // PEAK_MODELLER(DM_CALIBRATOR.out.ofile)
-    PEAK_MODELLER(DM_CALIBRATOR.out.ofile.collect())
+    PEAK_MODELLER(DM_CALIBRATOR.out.ofile.collect(), params_file)
     //
     // SUBMODULE: Peak inspector
     //
-    // PEAK_INSPECTOR(PEAK_MODELLER.out.oDMtable)
+    // PEAK_INSPECTOR(PEAK_MODELLER.out.oDMtable, params_file)
     //
     // SUBMODULE: Peak selector
     //
-    PEAK_SELECTOR(PEAK_MODELLER.out.oHistogram)
+    PEAK_SELECTOR(PEAK_MODELLER.out.oHistogram, params_file)
     //
     // SUBMODULE: Recom filterer
     //
-    RECOM_FILTERER(PEAK_MODELLER.out.oDMtable)
+    RECOM_FILTERER(PEAK_MODELLER.out.oDMtable, params_file)
     //
     // SUBMODULE: Peak assignator
     //
-    PEAK_ASSIGNATOR(RECOM_FILTERER.out.oRecomfiltered,PEAK_SELECTOR.out.oApexlist)
+    PEAK_ASSIGNATOR(RECOM_FILTERER.out.oRecomfiltered,PEAK_SELECTOR.out.oApexlist, params_file)
     //
     // SUBMODULE: Peak fdrer
     //

@@ -14,6 +14,7 @@ nextflow \
         --wkf "ptm_compass" \
         --inputs "/mnt/tierra/nf-PTM-compass/tests/test2/params/inputs_ptmcompass.yml" \
         --outdir  "/mnt/tierra/nf-PTM-compass/tests/test2" \
+        -params-file "/mnt/tierra/nf-PTM-compass/tests/test2/params/params.yml" \
         --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/params/ptm-compass.ini" \
         -resume
 
@@ -24,7 +25,7 @@ nextflow \
         --inputs "/mnt/tierra/nf-PTM-compass/tests/test3/params/inputs_refrag.yml" \
         --outdir  "/mnt/tierra/nf-PTM-compass/tests/test3" \
         -params-file "/mnt/tierra/nf-PTM-compass/tests/test3/params/params.yml" \
-        --params_file "/mnt/tierra/nf-PTM-compass/tests/test3/params/ReFrag.ini" \
+        --params_file "/mnt/tierra/nf-PTM-compass/tests/test3/params/ptm-compass.ini" \
         -resume
 
 nextflow \
@@ -40,15 +41,6 @@ nextflow \
 
 In Production using the Web Server
 
-
-nextflow \
-    -log "/opt/nextflow/nextflow/log/nf-refrag.log" \
-    run main.nf   \
-        --inputs "/mnt/tierra/nf-ReFrag/tests/test1/params/inputs_refrag.yml" \
-        --outdir  "/mnt/tierra/nf-ReFrag/tests/test1" \
-        -params-file "/mnt/tierra/nf-ReFrag/tests/test1/params/params.yml" \
-        --params_file "/mnt/tierra/nf-ReFrag/tests/test1/params/ReFrag.ini" \
-        -resume
 
 
 <!--

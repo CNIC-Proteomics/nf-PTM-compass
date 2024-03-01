@@ -1,6 +1,7 @@
 process DM_CALIBRATOR {
     tag '03'
     label 'process_medium'
+    path params_file
 
     input:
     path input_file
@@ -11,7 +12,7 @@ process DM_CALIBRATOR {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/DMcalibrator.py -i "${input_file}" -c "${params.params_file}"
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/DMcalibrator.py -i "${input_file}" -c "${params_file}"
     """
 
 }

@@ -4,6 +4,7 @@ process PEAK_MODELLER {
 
     input:
     path input_file
+    path params_file
 
     output:
     path "PeakModeller_DMTable.feather", emit: oDMtable
@@ -12,6 +13,6 @@ process PEAK_MODELLER {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakModeller.py -i "*_Unique_calibrated.feather" -c "${params.params_file}"
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakModeller.py -i "*_Unique_calibrated.feather" -c "${params_file}"
     """
 }

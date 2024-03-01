@@ -5,6 +5,7 @@ process DM0SOLVER {
     input:
     path input_file
     path input_file2
+    path params_file
 
     output:
     path "${input_file.baseName}_DM0S.txt", emit: ofile
@@ -12,6 +13,6 @@ process DM0SOLVER {
 
     script:
     """
-    source ${SOLVER_HOME}/env/bin/activate && python ${SOLVER_HOME}/DM0SOlver_V2.py -i "${input_file}" -a "${input_file2}" -c "${params.params_file}"
+    source ${SOLVER_HOME}/env/bin/activate && python ${SOLVER_HOME}/DM0SOlver_V2.py -i "${input_file}" -a "${input_file2}" -c "${params_file}"
     """
 }

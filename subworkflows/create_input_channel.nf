@@ -61,6 +61,53 @@ def joinChannelsFromFilename(ifiles1, ifiles2) {
 ========================================================================================
 */
 
+workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
+    take:
+    input_files
+    params_file
+
+    main:
+
+    // read the file with input parameters
+    f = new FileInputStream(new File(input_files))
+    // create yaml
+    inputs = new Yaml().load(f)
+    // add the input files into params variable
+    //new Yaml().load(inputs).each({ k, v -> params[k] = v })
+
+    // stop from the missing parameters
+    def requiredParams = ['re_files','exp_table','database']
+    getMissingParams(inputs, requiredParams)
+
+    // create channels from input files
+    re_files = Channel.fromPath("${inputs.re_files}", checkIfExists: true)
+    exp_table = Channel.fromPath("${inputs.exp_table}", checkIfExists: true)
+    database = Channel.fromPath("${inputs.database}", checkIfExists: true)
+
+    // create channel for params file
+    file = new File("${params_file}")
+    if ( file.exists() ) {
+        params_file = Channel.value("${params_file}")
+    } else { exit 1, "ERROR: The 'parameter' file does not exist" }
+
+    // update the database file and decoy_prefix in the parameter file
+    def params_data = Utils.updateIniParams(params_file, ['decoy_prefix': decoy_label] )
+    println "PARAMS_DATA: ${params_data}"
+    // create param string
+    def params_str = ""
+    params_data.each { key, value -> params_str += "$key = $value\n" }
+    // print the params data
+    def params_file = new File("TEST.params")
+
+
+
+    emit:
+    ch_re_files     = re_files
+    ch_exp_table    = exp_table
+    ch_database     = database
+    ch_params_file  = params_file
+}
+
 workflow CREATE_INPUT_CHANNEL_REFRAG {
     take:
     input_files

@@ -4,6 +4,7 @@ process PEAK_SELECTOR {
 
     input:
     path input_file
+    path params_file
 
     output:
     path "PeakModeller_ApexList.txt", emit: oApexlist
@@ -11,6 +12,6 @@ process PEAK_SELECTOR {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakSelector.py -i "${input_file}" -c "${params.params_file}"
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakSelector.py -i "${input_file}" -c "${params_file}"
     """
 }

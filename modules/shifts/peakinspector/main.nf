@@ -4,6 +4,7 @@ process PEAK_INSPECTOR {
 
     input:
     path input_file
+    path params_file
 
     output:
     path "${input_file.baseName}_calibrated.feather", emit: ofile
@@ -11,6 +12,6 @@ process PEAK_INSPECTOR {
 
     script:
     """
-    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakInspector.py -i "${input_file}" -c "${params.params_file}"
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakInspector.py -i "${input_file}" -c "${params_file}"
     """
 }
