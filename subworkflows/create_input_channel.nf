@@ -94,24 +94,24 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     def redefinedParams = ['decoy_label']
     // check which parameters are missing in the dict
     def missingParams = getMissingParams(params, redefinedParams)
-    println "PARAMS: ${missingParams}"
+    if (missingParams.isEmpty()) { // if 
+        // update the database file and decoy_prefix in the parameter file
+        def params_data = Utils.updateIniParams("${params_file}", ['decoy_prefix': ${params.decoy_label}] )
+        println "PARAMS_DATA: ${params_data}"
+        // create param string
+        def params_str = ""
+        params_data.each { key, value -> params_str += "$key = $value\n" }
+        // print the params data
+        def re_params_file = new File("TEST.params")
+    }
+    else {
+        // create channel for params file
+        file = new File("${params_file}")
+        if ( file.exists() ) {
+            params_file = Channel.value("${params_file}")
+        } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
-    // // create channel for params file
-    // file = new File("${params_file}")
-    // if ( file.exists() ) {
-    //     // def re_params_file = Channel.value("${params_file}")
-
-    //     // update the database file and decoy_prefix in the parameter file
-    //     def params_data = Utils.updateIniParams("${params_file}", ['decoy_prefix': ${params.decoy_label}] )
-    //     println "PARAMS_DATA: ${params_data}"
-    //     // create param string
-    //     def params_str = ""
-    //     params_data.each { key, value -> params_str += "$key = $value\n" }
-    //     // print the params data
-    //     def re_params_file = new File("TEST.params")
-
-    // } else { exit 1, "ERROR: The 'parameter' file does not exist" }
-
+    }
 
 
 
@@ -119,7 +119,7 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     ch_re_files     = re_files
     ch_exp_table    = exp_table
     ch_database     = database
-    ch_params_file  = re_params_file
+    ch_params_file  = params_file
 }
 
 workflow CREATE_INPUT_CHANNEL_REFRAG {
