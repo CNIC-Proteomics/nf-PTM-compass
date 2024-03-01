@@ -97,7 +97,8 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     if (missingParams.isEmpty()) {
         // println "PASA: ${params_file.toString()}"
         // update the database file and decoy_prefix in the parameter file
-        def params_data = Utils.updateIniParams(params_file, ['decoy_prefix': ${params.decoy_label}] )
+        //def params_data = Utils.updateIniParams(params_file, ['decoy_prefix': ${params.decoy_label}] )
+        def params_data = Utils.updateIniParams('KK', ['decoy_prefix': ${params.decoy_label}] )
         println "PARAMS_DATA: ${params_data}"
         // // create param string
         // def params_str = ""
