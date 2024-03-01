@@ -58,7 +58,6 @@ class Utils {
     static def parseMsfFile(fileName) {
         // declare variables
         def result = [:]
-        // 
         try {
             def fileReader = new File(fileName).text
             def currentSection = null
@@ -89,16 +88,15 @@ class Utils {
     //
     // Update the INI parameter file with the provided parameters
     //
-    public static String updateIniParams(ini_file, replaces) {
+    public static String updateIniParams(ifile, replaces) {
 
-        ini_file = "/home/jmrodriguezc/projects/nf-ReFrag/params/SHIFTS.ini"
-        ini_file = "/home/jmrodriguezc/projects/nf-ReFrag/tests/test1/params/closed_fragger.params"
-        // ini_file = "/tmp/config.ini"
-        println("PARAM_FILE ${ini_file}")
+        // ifile = "/home/jmrodriguezc/projects/nf-ReFrag/params/SHIFTS.ini"
+        // ifile = "/home/jmrodriguezc/projects/nf-ReFrag/tests/test1/params/closed_fragger.params"
+        // // ifile = "/tmp/config.ini"
+        println("PARAM_FILE ${ifile}")
 
-        def fileName = ini_file
         // parse the INI file
-        def param_data = parseIniFile(fileName)
+        def param_data = parseIniFile(ifile)
         param_data.each { entry ->
             println "Section: ${entry.section}, Key: ${entry.key}, Value: ${entry.value}"
         }
