@@ -95,7 +95,7 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     // check which parameters are missing in the dict
     def missingParams = getMissingParams(params, redefinedParams)
     if (missingParams.isEmpty()) {
-        println "PASA: ${params_file}"
+        println "PASA: ${params_file.toString()}"
         // update the database file and decoy_prefix in the parameter file
         def params_data = Utils.updateIniParams("${params_file}", ['decoy_prefix': ${params.decoy_label}] )
         println "PARAMS_DATA: ${params_data}"
