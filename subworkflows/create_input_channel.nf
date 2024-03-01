@@ -85,8 +85,8 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     database = Channel.fromPath("${inputs.database}", checkIfExists: true)
 
     // create channel for params file
-    file = new File("${params_file}")
-    if ( file.exists() ) {
+    // file = new File("${params_file}")
+    // if ( file.exists() ) {
         // def p_file = Channel.value("${params_file}")
 
         // update the database file and decoy_prefix in the parameter file
@@ -98,7 +98,7 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
         // print the params data
         def params2_file = new File("TEST.params")
 
-    } else { exit 1, "ERROR: The 'parameter' file does not exist" }
+    // } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
 
 
