@@ -60,6 +60,7 @@ workflow PTM_COMPASS {
         params.inputs,
         params.params_file
     )
+    println "PARAMS ${CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_params_file}"
     // WORKFLOW: Run SHIFTS analysis pipeline
     //
     SHIFTS(
