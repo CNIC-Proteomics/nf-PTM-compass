@@ -35,6 +35,7 @@ include { SOLVER } from './workflows/solver'
 // SUBWORKFLOW: Create input channels
 //
 include {
+    CREATE_INPUT_CHANNEL_PTMCOMPASS;
     CREATE_INPUT_CHANNEL_REFRAG;
     CREATE_INPUT_CHANNEL_SHIFTS;
     CREATE_INPUT_CHANNEL_SOLVER

@@ -85,9 +85,9 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     database = Channel.fromPath("${inputs.database}", checkIfExists: true)
 
     // create channel for params file
-    // file = new File("${params_file}")
-    // if ( file.exists() ) {
-        // def p_file = Channel.value("${params_file}")
+    file = new File("${params_file}")
+    if ( file.exists() ) {
+        // def re_params_file = Channel.value("${params_file}")
 
         // update the database file and decoy_prefix in the parameter file
         def params_data = Utils.updateIniParams("${params_file}", ['decoy_prefix': ${params.decoy_label}] )
@@ -96,9 +96,9 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
         def params_str = ""
         params_data.each { key, value -> params_str += "$key = $value\n" }
         // print the params data
-        def params2_file = new File("TEST.params")
+        def re_params_file = new File("TEST.params")
 
-    // } else { exit 1, "ERROR: The 'parameter' file does not exist" }
+    } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
 
 
@@ -107,7 +107,7 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     ch_re_files     = re_files
     ch_exp_table    = exp_table
     ch_database     = database
-    ch_params_file  = params_file
+    ch_params_file  = re_params_file
 }
 
 workflow CREATE_INPUT_CHANNEL_REFRAG {
