@@ -90,16 +90,16 @@ class Utils {
     //
     public static String updateIniParams(ifile, replaces) {
 
-        // ifile = "/home/jmrodriguezc/projects/nf-ReFrag/params/SHIFTS.ini"
-        // ifile = "/home/jmrodriguezc/projects/nf-ReFrag/tests/test1/params/closed_fragger.params"
-        // // ifile = "/tmp/config.ini"
+        ifile = "/home/jmrodriguezc/projects/nf-ReFrag/params/SHIFTS.ini"
+        ifile = "/home/jmrodriguezc/projects/nf-ReFrag/tests/test1/params/closed_fragger.params"
+        // ifile = "/tmp/config.ini"
         println("PARAM_FILE ${ifile}")
 
-        // parse the INI file
-        def param_data = parseIniFile(ifile)
-        param_data.each { entry ->
-            println "Section: ${entry.section}, Key: ${entry.key}, Value: ${entry.value}"
-        }
+        // // parse the INI file
+        // def param_data = parseIniFile(ifile)
+        // param_data.each { entry ->
+        //     println "Section: ${entry.section}, Key: ${entry.key}, Value: ${entry.value}"
+        // }
 
 
         return 'KK'

@@ -4,12 +4,19 @@
 
 /*
 ========================================================================================
-    LOCAL FUNCIOTNS
+    IMPORT MODULES
 ========================================================================================
 */
 
 import org.yaml.snakeyaml.Yaml
-import lib.Utils.Utils
+
+
+/*
+========================================================================================
+    LOCAL FUNCIOTNS
+========================================================================================
+*/
+
 
 // Define a function to check which parameters are missing in the dictionary
 def getMissingParams(Map dictionary, List params) {
@@ -91,30 +98,34 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     exp_table = Channel.fromPath("${inputs.exp_table}", checkIfExists: true)
     database = Channel.fromPath("${inputs.database}", checkIfExists: true)
 
-    // Check if parameters that are redefined exist
-    def redefinedParams = ['decoy_label']
-    // check which parameters are missing in the dict
-    def missingParams = getMissingParams(params, redefinedParams)
-    if (missingParams.isEmpty()) {
-        // println "PASA: ${params_file.toString()}"
-        // update the database file and decoy_prefix in the parameter file
-        //def params_data = Utils.updateIniParams(params_file, ['decoy_prefix': ${params.decoy_label}] )
-        def params_data = Utils.updateIniParams('KK', ['decoy_prefix': ${params.decoy_label}] )
-        println "PARAMS_DATA: ${params_data}"
-        // // create param string
-        // def params_str = ""
-        // params_data.each { key, value -> params_str += "$key = $value\n" }
-        // // print the params data
-        // def re_params_file = new File("TEST.params")
-    }
-    else {
-        // create channel for params file
-        file = new File("${params_file}")
-        if ( file.exists() ) {
-            params_file = Channel.value("${params_file}")
-        } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
-    }
+    def params_data = Utils.updateIniParams('KK', ['decoy_prefix': ${params.decoy_label}] )
+    println "PARAMS_DATA: ${params_data}"
+
+
+    // // Check if parameters that are redefined exist
+    // def redefinedParams = ['decoy_label']
+    // // check which parameters are missing in the dict
+    // def missingParams = getMissingParams(params, redefinedParams)
+    // if (missingParams.isEmpty()) {
+    //     // println "PASA: ${params_file.toString()}"
+    //     // update the database file and decoy_prefix in the parameter file
+    //     //def params_data = Utils.updateIniParams(params_file, ['decoy_prefix': ${params.decoy_label}] )
+    //     def params_data = Utils.updateIniParams('KK', ['decoy_prefix': ${params.decoy_label}] )
+    //     println "PARAMS_DATA: ${params_data}"
+    //     // // create param string
+    //     // def params_str = ""
+    //     // params_data.each { key, value -> params_str += "$key = $value\n" }
+    //     // // print the params data
+    //     // def re_params_file = new File("TEST.params")
+    // }
+    // else {
+    //     // create channel for params file
+    //     file = new File("${params_file}")
+    //     if ( file.exists() ) {
+    //         params_file = Channel.value("${params_file}")
+    //     } else { exit 1, "ERROR: The 'parameter' file does not exist" }
+    // }
 
 
 

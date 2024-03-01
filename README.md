@@ -41,6 +41,15 @@ nextflow \
 
 In Production using the Web Server
 
+nextflow \
+    -log "/tmp/nf-ptm-compass.log" \
+    run main.nf   \
+        --wkf "ptm_compass" \
+        --inputs "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params/inputs_ptmcompass.yml" \
+        --outdir  "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2" \
+        -params-file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params/params.yml" \
+        --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params/ptm-compass.ini" \
+        -resume
 
 
 <!--
