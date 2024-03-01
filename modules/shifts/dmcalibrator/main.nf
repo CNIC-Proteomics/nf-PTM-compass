@@ -1,10 +1,10 @@
 process DM_CALIBRATOR {
     tag '03'
     label 'process_medium'
-    path params_file
 
     input:
     path input_file
+    path params_file
 
     output:
     path "${input_file.baseName}_calibrated.feather", emit: ofile
