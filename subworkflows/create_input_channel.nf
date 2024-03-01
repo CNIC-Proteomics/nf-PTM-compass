@@ -87,10 +87,10 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     // create channel for params file
     file = new File("${params_file}")
     if ( file.exists() ) {
-        params_file = Channel.value("${params_file}")
+        def p_file = Channel.value("${params_file}")
 
         // update the database file and decoy_prefix in the parameter file
-        def params_data = Utils.updateIniParams("${params_file}", ['decoy_prefix': decoy_label] )
+        def params_data = Utils.updateIniParams(p_file, ['decoy_prefix': decoy_label] )
         println "PARAMS_DATA: ${params_data}"
         // create param string
         def params_str = ""
