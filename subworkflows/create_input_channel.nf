@@ -98,36 +98,25 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     exp_table = Channel.fromPath("${inputs.exp_table}", checkIfExists: true)
     database = Channel.fromPath("${inputs.database}", checkIfExists: true)
 
+    // Check if parameters that are redefined exist
+    def redefinedParams = ['decoy_prefix': params.decoy_prefix]
 
-    def params_data = Utils.updateIniParams('KK', ['decoy_prefix': ${params.decoy_label}] )
-    println "PARAMS_DATA: ${params_data}"
-
-
-    // // Check if parameters that are redefined exist
-    // def redefinedParams = ['decoy_label']
-    // // check which parameters are missing in the dict
-    // def missingParams = getMissingParams(params, redefinedParams)
-    // if (missingParams.isEmpty()) {
-    //     // println "PASA: ${params_file.toString()}"
-    //     // update the database file and decoy_prefix in the parameter file
-    //     //def params_data = Utils.updateIniParams(params_file, ['decoy_prefix': ${params.decoy_label}] )
-    //     def params_data = Utils.updateIniParams('KK', ['decoy_prefix': ${params.decoy_label}] )
-    //     println "PARAMS_DATA: ${params_data}"
-    //     // // create param string
-    //     // def params_str = ""
-    //     // params_data.each { key, value -> params_str += "$key = $value\n" }
-    //     // // print the params data
-    //     // def re_params_file = new File("TEST.params")
-    // }
-    // else {
-    //     // create channel for params file
-    //     file = new File("${params_file}")
-    //     if ( file.exists() ) {
-    //         params_file = Channel.value("${params_file}")
-    //     } else { exit 1, "ERROR: The 'parameter' file does not exist" }
-    // }
-
-
+    // check which parameters are missing in the dict
+    def missingParams = getMissingParams(params, redefinedParams.keySet().toList())
+    if (missingParams.isEmpty()) {
+        // update the database file and decoy_prefix in the parameter file
+        def updated_params_file = Utils.updateParamsFile(params_file, redefinedParams)
+        // create channel for params file
+        params_file = Channel.value("${updated_params_file}")
+    }
+    // there is not parameters to update
+    else {
+        // create channel for params file
+        file = new File("${params_file}")
+        if ( file.exists() ) {
+            params_file = Channel.value("${params_file}")
+        } else { exit 1, "ERROR: The 'parameter' file does not exist" }
+    }
 
     emit:
     ch_re_files     = re_files

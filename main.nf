@@ -60,13 +60,13 @@ workflow PTM_COMPASS {
         params.inputs,
         params.params_file
     )
-    // // WORKFLOW: Run SHIFTS analysis pipeline
-    // //
-    // SHIFTS(
-    //     CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_re_files,
-    //     CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_exp_table,
-    //     CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_params_file
-    // )
+    // WORKFLOW: Run SHIFTS analysis pipeline
+    //
+    SHIFTS(
+        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_re_files,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_exp_table,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_params_file
+    )
     // //
     // // WORKFLOW: Run SOLVER analysis pipeline
     // //
