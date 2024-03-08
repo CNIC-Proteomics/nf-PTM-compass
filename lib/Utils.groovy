@@ -41,12 +41,11 @@ class Utils {
     //
     public static String extractParamSection(ifile, section) {
         // declare variable
-        def params = ''
+        def fileReader = ''
         try {
             // read the file contents into a variable
             def f = new File(ifile.toString())
-            def fileReader = f.text
-
+            fileReader = f.text
         } catch(Exception ex) {
             println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
             System.exit(1)
