@@ -82,14 +82,21 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
 
     main:
 
+    // read the file with input parameters
+    f = new FileInputStream(new File(input_files))
+    // create yaml
+    inputs = new Yaml().load(f)
+    // add the input files into params variable
+    //new Yaml().load(inputs).each({ k, v -> params[k] = v })
+
     // stop from the missing parameters
     def requiredParams = ['re_files','exp_table','database']
-    printErrorMissingParams(params, requiredParams)
+    printErrorMissingParams(inputs, requiredParams)
 
     // create channels from input files
-    re_files = Channel.fromPath("${params.re_files}", checkIfExists: true)
-    exp_table = Channel.fromPath("${params.exp_table}", checkIfExists: true)
-    database = Channel.fromPath("${params.database}", checkIfExists: true)
+    re_files = Channel.fromPath("${inputs.re_files}", checkIfExists: true)
+    exp_table = Channel.fromPath("${inputs.exp_table}", checkIfExists: true)
+    database = Channel.fromPath("${inputs.database}", checkIfExists: true)
 
     // Check if parameters that are redefined exist
     def redefinedParams = ['decoy_prefix': params.decoy_prefix]

@@ -12,11 +12,20 @@ nextflow \
     -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
         --wkf "ptm_compass" \
+        -params-file "/mnt/tierra/nf-PTM-compass/tests/test2/params/inputs_ptmcompass.yml" \
+        --outdir  "/mnt/tierra/nf-PTM-compass/tests/test2" \
+        --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/params/ptm-compass.ini" \
+        -resume
+
+<!-- nextflow \
+    -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
+    run main.nf   \
+        --wkf "ptm_compass" \
         --inputs "/mnt/tierra/nf-PTM-compass/tests/test2/params/inputs_ptmcompass.yml" \
         --outdir  "/mnt/tierra/nf-PTM-compass/tests/test2" \
         -params-file "/mnt/tierra/nf-PTM-compass/tests/test2/params/params.yml" \
         --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/params/ptm-compass.ini" \
-        -resume
+        -resume -->
 
 nextflow \
     -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
