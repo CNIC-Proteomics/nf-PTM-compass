@@ -5,7 +5,7 @@ process PROTEIN_ASSIGNER {
     input:
     path input_file
     path database
-    path params_file
+    val  params_file
 
     output:
     path("${input_file.baseName}_PA.tsv", emit: ofile)
