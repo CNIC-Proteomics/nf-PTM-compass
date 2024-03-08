@@ -4,7 +4,7 @@ process PEAK_MODELLER {
 
     input:
     path input_file
-    path params_file
+    val  params_file
 
     output:
     path "PeakModeller_DMTable.feather", emit: oDMtable

@@ -5,7 +5,7 @@ process DM0SOLVER {
     input:
     path input_file
     path input_file2
-    path params_file
+    val  params_file
 
     output:
     path "${input_file.baseName}_DM0S.txt", emit: ofile

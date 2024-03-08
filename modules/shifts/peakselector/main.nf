@@ -4,7 +4,7 @@ process PEAK_SELECTOR {
 
     input:
     path input_file
-    path params_file
+    val  params_file
 
     output:
     path "PeakModeller_ApexList.txt", emit: oApexlist

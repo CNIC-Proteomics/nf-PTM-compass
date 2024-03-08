@@ -5,7 +5,7 @@ process PEAK_FDRER {
     input:
     path input_file
     path exp_table
-    path params_file
+    val  params_file
 
     output:
     path "${input_file.baseName}_FDRfiltered.tsv", emit: oFDRfiltered
