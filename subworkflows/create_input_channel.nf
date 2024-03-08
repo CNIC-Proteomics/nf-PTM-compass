@@ -77,7 +77,6 @@ def joinChannelsFromFilename(ifiles1, ifiles2) {
 
 workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     take:
-    input_files
     params_file
 
     main:
@@ -94,22 +93,22 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     // Check if parameters that are redefined exist
     def redefinedParams = ['decoy_prefix': params.decoy_prefix]
 
-    // check which parameters are missing in the dict
-    def missingParams = getMissingParams(params, redefinedParams.keySet().toList())
-    if (missingParams.isEmpty()) {
+    // // check which parameters are missing in the dict
+    // def missingParams = getMissingParams(params, redefinedParams.keySet().toList())
+    // if (missingParams.isEmpty()) {
         // update the database file and decoy_prefix in the parameter file
         def updated_params_file = Utils.updateParamsFile(params_file, redefinedParams)
         // create channel for params file
         params_file = Channel.value("${updated_params_file}")
-    }
-    // there is not parameters to update
-    else {
-        // create channel for params file
-        file = new File("${params_file}")
-        if ( file.exists() ) {
-            params_file = Channel.value("${params_file}")
-        } else { exit 1, "ERROR: The 'parameter' file does not exist" }
-    }
+    // }
+    // // there is not parameters to update
+    // else {
+    //     // create channel for params file
+    //     file = new File("${params_file}")
+    //     if ( file.exists() ) {
+    //         params_file = Channel.value("${params_file}")
+    //     } else { exit 1, "ERROR: The 'parameter' file does not exist" }
+    // }
 
     emit:
     ch_re_files     = re_files
