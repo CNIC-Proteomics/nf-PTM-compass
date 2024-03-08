@@ -23,15 +23,17 @@ class Utils {
     //
     // Print file from the given string
     //
-    public static String writeStrIntoFile(content, file) {
+    public static String writeStrIntoFile(content, ifile) {
+        // declare variable
+        def ofile = ''
         try {
-            ofile = new File(file)
+            ofile = new File(ifile)
             ofile.write(content)
         } catch(Exception ex) {
             println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
             System.exit(1)
         }
-        return file
+        return ofile
     }
 
     //
