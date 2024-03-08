@@ -4,7 +4,7 @@ process DM_CALIBRATOR {
 
     input:
     path input_file
-    path params_file
+    val params_file
 
     output:
     path "${input_file.baseName}_calibrated.feather", emit: ofile
