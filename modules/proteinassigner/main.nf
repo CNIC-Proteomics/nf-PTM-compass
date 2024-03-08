@@ -13,9 +13,10 @@ process PROTEIN_ASSIGNER {
 
     script:
     // define files
+    def log_file ="${input_file.baseName}_log.txt"
     def output_file ="${input_file.baseName}_PA.tsv"
 
     """    
-    source ${PROTEIN_ASSIGNER_HOME}/env/bin/activate && python ${PROTEIN_ASSIGNER_HOME}/ProteinAssigner_v5.py -i "${input_file}" -f "${database}" -o "${output_file}" -c "${params_file}"
+    source ${PROTEIN_ASSIGNER_HOME}/env/bin/activate && python ${PROTEIN_ASSIGNER_HOME}/ProteinAssigner_v5.py -i "${input_file}" -f "${database}" -o "${output_file}" -c "${params_file}" &> "${log_file}"
     """
 }
