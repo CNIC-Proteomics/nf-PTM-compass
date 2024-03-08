@@ -21,6 +21,38 @@ class Utils {
     }
 
     //
+    // Print file from the given string
+    //
+    public static String writeStrIntoFile(content, file) {
+        try {
+            ofile = new File(file)
+            ofile.write(content)
+        } catch(Exception ex) {
+            println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
+            System.exit(1)
+        }
+        return file
+    }
+
+    //
+    // Extract the parameter section from a parameter file (INI)
+    //
+    public static String extractParamSection(ifile, section) {
+        // declare variable
+        def params = ''
+        try {
+            // read the file contents into a variable
+            def f = new File(ifile.toString())
+            def fileReader = f.text
+
+        } catch(Exception ex) {
+            println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
+            System.exit(1)
+        }
+        return fileReader
+    }
+
+    //
     // Update the parameter file (INI) with the provided parameters
     //
     public static String updateParamsFile(ifile, replaces) {

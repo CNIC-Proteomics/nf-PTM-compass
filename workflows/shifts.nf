@@ -73,7 +73,7 @@ workflow SHIFTS {
     //
     // SUBMODULE: Peak assignator
     //
-    PEAK_ASSIGNATOR(RECOM_FILTERER.out.oRecomfiltered,PEAK_SELECTOR.out.oApexlist, params_file)
+    PEAK_ASSIGNATOR(RECOM_FILTERER.out.oRecomfiltered, PEAK_SELECTOR.out.oApexlist, params_file)
     //
     // SUBMODULE: Peak fdrer
     //

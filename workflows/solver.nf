@@ -19,6 +19,7 @@
 
 include { DM0SOLVER }              from '../modules/solver/dm0solver/main'
 include { PROTEIN_ASSIGNER }    from '../modules/proteinassigner/main'
+include { PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/main'
 
 
 /*
@@ -41,9 +42,14 @@ workflow SOLVER {
     //
     DM0SOLVER(peakfdrer, apexlist, params_file)
     //
-    // SUBMODULE: remove duplicates
+    // SUBMODULE: protein assigner
     //
     PROTEIN_ASSIGNER(DM0SOLVER.out.ofile, database, params_file)
+    //
+    // SUBMODULE: Peak assignator
+    //
+    PEAK_ASSIGNATOR(PROTEIN_ASSIGNER.out.ofile, apexlist, params_file, 'PeakAssignator_2')
+
 }
 
 /*
