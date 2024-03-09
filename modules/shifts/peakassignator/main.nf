@@ -10,7 +10,7 @@ process PEAK_ASSIGNATOR {
 
     output:
     path "${input_file.baseName}_PeakAssignation.feather", emit: oPeakassign
-    path("peak_assignator_params.ini", emit: ofile_param)
+    path "*.ini", emit: ofile_param
     path "*_log.txt", emit: log
 
     script:

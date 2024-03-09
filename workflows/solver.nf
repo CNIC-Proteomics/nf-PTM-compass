@@ -51,6 +51,15 @@ workflow SOLVER {
     def params_sections = Channel.value(['PeakAssignator_2','Logging'])
     PEAK_ASSIGNATOR(PROTEIN_ASSIGNER.out.ofile, apexlist, params_file, params_sections)
 
+    // return channels
+    ch_DM0solver       = DM0SOLVER.out.ofile
+    ch_MProtein        = PROTEIN_ASSIGNER.out.ofile
+    ch_Peakassign      = PEAK_ASSIGNATOR.out.oPeakassign
+
+    emit:
+    DM0solver       = ch_DM0solver
+    MProtein        = ch_MProtein
+    Peakassign      = ch_Peakassign
 }
 
 /*
