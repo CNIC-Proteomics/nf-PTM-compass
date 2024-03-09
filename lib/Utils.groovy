@@ -36,21 +36,83 @@ class Utils {
         return ofile
     }
 
+
     //
-    // Extract the parameter section from a parameter file (INI)
+    // Create report (list of maps) from an INI file
     //
-    public static String extractParamSection(ifile, section) {
-        // declare variable
-        def fileReader = ''
+    public static Map parseIniFile(ifile) {
+        def result = [:]
         try {
-            // read the file contents into a variable
-            def f = new File(ifile.toString())
-            fileReader = f.text
+            def fileReader = new File(ifile.toString()).text
+            def currentSection = null
+            fileReader.split("\n").each() { line ->
+                line = line.trim()
+                line = line.replaceAll(/(;|#).*/, '')
+                if (line.startsWith("[")) {
+                    // It's a section header
+                    currentSection = line.replaceAll("\\[|\\]", "")
+                    result[currentSection] = []
+                } else if (line && !line.startsWith("#") && !line.startsWith(";")) {
+                    // It's a key-value pair (not empty and not a comment)
+                    def keyValue = line.split('=').collect { it.split('/(#|;)/')[0].trim() }
+                    if (currentSection) {
+                        // Add the key-value pair to the current section
+                        result[currentSection] << ['key': keyValue[0], 'value': keyValue[1]]
+                    }
+                }
+            }
         } catch(Exception ex) {
             println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
             System.exit(1)
         }
-        return fileReader
+        return result
+    }
+
+
+    //
+    // Create String in Ini format from report (map of sections: {key,value}
+    //
+    public static String createIniStr(report) {
+        def result = ''
+        try {
+            report.each { section ->
+                result = "[${section}]"
+            }
+        } catch(Exception ex) {
+            println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
+            System.exit(1)
+        }
+        return result
+    }
+
+    //
+    // Extract the parameter section from a parameter file (INI)
+    //
+    public static String extractParamSection(ifile, sections) {
+        // declare variable
+        def params_str = ''
+        try {
+            // parse Ini file
+            def params = parseIniFile(ifile)
+            // get parameters from the given sections
+            def param_data = [:]
+            sections.each { section ->
+                if ( params.containsKey(section) ) {
+                    param_data[section] = params[section]
+                }
+                else {
+                    throw new Exception("Key '$replace.key' is not in the parameter file.")
+                }
+            }
+            // create str with Ini report
+            params_str = createIniStr(param_data)
+            println "${params_str}"
+            System.exit(1)
+        } catch(Exception ex) {
+            println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
+            System.exit(1)
+        }
+        return params_str
     }
 
     //
@@ -82,35 +144,6 @@ class Utils {
     }
 
 
-    // //
-    // // Create report (list of maps) from an INI file
-    // //
-    // static def parseIniFile(fileName) {
-    //     def result = []
-    //     try {
-    //         def fileReader = new File(fileName).text
-    //         def currentSection = null
-    //         fileReader.split("\n").each() { line ->
-    //             line = line.trim()
-    //             line = line.replaceAll(/(;|#).*/, '')
-    //             if (line.startsWith("[")) {
-    //                 // It's a section header
-    //                 currentSection = line.replaceAll("\\[|\\]", "")
-    //             } else if (line && !line.startsWith("#") && !line.startsWith(";")) {
-    //                 // It's a key-value pair (not empty and not a comment)
-    //                 def keyValue = line.split('=').collect { it.split('/(#|;)/')[0].trim() }
-    //                 if (currentSection) {
-    //                     // Add the key-value pair to the current section
-    //                     result << ['section': currentSection, 'key': keyValue[0], 'value': keyValue[1]]
-    //                 }
-    //             }
-    //         }
-    //     } catch(Exception ex) {
-    //         println("Catching the exception: ${ex}")
-    //         System.exit(1)
-    //     }
-    //     return result
-    // }
 
     // //
     // // Create report (map) with the parameters from the MSFragger file

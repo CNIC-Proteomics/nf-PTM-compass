@@ -48,7 +48,7 @@ workflow SOLVER {
     //
     // SUBMODULE: Peak assignator
     //
-    PEAK_ASSIGNATOR(PROTEIN_ASSIGNER.out.ofile, apexlist, params_file, 'PeakAssignator_2')
+    PEAK_ASSIGNATOR(PROTEIN_ASSIGNER.out.ofile, apexlist, params_file, ['PeakAssignator_2','Logging'])
 
 }
 
