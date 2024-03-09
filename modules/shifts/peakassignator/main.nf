@@ -17,14 +17,9 @@ process PEAK_ASSIGNATOR {
 
     // extract the parameter section and create a new parameter file
     def params_str = Utils.extractParamSection(params_file, params_sections)
-    // println "STR: ${params_str}"
 
     // create a new parameter file
-    // def re_params_file = Utils.writeStrIntoFile(params_str, "peak_assignator_params.ini")
-    def re_params_file = "peak_assignator_params.ini"
-    def ofile = new File(re_params_file)
-    ofile.write(params_str)
-
+    def re_params_file = Utils.writeStrIntoFile(params_str, "peak_assignator_params.ini")
     """
     source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakAssignator.py -i "${input_file}" -a "${input_file2}" -c "${re_params_file}"
     """

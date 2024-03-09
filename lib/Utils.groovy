@@ -95,7 +95,6 @@ class Utils {
     public static String extractParamSection(ifile, sections) {
         // declare variable
         def params_str = ''
-        println "SEC: ${sections}"
         try {
             // parse Ini file
             def params = parseIniFile(ifile)
@@ -115,7 +114,6 @@ class Utils {
             println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
             System.exit(1)
         }
-        println "STR: ${params_str}"
         return params_str
     }
 
