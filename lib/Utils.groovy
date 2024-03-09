@@ -75,8 +75,12 @@ class Utils {
     public static String createIniStr(report) {
         def result = ''
         try {
-            report.each { section ->
-                result = "[${section}]"
+            report.each { section, params ->
+                result += "[${section}]\n"
+                params.each { param ->
+                    result += "${param.key} = ${param.value}\n"
+                }
+                result += "\n"
             }
         } catch(Exception ex) {
             println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
@@ -95,19 +99,17 @@ class Utils {
             // parse Ini file
             def params = parseIniFile(ifile)
             // get parameters from the given sections
-            def param_data = [:]
+            def params_data = [:]
             sections.each { section ->
                 if ( params.containsKey(section) ) {
-                    param_data[section] = params[section]
+                    params_data[section] = params[section]
                 }
                 else {
                     throw new Exception("Key '$replace.key' is not in the parameter file.")
                 }
             }
             // create str with Ini report
-            params_str = createIniStr(param_data)
-            println "${params_str}"
-            System.exit(1)
+            params_str = createIniStr(params_data)
         } catch(Exception ex) {
             println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
             System.exit(1)

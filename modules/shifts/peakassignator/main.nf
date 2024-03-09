@@ -6,7 +6,7 @@ process PEAK_ASSIGNATOR {
     path input_file
     path input_file2
     val  params_file
-    val  params_section
+    val  params_sections
 
     output:
     path "${input_file.baseName}_PeakAssignation.feather", emit: oPeakassign
@@ -15,7 +15,11 @@ process PEAK_ASSIGNATOR {
     script:
 
     // extract the parameter section and create a new parameter file
-    def params_str = Utils.extractParamSection(params_file, params_section)
+    println "SECTIONS: ${params_sections}"
+
+    def params_str = Utils.extractParamSection(params_file, params_sections)
+    println "STR: ${params_str}"
+
     // create a new parameter file
     def re_params_file = Utils.writeStrIntoFile(params_str, "peak_assignator_params.ini")
 
