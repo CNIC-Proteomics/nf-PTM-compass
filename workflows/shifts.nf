@@ -73,7 +73,8 @@ workflow SHIFTS {
     //
     // SUBMODULE: Peak assignator
     //
-    def params_sections = Channel.fromList(['PeakAssignator','Logging'])
+    // def params_sections = Channel.fromList(['PeakAssignator','Logging'])
+    def params_sections = ['PeakAssignator','Logging']
     PEAK_ASSIGNATOR(RECOM_FILTERER.out.oRecomfiltered, PEAK_SELECTOR.out.oApexlist, params_file, params_sections)
     //
     // SUBMODULE: Peak fdrer
