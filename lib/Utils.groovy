@@ -115,6 +115,7 @@ class Utils {
             println("ERROR: ${new Object(){}.getClass().getEnclosingMethod().getName()}: $ex.")
             System.exit(1)
         }
+        println "STR: ${params_str}"
         return params_str
     }
 
