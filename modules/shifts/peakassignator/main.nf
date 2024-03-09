@@ -15,8 +15,6 @@ process PEAK_ASSIGNATOR {
     script:
 
     // extract the parameter section and create a new parameter file
-    println "SECTIONS: ${params_sections}"
-
     def params_str = Utils.extractParamSection(params_file, params_sections)
     println "STR: ${params_str}"
 

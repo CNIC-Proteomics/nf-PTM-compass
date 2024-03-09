@@ -95,6 +95,7 @@ class Utils {
     public static String extractParamSection(ifile, sections) {
         // declare variable
         def params_str = ''
+        println "SEC: ${sections}"
         try {
             // parse Ini file
             def params = parseIniFile(ifile)
