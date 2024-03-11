@@ -19,11 +19,11 @@ process PEAK_ASSIGNATOR {
     def params_str = Utils.extractParamSection(params_file, params_sections)
 
     // create a new parameter file
-    // def re_params_file = task.workDir.resolve('peak_assignator_params.ini')
-    // re_params_file = Utils.writeStrIntoFile(params_str, re_params_file)
+    def re_params_file = input_file.resolve('peak_assignator_params.ini')
+    re_params_file = Utils.writeStrIntoFile(params_str, re_params_file)
     // def re_params_file = Utils.writeStrIntoFile(params_str, "${task.projectDir()}/peak_assignator_params.ini")
-    def re_params_file = new File("peak_assignator_params.ini")
-    re_params_file.write(params_str)
+    // def re_params_file = new File("peak_assignator_params.ini")
+    // re_params_file.write(params_str)
 
 
     """
