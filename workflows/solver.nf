@@ -54,7 +54,7 @@ workflow SOLVER {
     //
     // SUBMODULE: Site list maker
     //
-    SITELIST_MAKER('04', PEAK_ASSIGNATOR.out.oPeakassign, apexlist, params_file, params_sections)
+    SITELIST_MAKER('04', PEAK_ASSIGNATOR.out.oPeakassign, params_file, params_sections)
 
     // return channels
     ch_DM0solver       = DM0SOLVER.out.ofile
