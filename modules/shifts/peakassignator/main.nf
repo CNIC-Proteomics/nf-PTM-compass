@@ -9,7 +9,7 @@ process PEAK_ASSIGNATOR {
     val  params_sections
 
     output:
-    // path "${input_file.baseName}_PeakAssignation.feather", emit: oPeakassign
+    path "${input_file.baseName}_PeakAssignation.feather", emit: oPeakassign
     path "peak_assignator_params.ini", emit: ofile_param
     // path "*_log.txt", emit: log
 
@@ -27,6 +27,8 @@ process PEAK_ASSIGNATOR {
     def re_params_file = Utils.writeStrIntoFile(params_str, "peak_assignator_params.ini")
     // def re_params_file = new File("peak_assignator_params.ini")
     // re_params_file.write(params_str)
+
+    def re_params_file2 = Utils.writeStrIntoFile("KK", "${input_file.baseName}_PeakAssignation.feather")
 
 
     // """
