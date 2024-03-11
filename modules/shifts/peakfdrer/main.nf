@@ -1,8 +1,9 @@
 process PEAK_FDRER {
-    tag '09'
+    tag "${order}"
     label 'process_high'
 
     input:
+    val  order
     path input_file
     path exp_table
     val  params_file
