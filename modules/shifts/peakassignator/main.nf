@@ -21,7 +21,7 @@ process PEAK_ASSIGNATOR {
     // create a new parameter file
     // def re_params_file = task.workDir.resolve('peak_assignator_params.ini')
     // re_params_file = Utils.writeStrIntoFile(params_str, re_params_file)
-    def re_params_file = Utils.writeStrIntoFile(params_str, "${task.workDir()}/peak_assignator_params.ini")
+    def re_params_file = Utils.writeStrIntoFile(params_str, "${task.projectDir}/peak_assignator_params.ini")
 
     """
     source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakAssignator.py -i "${input_file}" -a "${input_file2}" -c "${re_params_file}"
