@@ -11,9 +11,9 @@ process PEAK_ASSIGNATOR {
     output:
     path "${input_file.baseName}_PeakAssignation.feather", emit: oPeakassign
     path "peak_assignator_params.ini", emit: ofile_param
-    // path "*_log.txt", emit: log
+    path "*_log.txt", emit: log
 
-    exec:
+    script:
 
     // extract the parameter section and create a new parameter file
     def params_str = Utils.extractParamSection(params_file, params_sections)
@@ -24,13 +24,11 @@ process PEAK_ASSIGNATOR {
     // def re_params_file = input_file.resolve('peak_assignator_params.ini').text
     // println "PARA_FILE: ${re_params_file}"
     // re_params_file = Utils.writeStrIntoFile(params_str, re_params_file)
-    def re_params_file = Utils.writeStrIntoFile(params_str, "peak_assignator_params.ini")
+    // def re_params_file = Utils.writeStrIntoFile(params_str, "peak_assignator_params.ini")
+    def re_params_file = "peak_assignator_params.ini"
 
-    def re_params_file2 = new File("PeakModeller_DMTable_RECOMfiltered_PeakAssignation.feather")
-    re_params_file2.write("KK")
-
-
-    // """
-    // source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakAssignator.py -i "${input_file}" -a "${input_file2}" -c "${re_params_file}"
-    // """
+    """
+    echo "${params_str}" > "${re_params_file}"
+    source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakAssignator.py -i "${input_file}" -a "${input_file2}" -c "${re_params_file}"
+    """
 }
