@@ -48,7 +48,7 @@ workflow SOLVER {
     //
     // SUBMODULE: Peak assignator
     //
-    def params_sections = Channel.value(['PeakAssignator_2','Logging'])
+    def params_sections = Channel.value(['PeakAssignator_2','Logging','General'])
     PEAK_ASSIGNATOR(PROTEIN_ASSIGNER.out.ofile, apexlist, params_file, params_sections)
 
     // return channels
