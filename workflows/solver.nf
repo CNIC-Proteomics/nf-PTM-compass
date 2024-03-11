@@ -18,6 +18,7 @@
 */
 
 include { DM0SOLVER }              from '../modules/solver/dm0solver/main'
+include { TRUNK_SOLVER }              from '../modules/solver/trunksolver/main'
 include { PROTEIN_ASSIGNER }    from '../modules/proteinassigner/main'
 include { PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/main'
 include { SITELIST_MAKER }              from '../modules/solver/sitelistmaker/main'
@@ -47,14 +48,23 @@ workflow SOLVER {
     //
     PROTEIN_ASSIGNER('02', DM0SOLVER.out.ofile, database, params_file)
     //
-    // SUBMODULE: Peak assignator
+    // SUBMODULE: Trunk solver
     //
-    def params_sections = Channel.value(['PeakAssignator_in_Solver','Logging','General'])
-    PEAK_ASSIGNATOR('03', PROTEIN_ASSIGNER.out.ofile, apexlist, params_file, params_sections)
+    TRUNK_SOLVER('03', PROTEIN_ASSIGNER.out.ofile, database, params_file)
     //
-    // SUBMODULE: Site list maker
+    // SUBMODULE: protein assigner
     //
-    SITELIST_MAKER('04', PEAK_ASSIGNATOR.out.oPeakassign, params_file)
+    PROTEIN_ASSIGNER('04', TRUNK_SOLVER.out.ofile, database, params_file)
+    // //
+    // // SUBMODULE: Peak assignator
+    // //
+    // def params_sections = Channel.value(['PeakAssignator_in_Solver','Logging','General'])
+    // PEAK_ASSIGNATOR('05', PROTEIN_ASSIGNER.out.ofile, apexlist, params_file, params_sections)
+    // //
+    // // SUBMODULE: Site list maker
+    // //
+    // SITELIST_MAKER('06', PEAK_ASSIGNATOR.out.oPeakassign, params_file)
+
 
     // return channels
     ch_DM0solver       = DM0SOLVER.out.ofile
