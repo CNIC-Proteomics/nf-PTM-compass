@@ -57,11 +57,11 @@ workflow SOLVER {
     // SUBMODULE: protein assigner
     //
     PROTEIN_ASSIGNER_2('04', TRUNK_SOLVER.out.ofile, database, params_file)
-    // //
-    // // SUBMODULE: Peak assignator
-    // //
-    // def params_sections = Channel.value(['PeakAssignator_in_Solver','Logging','General'])
-    // PEAK_ASSIGNATOR('05', PROTEIN_ASSIGNER.out.ofile, apexlist, params_file, params_sections)
+    //
+    // SUBMODULE: Peak assignator
+    //
+    def params_sections = Channel.value(['PeakAssignator_in_Solver','Logging','General'])
+    PEAK_ASSIGNATOR('05', PROTEIN_ASSIGNER_2.out.ofile, apexlist, params_file, params_sections)
     // //
     // // SUBMODULE: Site list maker
     // //
@@ -71,7 +71,7 @@ workflow SOLVER {
     // return channels
     ch_DM0solver       = DM0SOLVER.out.ofile
     ch_MProtein        = PROTEIN_ASSIGNER.out.ofile
-    // ch_Peakassign      = PEAK_ASSIGNATOR.out.oPeakassign
+    ch_Peakassign      = PEAK_ASSIGNATOR.out.oPeakassign
 
     emit:
     DM0solver       = ch_DM0solver
