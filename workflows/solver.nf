@@ -51,10 +51,10 @@ workflow SOLVER {
     // SUBMODULE: Trunk solver
     //
     TRUNK_SOLVER('03', PROTEIN_ASSIGNER.out.ofile, database, params_file)
-    // //
-    // // SUBMODULE: protein assigner
-    // //
-    // PROTEIN_ASSIGNER('04', TRUNK_SOLVER.out.ofile, database, params_file)
+    //
+    // SUBMODULE: protein assigner
+    //
+    PROTEIN_ASSIGNER('04', TRUNK_SOLVER.out.ofile, database, params_file)
     // //
     // // SUBMODULE: Peak assignator
     // //
@@ -69,7 +69,7 @@ workflow SOLVER {
     // return channels
     ch_DM0solver       = DM0SOLVER.out.ofile
     ch_MProtein        = PROTEIN_ASSIGNER.out.ofile
-    ch_Peakassign      = PEAK_ASSIGNATOR.out.oPeakassign
+    // ch_Peakassign      = PEAK_ASSIGNATOR.out.oPeakassign
 
     emit:
     DM0solver       = ch_DM0solver
