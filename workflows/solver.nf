@@ -62,10 +62,10 @@ workflow SOLVER {
     //
     def params_sections = Channel.value(['PeakAssignator_in_Solver','Logging','General'])
     PEAK_ASSIGNATOR('05', PROTEIN_ASSIGNER_2.out.ofile, apexlist, params_file, params_sections)
-    // //
-    // // SUBMODULE: Site list maker
-    // //
-    // SITELIST_MAKER('06', PEAK_ASSIGNATOR.out.oPeakassign, params_file)
+    //
+    // SUBMODULE: Site list maker
+    //
+    SITELIST_MAKER('06', PEAK_ASSIGNATOR.out.oPeakassign, params_file)
 
 
     // return channels
