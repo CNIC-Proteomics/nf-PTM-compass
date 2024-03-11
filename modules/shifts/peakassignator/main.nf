@@ -29,9 +29,11 @@ process PEAK_ASSIGNATOR {
     // re_params_file.write(params_str)
 
     script:
-    
+
     """
-    echo ${re_params_file}
+    def params_str = Utils.extractParamSection(params_file, params_sections)
+    def re_params_file = Utils.writeStrIntoFile(params_str, "peak_assignator_params.ini")
+
     source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakAssignator.py -i "${input_file}" -a "${input_file2}" -c "${re_params_file}"
     """
 }
