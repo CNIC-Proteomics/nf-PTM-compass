@@ -17,11 +17,13 @@
 ========================================================================================
 */
 
-include { DM0SOLVER }              from '../modules/solver/dm0solver/main'
-include { TRUNK_SOLVER }              from '../modules/solver/trunksolver/main'
-include { PROTEIN_ASSIGNER }    from '../modules/proteinassigner/main'
+include { DM0SOLVER }           from '../modules/solver/dm0solver/main'
+include { TRUNK_SOLVER }        from '../modules/solver/trunksolver/main'
+include { PROTEIN_ASSIGNER;
+          PROTEIN_ASSIGNER as PROTEIN_ASSIGNER_2;
+}                               from '../modules/proteinassigner/main'
 include { PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/main'
-include { SITELIST_MAKER }              from '../modules/solver/sitelistmaker/main'
+include { SITELIST_MAKER }      from '../modules/solver/sitelistmaker/main'
 
 
 /*
@@ -54,7 +56,7 @@ workflow SOLVER {
     //
     // SUBMODULE: protein assigner
     //
-    PROTEIN_ASSIGNER('04', TRUNK_SOLVER.out.ofile, database, params_file)
+    PROTEIN_ASSIGNER_2('04', TRUNK_SOLVER.out.ofile, database, params_file)
     // //
     // // SUBMODULE: Peak assignator
     // //
