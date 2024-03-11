@@ -1,4 +1,4 @@
-process DM0SOLVER {
+process SITELIST_MAKER {
     tag "${order}"
     label 'process_medium'
 

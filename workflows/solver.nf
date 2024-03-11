@@ -20,6 +20,7 @@
 include { DM0SOLVER }              from '../modules/solver/dm0solver/main'
 include { PROTEIN_ASSIGNER }    from '../modules/proteinassigner/main'
 include { PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/main'
+include { SITELIST_MAKER }              from '../modules/solver/sitelistmaker/main'
 
 
 /*
@@ -48,8 +49,12 @@ workflow SOLVER {
     //
     // SUBMODULE: Peak assignator
     //
-    def params_sections = Channel.value(['PeakAssignator_2','Logging','General'])
+    def params_sections = Channel.value(['PeakAssignator_in_Solver','Logging','General'])
     PEAK_ASSIGNATOR('03', PROTEIN_ASSIGNER.out.ofile, apexlist, params_file, params_sections)
+    //
+    // SUBMODULE: Site list maker
+    //
+    SITELIST_MAKER('04', PEAK_ASSIGNATOR.out.oPeakassign, apexlist, params_file, params_sections)
 
     // return channels
     ch_DM0solver       = DM0SOLVER.out.ofile
