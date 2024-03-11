@@ -27,7 +27,7 @@ process PEAK_ASSIGNATOR {
     def re_params_file = Utils.writeStrIntoFile(params_str, "peak_assignator_params.ini")
 
     def re_params_file2 = new File("PeakModeller_DMTable_RECOMfiltered_PeakAssignation.feather")
-    re_params_file.write("KK")
+    re_params_file2.write("KK")
 
 
     // """
