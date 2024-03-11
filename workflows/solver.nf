@@ -51,10 +51,10 @@ workflow SOLVER {
     // SUBMODULE: Trunk solver
     //
     TRUNK_SOLVER('03', PROTEIN_ASSIGNER.out.ofile, database, params_file)
-    //
-    // SUBMODULE: protein assigner
-    //
-    PROTEIN_ASSIGNER('04', TRUNK_SOLVER.out.ofile, database, params_file)
+    // //
+    // // SUBMODULE: protein assigner
+    // //
+    // PROTEIN_ASSIGNER('04', TRUNK_SOLVER.out.ofile, database, params_file)
     // //
     // // SUBMODULE: Peak assignator
     // //
