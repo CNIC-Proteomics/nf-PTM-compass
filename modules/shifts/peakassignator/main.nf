@@ -13,7 +13,7 @@ process PEAK_ASSIGNATOR {
     path "peak_assignator_params.ini", emit: ofile_param
     path "*_log.txt", emit: log
 
-    script:
+    exec:
 
     // extract the parameter section and create a new parameter file
     def params_str = Utils.extractParamSection(params_file, params_sections)
@@ -24,7 +24,7 @@ process PEAK_ASSIGNATOR {
     // def re_params_file = input_file.resolve('peak_assignator_params.ini').text
     // println "PARA_FILE: ${re_params_file}"
     // re_params_file = Utils.writeStrIntoFile(params_str, re_params_file)
-    def re_params_file = Utils.writeStrIntoFile(params_str, "./peak_assignator_params.ini")
+    def re_params_file = Utils.writeStrIntoFile(params_str, "peak_assignator_params.ini")
     // def re_params_file = new File("peak_assignator_params.ini")
     // re_params_file.write(params_str)
 
