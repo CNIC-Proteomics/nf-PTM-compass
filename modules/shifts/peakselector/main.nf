@@ -1,8 +1,9 @@
 process PEAK_SELECTOR {
-    tag '06'
+    tag "${order}"
     label 'process_medium'
 
     input:
+    val  order
     path input_file
     val  params_file
 

@@ -1,8 +1,9 @@
 process ADAPTER {
-    tag '01'
+    tag "${order}"
     label 'process_medium'
 
     input:
+    val order
     val input_file // get the value of path
 
     output:

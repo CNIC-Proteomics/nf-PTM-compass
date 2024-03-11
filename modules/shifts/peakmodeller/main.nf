@@ -1,8 +1,9 @@
 process PEAK_MODELLER {
-    tag '04'
+    tag "${order}"
     label 'process_high'
 
     input:
+    val  order
     path input_file
     val  params_file
 

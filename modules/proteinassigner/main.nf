@@ -1,8 +1,9 @@
 process PROTEIN_ASSIGNER {
-    tag '02'
+    tag "${order}"
     label 'process_medium'
 
     input:
+    val  order
     path input_file
     path database
     val  params_file

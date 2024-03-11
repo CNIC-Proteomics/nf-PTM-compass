@@ -1,8 +1,9 @@
 process DM_CALIBRATOR {
-    tag '03'
+    tag "${order}"
     label 'process_medium'
 
     input:
+    val  order
     path input_file
     val  params_file
 

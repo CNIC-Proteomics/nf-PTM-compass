@@ -1,8 +1,9 @@
 process DUPLICATE_REMOVER {
-    tag '02'
+    tag "${order}"
     label 'process_medium'
 
     input:
+    val  order
     path input_file
 
     output:

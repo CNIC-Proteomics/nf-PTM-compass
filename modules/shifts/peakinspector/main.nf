@@ -1,8 +1,9 @@
 process PEAK_INSPECTOR {
-    tag '05'
+    tag "${order}"
     label 'process_medium'
 
     input:
+    val  order
     path input_file
     path params_file
 

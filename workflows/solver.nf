@@ -40,11 +40,11 @@ workflow SOLVER {
     //
     // SUBMODULE: DM0 solver
     //
-    DM0SOLVER(peakfdrer, apexlist, params_file)
+    DM0SOLVER('01', peakfdrer, apexlist, params_file)
     //
     // SUBMODULE: protein assigner
     //
-    PROTEIN_ASSIGNER(DM0SOLVER.out.ofile, database, params_file)
+    PROTEIN_ASSIGNER('02', DM0SOLVER.out.ofile, database, params_file)
     //
     // SUBMODULE: Peak assignator
     //

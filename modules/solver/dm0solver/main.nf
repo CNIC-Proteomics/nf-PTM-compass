@@ -1,8 +1,9 @@
 process DM0SOLVER {
-    tag '01'
+    tag "${order}"
     label 'process_medium'
 
     input:
+    val  order
     path input_file
     path input_file2
     val  params_file

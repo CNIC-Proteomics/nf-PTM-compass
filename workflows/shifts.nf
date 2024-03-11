@@ -45,31 +45,31 @@ workflow SHIFTS {
     //
     // SUBMODULE: adapter the input files
     //
-    ADAPTER(re_files)
+    ADAPTER('01', re_files)
     //
     // SUBMODULE: remove duplicates
     //
-    DUPLICATE_REMOVER(ADAPTER.out.ofile)
+    DUPLICATE_REMOVER('02', ADAPTER.out.ofile)
     //
     // SUBMODULE: DM calibrator
     //
-    DM_CALIBRATOR(DUPLICATE_REMOVER.out.ofile, params_file)
+    DM_CALIBRATOR('03', DUPLICATE_REMOVER.out.ofile, params_file)
     //
     // SUBMODULE: Peak modelller
     //
-    PEAK_MODELLER(DM_CALIBRATOR.out.ofile.collect(), params_file)
+    PEAK_MODELLER('04', DM_CALIBRATOR.out.ofile.collect(), params_file)
     //
     // SUBMODULE: Peak inspector
     //
-    // PEAK_INSPECTOR(PEAK_MODELLER.out.oDMtable, params_file)
+    // PEAK_INSPECTOR('05', PEAK_MODELLER.out.oDMtable, params_file)
     //
     // SUBMODULE: Peak selector
     //
-    PEAK_SELECTOR(PEAK_MODELLER.out.oHistogram, params_file)
+    PEAK_SELECTOR('06', PEAK_MODELLER.out.oHistogram, params_file)
     //
     // SUBMODULE: Recom filterer
     //
-    RECOM_FILTERER(PEAK_MODELLER.out.oDMtable, params_file)
+    RECOM_FILTERER('07', PEAK_MODELLER.out.oDMtable, params_file)
     //
     // SUBMODULE: Peak assignator
     //
@@ -78,7 +78,7 @@ workflow SHIFTS {
     //
     // SUBMODULE: Peak fdrer
     //
-    PEAK_FDRER(PEAK_ASSIGNATOR.out.oPeakassign, exp_table, params_file)
+    PEAK_FDRER('09', PEAK_ASSIGNATOR.out.oPeakassign, exp_table, params_file)
 
     // return channels
     ch_DMtable         = PEAK_MODELLER.out.oDMtable
