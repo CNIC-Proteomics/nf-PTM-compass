@@ -24,7 +24,7 @@ process PEAK_ASSIGNATOR {
     def re_params_file = "peak_assignator_params.ini"
 
     """
-    // create the new parameter file
+    # create the new parameter file
     echo "${params_str}" > "${re_params_file}"
 
     source ${SHIFTS_HOME}/env/bin/activate && python ${SHIFTS_HOME}/PeakAssignator.py -i "${input_file}" -a "${input_file2}" -c "${re_params_file}"
