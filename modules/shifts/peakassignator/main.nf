@@ -10,12 +10,7 @@ process PEAK_ASSIGNATOR {
     val  params_sections
 
     output:
-    if ( input_file.getExtension() == '.feather' ) {
-        path "*_PeakAssignation.feather",  emit: oPeakassign
-    }
-    else {
-        path "*_PeakAssignation.tsv", emit: oPeakassign
-    }
+    path "*_PeakAssignation.feather",  emit: oPeakassign
     path "peak_assignator_params.ini", emit: ofile_param
     path "*_log.txt", emit: log
 
@@ -28,6 +23,9 @@ process PEAK_ASSIGNATOR {
     // def re_params_file = Utils.writeStrIntoFile(params_str, "peak_assignator_params.ini")
     def re_params_file = "peak_assignator_params.ini"
 
+    // get the input extension that will be used for output extension
+    def ext = input_file.getExtension()
+    println "EXT: ${ext}"
     """
     # create the new parameter file
     echo "${params_str}" > "${re_params_file}"
