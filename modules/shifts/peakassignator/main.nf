@@ -25,6 +25,7 @@ process PEAK_ASSIGNATOR {
 
     // get the input extension that will be used for output extension
     def ext = input_file.getExtension()
+    println "EXT:${ext}"
 
     """
     # create the new parameter file
