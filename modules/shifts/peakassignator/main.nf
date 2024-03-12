@@ -10,7 +10,7 @@ process PEAK_ASSIGNATOR {
     val  params_sections
 
     output:
-    if ( input_file.endsWith('.feather') ) {
+    if ( $input_file.endsWith('.feather') ) {
         path "*_PeakAssignation.feather",  emit: oPeakassign
     }
     else {
