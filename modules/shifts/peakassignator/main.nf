@@ -10,11 +10,12 @@ process PEAK_ASSIGNATOR {
     val  params_sections
 
     output:
-    path "*_PeakAssignation.(feather|tsv)",  emit: oPeakassign
+    path "*_PeakAssignation.feather",  emit: oPeakassign, optional: true
+    path "*_PeakAssignation.tsv",  emit: oPeakassign, optional: true
     path "peak_assignator_params.ini", emit: ofile_param
     path "*_log.txt", emit: log
 
-    when:
+    // when:
     // if ( $input_file.endsWith('.feather') ) {
     //     path "*_PeakAssignation.feather",  emit: oPeakassign
     // }
