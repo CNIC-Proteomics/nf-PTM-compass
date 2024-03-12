@@ -10,14 +10,16 @@ process PEAK_ASSIGNATOR {
     val  params_sections
 
     output:
+    path "peak_assignator_params.ini", emit: ofile_param
+    path "*_log.txt", emit: log
+
+    when:
     if ( $input_file.endsWith('.feather') ) {
         path "*_PeakAssignation.feather",  emit: oPeakassign
     }
     else {
         path "*_PeakAssignation.tsv", emit: oPeakassign
     }
-    path "peak_assignator_params.ini", emit: ofile_param
-    path "*_log.txt", emit: log
 
     script:
     // extract the parameter section and create a new parameter file
