@@ -76,7 +76,7 @@ workflow SOLVER {
     //
     // SUBMODULE: Scan id generator
     //
-    SCANID_GENERATOR('08', SITE_SOLVER.out.ofile, sitelist_file)
+    SCANID_GENERATOR('08', SITE_SOLVER.out.ofile)
 
 
     // return channels
