@@ -71,7 +71,7 @@ workflow SOLVER {
     //
     // SUBMODULE: Site solver
     //
-    SITEL_SOLVER('07', PEAK_ASSIGNATOR.out.oPeakassign, sitelist_file, params_file)
+    SITE_SOLVER('07', PEAK_ASSIGNATOR.out.oPeakassign, sitelist_file, params_file)
 
 
     // return channels
