@@ -8,7 +8,6 @@ process SCANID_GENERATOR {
 
     output:
     path "${input_file.baseName}_ScanID.txt", emit: ofile
-    path "*_log.txt", emit: log
 
     script:
     """
