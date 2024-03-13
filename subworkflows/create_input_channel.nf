@@ -89,6 +89,8 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     re_files = Channel.fromPath("${params.re_files}", checkIfExists: true)
     exp_table = Channel.fromPath("${params.exp_table}", checkIfExists: true)
     database = Channel.fromPath("${params.database}", checkIfExists: true)
+    sitelist_file = Channel.fromPath("${params.sitelist_file}", checkIfExists: true)
+
 
     // Check if parameters that are redefined exist
     def redefinedParams = ['decoy_prefix': params.decoy_prefix]
@@ -111,10 +113,11 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     // }
 
     emit:
-    ch_re_files     = re_files
-    ch_exp_table    = exp_table
-    ch_database     = database
-    ch_params_file  = params_file
+    ch_re_files       = re_files
+    ch_exp_table      = exp_table
+    ch_database       = database
+    ch_params_file    = params_file
+    ch_sitelist_file  = sitelist_file
 }
 
 workflow CREATE_INPUT_CHANNEL_REFRAG {
