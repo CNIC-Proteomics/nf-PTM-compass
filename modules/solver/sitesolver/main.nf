@@ -9,7 +9,7 @@ process SITE_SOLVER {
     val  params_file
 
     output:
-    path "${input_file.baseName}_Clean_P0_Frequency_Table.txt", emit: oCleanP0Frequency
+    path "${input_file.baseName}_SS.txt", emit: ofile
     path "*_log.txt", emit: log
 
     script:
