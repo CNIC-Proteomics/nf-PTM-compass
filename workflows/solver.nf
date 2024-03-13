@@ -24,6 +24,7 @@ include { PROTEIN_ASSIGNER;
 }                               from '../modules/proteinassigner/main'
 include { PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/main'
 include { SITELIST_MAKER }      from '../modules/solver/sitelistmaker/main'
+include { SITE_SOLVER }         from '../modules/solver/sitesolver/main'
 
 
 /*
