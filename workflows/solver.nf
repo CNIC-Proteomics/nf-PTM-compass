@@ -25,6 +25,7 @@ include { PROTEIN_ASSIGNER;
 include { PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/main'
 include { SITELIST_MAKER }      from '../modules/solver/sitelistmaker/main'
 include { SITE_SOLVER }         from '../modules/solver/sitesolver/main'
+include { SCANID_GENERATOR }         from '../modules/scanidgenerator/main'
 
 
 /*
@@ -72,6 +73,10 @@ workflow SOLVER {
     // SUBMODULE: Site solver
     //
     SITE_SOLVER('07', PEAK_ASSIGNATOR.out.oPeakassign, sitelist_file, params_file)
+    //
+    // SUBMODULE: Scan id generator
+    //
+    SCANID_GENERATOR('08', SITE_SOLVER.out.ofile, sitelist_file)
 
 
     // return channels
