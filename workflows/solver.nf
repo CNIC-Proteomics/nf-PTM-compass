@@ -25,7 +25,9 @@ include { PROTEIN_ASSIGNER;
 include { PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/main'
 include { SITELIST_MAKER }      from '../modules/solver/sitelistmaker/main'
 include { SITE_SOLVER }         from '../modules/solver/sitesolver/main'
-include { SCANID_GENERATOR }         from '../modules/scanidgenerator/main'
+include { SCANID_GENERATOR }    from '../modules/scanidgenerator/main'
+include { PDMTABLE_MAKER }      from '../modules/pdmtablemaker/main'
+
 
 
 /*
@@ -77,6 +79,10 @@ workflow SOLVER {
     // SUBMODULE: Scan id generator
     //
     SCANID_GENERATOR('08', SITE_SOLVER.out.ofile)
+    //
+    // SUBMODULE: PDMtable maker
+    //
+    PDMTABLE_MAKER('08', SITE_SOLVER.out.ofile, database, params_file)
 
 
     // return channels
