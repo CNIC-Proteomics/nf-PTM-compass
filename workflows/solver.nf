@@ -83,7 +83,7 @@ workflow SOLVER {
     //
     // SUBMODULE: PDMtable maker
     //
-    PDMTABLE_MAKER('08', SITE_SOLVER.out.ofile, database, params_file)
+    PDMTABLE_MAKER('09', SCANID_GENERATOR.out.ofile, database, params_file)
 
 
     // return channels
