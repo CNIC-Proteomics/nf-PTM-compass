@@ -83,7 +83,7 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
 
     // stop from the missing parameters
     def requiredParams = ['re_files','exp_table','database']
-    printErrorMissingParams(params, requiredParams)
+    // printErrorMissingParams(params, requiredParams)
 
     // create channels from input files
     re_files        = Channel.fromPath("${params.re_files}", checkIfExists: true)
