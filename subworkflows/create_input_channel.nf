@@ -77,7 +77,6 @@ def joinChannelsFromFilename(ifiles1, ifiles2) {
 
 workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     take:
-    params
     params_file
 
     main:
@@ -97,7 +96,7 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     def redefinedParams = ['decoy_prefix': params.decoy_prefix]
 
     // check which parameters are missing in the dict
-    def missingParams = getMissingParams(params, redefinedParams.keySet().toList())
+    def missingParams = getMissingParams(${params.keySet().toList()}, redefinedParams.keySet().toList())
     if (missingParams.isEmpty()) {
         // update the database file and decoy_prefix in the parameter file
         def updated_params_file = Utils.updateParamsFile(params_file, redefinedParams)
