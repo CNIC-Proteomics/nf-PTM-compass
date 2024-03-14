@@ -151,7 +151,7 @@ class Utils {
             def params1 = parseIniFile(ifile1)
             def params2 = parseIniFile(ifile2)
 
-            println "PARAMS1: ${params1}"
+            println "PARAMS2: ${params2}"
 
             // init the merged parameter
             def params_data = [:]
