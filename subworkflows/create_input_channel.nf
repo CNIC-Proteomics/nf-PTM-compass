@@ -82,8 +82,8 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     main:
 
     // stop from the missing parameters
-    def requiredParams = ['re_files','exp_table','database']
-    // printErrorMissingParams(params, requiredParams)
+    def requiredParams = ['re_files','exp_table','database','decoy_prefix']
+    printErrorMissingParams(params, requiredParams)
 
     // create channels from input files
     re_files        = Channel.fromPath("${params.re_files}", checkIfExists: true)
@@ -92,13 +92,9 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     sitelist_file   = Channel.fromPath("${params.sitelist_file}", checkIfExists: true)
     groupmaker_file = Channel.fromPath("${params.groupmaker_file}", checkIfExists: true)
 
-    // check if parameters that are redefined exist
+    // update the parameter from the file based on the given one
     def redefinedParams = ['decoy_prefix': params.decoy_prefix]
-
-    // check which parameters are missing in the dict
-    def missingParams = getMissingParams(params, redefinedParams.keySet().toList())
-    if (missingParams.isEmpty()) {
-        // update the database file and decoy_prefix in the parameter file
+    if (redefinedParams) {
         def updated_params_file = Utils.updateParamsFile(params_file, redefinedParams)
         // create channel for params file
         params_file = Channel.value("${updated_params_file}")
