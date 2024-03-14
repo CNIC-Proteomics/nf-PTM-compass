@@ -120,6 +120,7 @@ class Utils {
         def ofile = ''
         def content = ''
         try {
+            println "PARAMS: ${ifile}"
             // read the file contents into a variable
             def f = new File(ifile.toString())
             content = f.text

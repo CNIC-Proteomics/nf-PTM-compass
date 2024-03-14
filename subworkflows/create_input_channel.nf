@@ -97,8 +97,7 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
 
     // update the given parameter into the fixed parameter file
     def redefinedParams = ['decoy_prefix': params.decoy_prefix]
-    def updated_params_str = Utils.updateParamsFile(${params.fixed_params_file}, redefinedParams)
-    println "PARAMS: ${updated_params_str}"
+    def updated_params_str = Utils.updateParamsFile(params.fixed_params_file, redefinedParams)
     def updated_params_file = Utils.writeStrIntoFile(updated_params_str, "${params.paramdir}/params.ini")
 
 
