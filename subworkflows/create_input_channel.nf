@@ -18,13 +18,13 @@ import org.yaml.snakeyaml.Yaml
 */
 
 
-// Define a function to check which parameters are missing in the dictionary
-def getMissingParams(Map dictionary, List params) {
+// Define a function to check which parameters are missing
+def getMissingParams(params, required_params) {
     def missingParams = []
     // Iterate over each parameter in the list
-    for (param in params) {
-        // Check if the parameter exists in the dictionary
-        if (!dictionary.containsKey(param)) {
+    for (param in required_params) {
+        // Check if the parameter exists in the params
+        if (!params.containsKey(param)) {
             // If parameter is missing, add it to the list of missing parameters
             missingParams.add(param)
         }
@@ -33,13 +33,13 @@ def getMissingParams(Map dictionary, List params) {
     return missingParams
 }
 
-// Define a function to check which parameters are missing in the dictionary
-def printErrorMissingParams(Map dictionary, List params) {
+// Print an error message for the missing parameters
+def printErrorMissingParams(params, required_params) {
     // check which parameters are missing in the dict
-    def missingParams = getMissingParams(dictionary, params)
+    def missingParams = getMissingParams(params, required_params)
     // stop from the missing parameters
     if (!missingParams.isEmpty()) {
-        exit 1, "ERROR: Missing parameters in dictionary: ${missingParams}"
+        exit 1, "ERROR: Missing parameters: ${missingParams}"
     }
 }
 
@@ -96,7 +96,7 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     def redefinedParams = ['decoy_prefix': params.decoy_prefix]
 
     // check which parameters are missing in the dict
-    def missingParams = getMissingParams(${params.keySet().toList()}, redefinedParams.keySet().toList())
+    def missingParams = getMissingParams(params, redefinedParams.keySet().toList())
     if (missingParams.isEmpty()) {
         // update the database file and decoy_prefix in the parameter file
         def updated_params_file = Utils.updateParamsFile(params_file, redefinedParams)
