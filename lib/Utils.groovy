@@ -120,7 +120,6 @@ class Utils {
         def ofile = ''
         def content = ''
         try {
-            println "PARAMS: ${ifile}"
             // read the file contents into a variable
             def f = new File(ifile.toString())
             content = f.text
@@ -150,7 +149,10 @@ class Utils {
         try {
             // parse Ini files
             def params1 = parseIniFile(ifile1)
-            def params2 = parseIniFile(ifile1)
+            def params2 = parseIniFile(ifile2)
+
+            println "PARAMS1: ${params1}"
+
             // init the merged parameter
             def params_data = [:]
             params1.each { section ->
