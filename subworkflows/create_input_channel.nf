@@ -92,21 +92,20 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     sitelist_file   = Channel.fromPath("${params.sitelist_file}", checkIfExists: true)
     groupmaker_file = Channel.fromPath("${params.groupmaker_file}", checkIfExists: true)
 
-    // update the parameter from the file based on the given one
+    // update the given parameter into the fixed parameter file
     def redefinedParams = ['decoy_prefix': params.decoy_prefix]
-    if (redefinedParams) {
-        def updated_params_file = Utils.updateParamsFile(params_file, redefinedParams)
-        // create channel for params file
-        params_file = Channel.value("${updated_params_file}")
-    }
-    // there is not parameters to update
-    else {
-        // create channel for params file
-        file = new File("${params_file}")
-        if ( file.exists() ) {
-            params_file = Channel.value("${params_file}")
-        } else { exit 1, "ERROR: The 'parameter' file does not exist" }
-    }
+    def updated_params_str = Utils.updateParamsFile(${params.fixed_params_file}, redefinedParams)
+    def updated_params_file = Utils.writeStrIntoFile(updated_params_str, "${params.paramdir}/params.ini")
+
+
+    // create channel for params file
+    params_file = Channel.value("${updated_params_file}")
+
+    // // create channel for params file
+    // file = new File("${params_file}")
+    // if ( file.exists() ) {
+    //     params_file = Channel.value("${params_file}")
+    // } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
     emit:
     ch_re_files       = re_files
