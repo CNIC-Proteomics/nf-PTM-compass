@@ -28,6 +28,7 @@ include { TRUNK_SOLVER }        from '../modules/solver/trunksolver/main'
 include { SITELIST_MAKER }      from '../modules/solver/sitelistmaker/main'
 include { SITE_SOLVER }         from '../modules/solver/sitesolver/main'
 include { PDMTABLE_MAKER }      from '../modules/solver/pdmtablemaker/main'
+include { GROUP_MAKER }      from '../modules/solver/groupmaker/main'
 
 
 
@@ -84,6 +85,10 @@ workflow SOLVER {
     // SUBMODULE: PDMtable maker
     //
     PDMTABLE_MAKER('09', SCANID_GENERATOR.out.ofile, database, params_file)
+    //
+    // SUBMODULE: Group maker
+    //
+    GROUP_MAKER('09', SCANID_GENERATOR.out.ofile, database, params_file)
 
 
     // return channels
