@@ -56,9 +56,7 @@ workflow PTM_COMPASS {
     //
     // SUBWORKFLOW: Create input channel
     //
-    CREATE_INPUT_CHANNEL_PTMCOMPASS (
-        params.params_file
-    )
+    CREATE_INPUT_CHANNEL_PTMCOMPASS()
     // WORKFLOW: Run SHIFTS analysis pipeline
     //
     SHIFTS(

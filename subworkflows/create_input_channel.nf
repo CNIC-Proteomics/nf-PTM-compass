@@ -76,9 +76,6 @@ def joinChannelsFromFilename(ifiles1, ifiles2) {
 */
 
 workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
-    take:
-    params_file
-
     main:
 
     // stop from the missing parameters
@@ -92,24 +89,18 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     sitelist_file   = Channel.fromPath("${params.sitelist_file}", checkIfExists: true)
     groupmaker_file = Channel.fromPath("${params.groupmaker_file}", checkIfExists: true)
 
-    println "PARAMS: ${params}"
-
-
     // update the given parameter into the fixed parameter file
     def redefinedParams = ['decoy_prefix': params.decoy_prefix]
     def updated_params_str = Utils.updateParamsFile(params.fixed_params_file, redefinedParams)
-    def updated_params_file = Utils.writeStrIntoFile(updated_params_str, "${params.paramdir}/params.ini")
+    def fixed_params_file = Utils.writeStrIntoFile(updated_params_str, "${params.paramdir}/params.ini")
 
-
+    // merge the files that contain both the fixed parametes and the variable parameters
+    def merged_params_str = Utils.mergeIniFiles(fixed_params_file, params.params_file)
+    def updated_params_file = Utils.writeStrIntoFile(merged_params_str, "${params.paramdir}/params.ini")
 
     // create channel for params file
     params_file = Channel.value("${updated_params_file}")
 
-    // // create channel for params file
-    // file = new File("${params_file}")
-    // if ( file.exists() ) {
-    //     params_file = Channel.value("${params_file}")
-    // } else { exit 1, "ERROR: The 'parameter' file does not exist" }
 
     emit:
     ch_re_files       = re_files
