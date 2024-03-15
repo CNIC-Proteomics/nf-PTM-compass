@@ -71,7 +71,7 @@ workflow PTM_COMPASS {
         SHIFTS.out.Apexlist,
         CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_database,
         CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_sitelist_file,
-        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_sitelist_file,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_groupmaker_file,
         CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_params_file
     )
 }
