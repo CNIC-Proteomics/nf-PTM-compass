@@ -44,9 +44,6 @@ class Utils {
         try {
             report.each { section,params ->
                 result += "[${section}]\n"
-                // params.each { param ->
-                //     result += "${param.key} = ${param.value}\n"
-                // }
                 params.each { key,val ->
                     result += "${key} = ${val}\n"
                 }
@@ -71,14 +68,13 @@ class Utils {
                 line = line.replaceAll(/(#).*/, '')
                 if (line.startsWith("[")) {
                     // It's a section header
-                    currentSection = line.replaceAll("\\[|\\]", "")
+                    currentSection = line.replaceAll("\\[|\\]", "").trim()
                     result[currentSection] = [:]
                 } else if (line && !line.startsWith("#")) {
                     // It's a key-value pair (not empty and not a comment)
                     def keyValue = line.split('=').collect { it.split('/(#)/')[0].trim() }
                     if (currentSection) {
                         // Add the key-value pair to the current section
-                        // result[currentSection] << ['key': keyValue[0], 'value': keyValue[1]]
                         result[currentSection][keyValue[0]] = keyValue[1]
                     }
                 }
