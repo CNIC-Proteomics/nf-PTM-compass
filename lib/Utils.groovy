@@ -154,18 +154,19 @@ class Utils {
             // parse Ini files
             def params1 = parseIniFile(ifile1)
             def params2 = parseIniFile(ifile2)
-
-            println "PARAMS1: ${params1}"
-            // init the merged parameter
-            def params_data = [:]
-            params1.each { section, params ->
-                if ( params2.containsKey(section) ) {
-                    // params.each { key,val ->
-
-                    //     result += "${param.key} = ${param.value}\n"
-                    // }
+            // add the section/parameters (params2) into fixed parameters (params1)
+            def params_data = params1
+            params2.each { section, params ->
+                // the section from params2 are within params_data
+                if ( params_data.containsKey(section) ) {
+                    params.each { key,val ->
+                        // We add the parameters from params2 into params_data if they do not exist
+                        if ( !param_data[section].containsKey(key) ) {
+                            param_data[section][key] = val
+                        }
+                    }
                 }
-                else { // section does not exist in params2
+                else { // add the new section from params2 into params_data
                     params_data[section] = params
                 }
             }
