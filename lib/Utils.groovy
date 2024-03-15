@@ -150,9 +150,6 @@ class Utils {
             // parse Ini files
             def params1 = parseIniFile(ifile1)
             def params2 = parseIniFile(ifile2)
-
-            println "PARAMS2: ${params2}"
-
             // init the merged parameter
             def params_data = [:]
             params1.each { section ->

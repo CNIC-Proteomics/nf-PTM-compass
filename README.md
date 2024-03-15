@@ -11,31 +11,10 @@ cd /usr/local/nf-PTM-compass
 nextflow \
     -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
-        --wkf "ptm_compass" \
-        -params-file "/mnt/tierra/nf-PTM-compass/tests/test2/params/inputs_ptmcompass.yml" \
-        --outdir  "/mnt/tierra/nf-PTM-compass/tests/test2" \
-        --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/params/ptm-compass.ini" \
-        -resume
-
-nextflow \
-    -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
-    run main.nf   \
-        --wkf "refrag" \
-        --inputs "/mnt/tierra/nf-PTM-compass/tests/test3/params/inputs_refrag.yml" \
-        --outdir  "/mnt/tierra/nf-PTM-compass/tests/test3" \
-        -params-file "/mnt/tierra/nf-PTM-compass/tests/test3/params/params.yml" \
-        --params_file "/mnt/tierra/nf-PTM-compass/tests/test3/params/ptm-compass.ini" \
-        -resume
-
-nextflow \
-    -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
-    run main.nf   \
-        --wkf "ptm_compass" \
-        --inputs "/mnt/tierra/nf-PTM-compass/tests/test1/params/inputs_ptmcompass.yml" \
+        -params-file "/mnt/tierra/nf-PTM-compass/tests/test1/inputs/inputs.yml" \
         --outdir  "/mnt/tierra/nf-PTM-compass/tests/test1" \
-        --params_file "/mnt/tierra/nf-PTM-compass/tests/test1/params/params.ini" \
+        --params_file "/mnt/tierra/nf-PTM-compass/tests/test1/inputs/params.ini" \
         -resume
-
 ```
 
 In Production using the Web Server
@@ -50,7 +29,18 @@ nextflow \
         --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params/ptm-compass.ini" \
         -resume
 
-<!-- nextflow \
+<!--
+```
+nextflow \
+    -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
+    run main.nf   \
+        --wkf "refrag" \
+        -params-file "/mnt/tierra/nf-PTM-compass/tests/test2/inputs/inputs.yml" \
+        --outdir  "/mnt/tierra/nf-PTM-compass/tests/test2" \
+        --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/inputs/params.ini" \
+        -resume
+
+nextflow \
     -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
         --wkf "ptm_compass" \
@@ -58,7 +48,9 @@ nextflow \
         --outdir  "/mnt/tierra/nf-PTM-compass/tests/test2" \
         -params-file "/mnt/tierra/nf-PTM-compass/tests/test2/params/params.yml" \
         --params_file "/mnt/tierra/nf-PTM-compass/tests/test2/params/ptm-compass.ini" \
-        -resume -->
+        -resume
+```        
+-->
 
 
 

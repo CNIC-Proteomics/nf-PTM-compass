@@ -76,58 +76,58 @@ workflow PTM_COMPASS {
     )
 }
 
-workflow REFRAG_WORKFLOW {
-    //
-    // SUBWORKFLOW: Create input channels
-    //
-    CREATE_INPUT_CHANNEL_REFRAG (
-        params.inputs,
-        params.params_file
-    )
-    //
-    // WORKFLOW: ReFrag analysis
-    //
-    REFRAG(
-        CREATE_INPUT_CHANNEL_REFRAG.out.ch_msf_raw_files,
-        CREATE_INPUT_CHANNEL_REFRAG.out.ch_dm_file,
-        CREATE_INPUT_CHANNEL_REFRAG.out.ch_params_file
-    )
-}
+// workflow REFRAG_WORKFLOW {
+//     //
+//     // SUBWORKFLOW: Create input channels
+//     //
+//     CREATE_INPUT_CHANNEL_REFRAG (
+//         params.inputs,
+//         params.params_file
+//     )
+//     //
+//     // WORKFLOW: ReFrag analysis
+//     //
+//     REFRAG(
+//         CREATE_INPUT_CHANNEL_REFRAG.out.ch_msf_raw_files,
+//         CREATE_INPUT_CHANNEL_REFRAG.out.ch_dm_file,
+//         CREATE_INPUT_CHANNEL_REFRAG.out.ch_params_file
+//     )
+// }
 
-workflow SHIFTS_WORKFLOW {
-    //
-    // SUBWORKFLOW: Create input channel
-    //
-    CREATE_INPUT_CHANNEL_SHIFTS (
-        params.inputs,
-        params.params_file
-    )
-    //
-    // WORKFLOW: Run SHIFTS analysis pipeline
-    //
-    SHIFTS(
-        CREATE_INPUT_CHANNEL_SHIFTS.out.ch_re_files,
-        CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table,
-        CREATE_INPUT_CHANNEL_SHIFTS.out.ch_params_file
-    )
-}
+// workflow SHIFTS_WORKFLOW {
+//     //
+//     // SUBWORKFLOW: Create input channel
+//     //
+//     CREATE_INPUT_CHANNEL_SHIFTS (
+//         params.inputs,
+//         params.params_file
+//     )
+//     //
+//     // WORKFLOW: Run SHIFTS analysis pipeline
+//     //
+//     SHIFTS(
+//         CREATE_INPUT_CHANNEL_SHIFTS.out.ch_re_files,
+//         CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table,
+//         CREATE_INPUT_CHANNEL_SHIFTS.out.ch_params_file
+//     )
+// }
 
-workflow SOLVER_WORKFLOW {
-    //
-    // SUBWORKFLOW: Create input channel
-    //
-    CREATE_INPUT_CHANNEL_SOLVER (
-        params.inputs,
-        params.params_file
-    )
-    //
-    // WORKFLOW: Run SOLVER analysis pipeline
-    //
-    SOLVER(
-        INPUT_CHANNEL_SOLVER.out.ch_FDRfiltered,
-        INPUT_CHANNEL_SOLVER.out.ch_Apexlist
-    )
-}
+// workflow SOLVER_WORKFLOW {
+//     //
+//     // SUBWORKFLOW: Create input channel
+//     //
+//     CREATE_INPUT_CHANNEL_SOLVER (
+//         params.inputs,
+//         params.params_file
+//     )
+//     //
+//     // WORKFLOW: Run SOLVER analysis pipeline
+//     //
+//     SOLVER(
+//         INPUT_CHANNEL_SOLVER.out.ch_FDRfiltered,
+//         INPUT_CHANNEL_SOLVER.out.ch_Apexlist
+//     )
+// }
 
 
 
@@ -145,19 +145,20 @@ def multiqc_report = []
 //
 workflow {
 
-    // Select the type of workflow
-    if ( 'ptm_compass' == params.wkf ) {
-        PTM_COMPASS()
-    } else if ( 'refrag' == params.wkf ) {
-        REFRAG_WORKFLOW()
-    } else if ( 'shifts' == params.wkf ) {
-        SHIFTS_WORKFLOW()
-    } else if ( 'solver' == params.wkf ) {
-        SOLVER_WORKFLOW()
-    } else {
-        println "Define a correct workflow: [ptm_compass,refrag,shifts,solver]"
-    }
-
+    // // Select the type of workflow
+    // if ( 'ptm_compass' == params.wkf ) {
+    //     PTM_COMPASS()
+    // } else if ( 'refrag' == params.wkf ) {
+    //     REFRAG_WORKFLOW()
+    // } else if ( 'shifts' == params.wkf ) {
+    //     SHIFTS_WORKFLOW()
+    // } else if ( 'solver' == params.wkf ) {
+    //     SOLVER_WORKFLOW()
+    // } else {
+    //     println "Define a correct workflow: [ptm_compass,refrag,shifts,solver]"
+    // }
+    // Execute the PTM-compass workflow
+    PTM_COMPASS()
 }
 
 /*
