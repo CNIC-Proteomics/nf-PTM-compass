@@ -168,14 +168,6 @@ class Utils {
                 else { // section does not exist in params2
                     params_data[section] = params
                 }
-
-            params1.each { section ->
-                if ( params2.containsKey(section) ) {
-                    params_data[section] = params[section]
-                }
-                else {
-                    throw new Exception("Key '$replace.key' is not in the parameter file.")
-                }
             }
             // create str with Ini report
             params_str = createIniStr(params_data)
