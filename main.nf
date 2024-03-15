@@ -16,7 +16,7 @@ nextflow.enable.dsl = 2
 ========================================================================================
 */
 
-// WorkflowMain.initialise(workflow, params, log)
+WorkflowMain.initialise(workflow, params, log)
 // a = Utils.getBaseName("/mnt/tierr.txt")
 // println "TRYE: ${a}"
 
