@@ -48,7 +48,7 @@ class Utils {
                 //     result += "${param.key} = ${param.value}\n"
                 // }
                 params.each { key,val ->
-                    result += "${key} = ${value}\n"
+                    result += "${key} = ${val}\n"
                 }
                 result += "\n"
             }
