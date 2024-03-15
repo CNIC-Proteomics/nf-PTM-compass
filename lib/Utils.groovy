@@ -68,14 +68,14 @@ class Utils {
             def currentSection = null
             fileReader.split("\n").each() { line ->
                 line = line.trim()
-                line = line.replaceAll(/(;|#).*/, '')
+                line = line.replaceAll(/(#).*/, '')
                 if (line.startsWith("[")) {
                     // It's a section header
                     currentSection = line.replaceAll("\\[|\\]", "")
                     result[currentSection] = [:]
-                } else if (line && !line.startsWith("#") && !line.startsWith(";")) {
+                } else if (line && !line.startsWith("#")) {
                     // It's a key-value pair (not empty and not a comment)
-                    def keyValue = line.split('=').collect { it.split('/(#|;)/')[0].trim() }
+                    def keyValue = line.split('=').collect { it.split('/(#)/')[0].trim() }
                     if (currentSection) {
                         // Add the key-value pair to the current section
                         // result[currentSection] << ['key': keyValue[0], 'value': keyValue[1]]
