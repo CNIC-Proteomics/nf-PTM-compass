@@ -161,8 +161,8 @@ class Utils {
                 if ( params_data.containsKey(section) ) {
                     params.each { key,val ->
                         // We add the parameters from params2 into params_data if they do not exist
-                        if ( !param_data[section].containsKey(key) ) {
-                            param_data[section][key] = val
+                        if ( !params_data[section].containsKey(key) ) {
+                            params_data[section][key] = val
                         }
                     }
                 }
