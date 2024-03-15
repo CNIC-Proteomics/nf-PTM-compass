@@ -42,10 +42,13 @@ class Utils {
     public static String createIniStr(report) {
         def result = ''
         try {
-            report.each { section, params ->
+            report.each { section,params ->
                 result += "[${section}]\n"
-                params.each { param ->
-                    result += "${param.key} = ${param.value}\n"
+                // params.each { param ->
+                //     result += "${param.key} = ${param.value}\n"
+                // }
+                params.each { key,val ->
+                    result += "${key} = ${value}\n"
                 }
                 result += "\n"
             }
@@ -69,13 +72,14 @@ class Utils {
                 if (line.startsWith("[")) {
                     // It's a section header
                     currentSection = line.replaceAll("\\[|\\]", "")
-                    result[currentSection] = []
+                    result[currentSection] = [:]
                 } else if (line && !line.startsWith("#") && !line.startsWith(";")) {
                     // It's a key-value pair (not empty and not a comment)
                     def keyValue = line.split('=').collect { it.split('/(#|;)/')[0].trim() }
                     if (currentSection) {
                         // Add the key-value pair to the current section
-                        result[currentSection] << ['key': keyValue[0], 'value': keyValue[1]]
+                        // result[currentSection] << ['key': keyValue[0], 'value': keyValue[1]]
+                        result[currentSection][keyValue[0]] = keyValue[1]
                     }
                 }
             }
@@ -150,8 +154,21 @@ class Utils {
             // parse Ini files
             def params1 = parseIniFile(ifile1)
             def params2 = parseIniFile(ifile2)
+
+            println "PARAMS1: ${params1}"
             // init the merged parameter
             def params_data = [:]
+            params1.each { section, params ->
+                if ( params2.containsKey(section) ) {
+                    // params.each { key,val ->
+
+                    //     result += "${param.key} = ${param.value}\n"
+                    // }
+                }
+                else { // section does not exist in params2
+                    params_data[section] = params
+                }
+
             params1.each { section ->
                 if ( params2.containsKey(section) ) {
                     params_data[section] = params[section]
