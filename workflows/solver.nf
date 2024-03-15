@@ -45,6 +45,7 @@ workflow SOLVER {
     apexlist
     database
     sitelist_file
+    groupmaker_file
     params_file
 
     main:
@@ -88,7 +89,7 @@ workflow SOLVER {
     //
     // SUBMODULE: Group maker
     //
-    GROUP_MAKER('09', SCANID_GENERATOR.out.ofile, database, params_file)
+    GROUP_MAKER('10', PDMTABLE_MAKER.out.ofile, groupmaker_file, params_file)
 
 
     // return channels

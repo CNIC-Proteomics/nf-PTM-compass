@@ -5,7 +5,7 @@ process GROUP_MAKER {
     input:
     val  order
     path input_file
-    path database
+    path groupmaker_file
     val  params_file
 
     output:
@@ -14,6 +14,6 @@ process GROUP_MAKER {
 
     script:
     """
-    source ${SOLVER_HOME}/env/bin/activate && python ${SOLVER_HOME}/PDMTableMaker_V7.py -i "${re_input_file}" -f "${database}" -c "${params_file}"
+    source ${SOLVER_HOME}/env/bin/activate && python ${SOLVER_HOME}/GroupMaker.py -i "${input_file}" -u "${groupmaker_file}" -c "${params_file}"
     """
 }
