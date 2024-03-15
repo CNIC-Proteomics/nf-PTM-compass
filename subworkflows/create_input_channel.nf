@@ -103,11 +103,12 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
 
 
     emit:
-    ch_re_files       = re_files
-    ch_exp_table      = exp_table
-    ch_database       = database
-    ch_params_file    = params_file
-    ch_sitelist_file  = sitelist_file
+    ch_re_files         = re_files
+    ch_exp_table        = exp_table
+    ch_database         = database
+    ch_sitelist_file    = sitelist_file
+    ch_groupmaker_file  = groupmaker_file
+    ch_params_file      = params_file
 }
 
 workflow CREATE_INPUT_CHANNEL_REFRAG {
