@@ -66,7 +66,7 @@ class WorkflowMain {
         // }
 
         // Check that a -profile or Nextflow config has been provided to run the pipeline
-        NfcoreTemplate.checkConfigProvided(workflow, log)
+        // NfcoreTemplate.checkConfigProvided(workflow, log)
 
         // // Check that conda channels are set-up correctly
         // if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
@@ -88,13 +88,18 @@ class WorkflowMain {
             System.exit(1)
         }
 
+        // Create parameter dir
+        def output_d = new File("${params.paramdir}")
+        if (!params.paramdir.startsWith("null/")) {
+            output_d.mkdirs()
+        }
+
         // // check fasta database has been provided
         // if (!params.database) {
         //     log.error "Please provide an fasta database to the pipeline e.g. '--database *.fasta'"
         // }
 
-        if (params.tracedir.startsWith("null/"))
-        {
+        if (params.tracedir.startsWith("null/")) {
             log.error """Error: Your tracedir is `\$params.tracedir`, this means you probably set outdir in a way that does not affect the default
             `\$params.tracedir` (e.g., by specifying outdir in a profile instead of the commandline or through a `-params-file`.
             Either set outdir in a correct way, or redefine tracedir as well (e.g., in your profile)."""
