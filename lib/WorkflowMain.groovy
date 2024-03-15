@@ -60,10 +60,10 @@ class WorkflowMain {
         // Print parameter summary log to screen
         log.info paramsSummaryLog(workflow, params, log)
 
-        // Validate workflow parameters via the JSON schema
-        if (params.validate_params) {
-            NfcoreSchema.validateParameters(workflow, params, log)
-        }
+        // // Validate workflow parameters via the JSON schema
+        // if (params.validate_params) {
+        //     NfcoreSchema.validateParameters(workflow, params, log)
+        // }
 
         // Check that a -profile or Nextflow config has been provided to run the pipeline
         NfcoreTemplate.checkConfigProvided(workflow, log)
