@@ -114,7 +114,7 @@ workflow SOLVER {
     DM0solver             = ch_DM0solver
     MProtein              = ch_MProtein
     TrunkSolver           = ch_TrunkSolver
-    Peakassign            = ch_Peakassign
+    Peakassign            = ch_PeakAssign
     SiteFrequency         = ch_SiteFrequency
     SiteCleanFrequency    = ch_SiteCleanFrequency
     SiteCleanP0Frequency  = ch_SiteCleanP0Frequency
