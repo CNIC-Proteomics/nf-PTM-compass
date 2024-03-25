@@ -1,4 +1,4 @@
-# ptm-compass
+# PTM-compass
 Nextflow pipeline for the PTM-compass workflow
 
 
