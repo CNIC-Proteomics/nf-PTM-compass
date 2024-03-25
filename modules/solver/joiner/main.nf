@@ -8,7 +8,7 @@ process JOINER {
     val  params_file
 
     output:
-    path "_GM.txt", emit: ofile
+    path "*_J.txt", emit: ofile
     path "*_log.txt", emit: log
 
     script:
