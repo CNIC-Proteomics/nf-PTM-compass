@@ -9,7 +9,7 @@ process GROUP_MAKER {
     val  params_file
 
     output:
-    path "_GM.txt", emit: ofile
+    path "*_GM.txt", emit: ofile
     path "*_log.txt", emit: log
 
     script:
