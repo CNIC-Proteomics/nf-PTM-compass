@@ -98,14 +98,30 @@ workflow SOLVER {
 
 
     // return channels
-    ch_DM0solver       = DM0SOLVER.out.ofile
-    ch_MProtein        = PROTEIN_ASSIGNER.out.ofile
-    ch_Peakassign      = PEAK_ASSIGNATOR.out.oPeakassign
+    ch_DM0solver              = DM0SOLVER.out.ofile
+    ch_MProtein               = PROTEIN_ASSIGNER.out.ofile
+    ch_TrunkSolver            = TRUNK_SOLVER.out.ofile
+    ch_PeakAssign             = PEAK_ASSIGNATOR.out.oPeakassign
+    ch_SiteFrequency          = SITELIST_MAKER.out.oFrequency
+    ch_SiteCleanFrequency     = SITELIST_MAKER.out.oCleanFrequency
+    ch_SiteCleanP0Frequency   = SITELIST_MAKER.out.oCleanP0Frequency
+    ch_SiteSolver             = SITE_SOLVER.out.ofile
+    ch_PDMtable               = PDMTABLE_MAKER.out.ofile
+    ch_GroupMaker             = GROUP_MAKER.out.ofile
+    ch_GroupJoiner            = JOINER.out.ofile
 
     emit:
-    DM0solver       = ch_DM0solver
-    MProtein        = ch_MProtein
-    Peakassign      = ch_Peakassign
+    DM0solver             = ch_DM0solver
+    MProtein              = ch_MProtein
+    TrunkSolver           = ch_TrunkSolver
+    Peakassign            = ch_Peakassign
+    SiteFrequency         = ch_SiteFrequency
+    SiteCleanFrequency    = ch_SiteCleanFrequency
+    SiteCleanP0Frequency  = ch_SiteCleanP0Frequency
+    SiteSolver            = ch_SiteSolver
+    PDMtable              = ch_PDMtable
+    GroupMaker            = ch_GroupMaker
+    GroupJoiner           = ch_GroupJoiner
 }
 
 /*
