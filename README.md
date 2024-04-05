@@ -17,6 +17,20 @@ nextflow \
         -resume
 ```
 
+Debugging using Ubuntu and Singularity (WSL - backend):
+```
+cd /usr/local/nf-PTM-compass
+
+nextflow \
+    -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
+    run main.nf   \
+        -params-file "/mnt/tierra/nf-PTM-compass/tests/test1/inputs/inputs.yml" \
+        --outdir  "/mnt/tierra/nf-PTM-compass/tests/test1" \
+        --params_file "/mnt/tierra/nf-PTM-compass/tests/test1/inputs/params.ini" \
+        -resume
+```
+
+
 In Production using the Web Server
 
 nextflow \
