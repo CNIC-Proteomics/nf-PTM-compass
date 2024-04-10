@@ -4,20 +4,20 @@ Nextflow pipeline for the PTM-compass workflow
 
 # Usage
 
-Debugging using Ubuntu (Docker - backend):
+Debugging using Ubuntu and Singularity (WSL - backend):
 ```
-cd /usr/local/nf-PTM-compass
+cd /home/jmrodriguezc/nf-PTM-compass
 
 nextflow \
-    -log "/opt/nextflow/nextflow/log/nf-ptm-compass.log" \
+    -log "/tmp/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
-        -params-file "/mnt/tierra/nf-PTM-compass/tests/test1/inputs/inputs.yml" \
-        --outdir  "/mnt/tierra/nf-PTM-compass/tests/test1" \
-        --params_file "/mnt/tierra/nf-PTM-compass/tests/test1/inputs/params.ini" \
+        -params-file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1_ptm/inputs/inputs.yml" \
+        --outdir  "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1_ptm" \
+        --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1_ptm/inputs/params.ini" \
         -resume
 ```
 
-Debugging using Ubuntu and Singularity (WSL - backend):
+Debugging using Ubuntu (Docker - backend):
 ```
 cd /usr/local/nf-PTM-compass
 

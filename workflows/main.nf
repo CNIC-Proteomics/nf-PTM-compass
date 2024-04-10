@@ -1,26 +1,12 @@
-#!/usr/bin/env nextflow
-
-nextflow.enable.dsl = 2
-
-
-/*
-========================================================================================
-    VALIDATE & PRINT PARAMETER SUMMARY
-========================================================================================
-*/
-
-// Under construction
-WorkflowMain.initialise(workflow, params, log)
-
 /*
 ========================================================================================
     IMPORT LOCAL MODULES/SUBWORKFLOWS
 ========================================================================================
 */
 
-include { REFRAG } from './workflows/refrag'
-include { SHIFTS } from './workflows/shifts'
-include { SOLVER } from './workflows/solver'
+include { REFRAG } from './refrag'
+include { SHIFTS } from './shifts'
+include { SOLVER } from './solver'
 
 
 //
@@ -32,7 +18,7 @@ include {
     CREATE_INPUT_CHANNEL_REFRAG;
     CREATE_INPUT_CHANNEL_SHIFTS;
     CREATE_INPUT_CHANNEL_SOLVER
-} from './subworkflows/create_input_channel'
+} from './../subworkflows/create_input_channel'
 
 
 /*
@@ -150,53 +136,6 @@ workflow SOLVER_WORKFLOW {
     )
 }
 
-
-
-/*
-========================================================================================
-    RUN ALL WORKFLOWS
-========================================================================================
-*/
-
-// Info required for completion email and summary
-def multiqc_report = []
-
-//
-// WORKFLOW: Execute a single named workflow for the pipeline
-//
-workflow {
-
-    // // Select the type of workflow
-    // if ( 'ptm_compass' == params.wkf ) {
-    //     PTM_COMPASS()
-    // } else if ( 'refrag' == params.wkf ) {
-    //     REFRAG_WORKFLOW()
-    // } else if ( 'shifts' == params.wkf ) {
-    //     SHIFTS_WORKFLOW()
-    // } else if ( 'solver' == params.wkf ) {
-    //     SOLVER_WORKFLOW()
-    // } else {
-    //     println "Define a correct workflow: [ptm_compass,refrag,shifts,solver]"
-    // }
-    // Execute the PTM-compass workflow
-    PTM_COMPASS()
-}
-
-/*
-========================================================================================
-    COMPLETION EMAIL AND SUMMARY
-========================================================================================
-*/
-
-// workflow.onComplete {
-//     if (params.email || params.email_on_fail) {
-//         NfcoreTemplate.email(workflow, params, summary_params, projectDir, log, multiqc_report)
-//     }
-//     NfcoreTemplate.summary(workflow, params, log)
-//     if (params.hook_url) {
-//         NfcoreTemplate.IM_notification(workflow, params, summary_params, projectDir, log)
-//     }
-// }
 
 /*
 ========================================================================================
