@@ -18,7 +18,7 @@ include {
     CREATE_INPUT_CHANNEL_REFRAG;
     CREATE_INPUT_CHANNEL_SHIFTS;
     CREATE_INPUT_CHANNEL_SOLVER
-} from './../subworkflows/create_input_channel'
+} from '../subworkflows/create_input_channel'
 
 
 /*
@@ -31,7 +31,7 @@ include {
 // WORKFLOW: Run main analysis pipeline
 //
 
-workflow PTM_COMPASS {
+workflow PTM_COMPASS_WORKFLOW {
     //
     // SUBWORKFLOW: Create input channels
     //
@@ -64,7 +64,7 @@ workflow PTM_COMPASS {
     )
 }
 
-workflow PTM_COMPASS_1 {
+workflow PTM_COMPASS_WORKFLOW_1 {
     //
     // SUBWORKFLOW: Create input channel
     //

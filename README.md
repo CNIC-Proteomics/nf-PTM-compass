@@ -4,17 +4,31 @@ Nextflow pipeline for the PTM-compass workflow
 
 # Usage
 
-Debugging using Ubuntu and Singularity (WSL - backend):
+Executing using Ubuntu and Singularity (WSL - backend):
+
+This workflow starts with SHIFTS
 ```
 cd /home/jmrodriguezc/nf-PTM-compass
 
 nextflow \
     -log "/tmp/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
-        -params-file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1_ptm/inputs/inputs.yml" \
-        --outdir  "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1_ptm" \
-        --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1_ptm/inputs/params.ini" \
+        -profile singularity \
+        --re_files "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/re_files/*" \
+        --exp_table "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/exp_table.txt" \
+        --database "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/database.fasta" \
+        --decoy_prefix "DECOY_"\
+        --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/params.ini" \
+        --outdir  "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1" \
         -resume
+<!-- nextflow \
+    -log "/tmp/nextflow/log/nf-ptm-compass.log" \
+    run main.nf   \
+        -profile singularity \
+        -params-file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/inputs.yml" \
+        --outdir  "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1" \
+        --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/params.ini" \
+        -resume -->
 ```
 
 Debugging using Ubuntu (Docker - backend):

@@ -79,15 +79,20 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS {
     main:
 
     // stop from the missing parameters
-    def requiredParams = ['re_files','exp_table','database','decoy_prefix']
+    def requiredParams = ['raw_files','msf_files','dm_file','exp_table','database','decoy_prefix']
     printErrorMissingParams(params, requiredParams)
 
     // create channels from input files
-    raw_files = Channel.fromPath("${inputs.raw_files}", checkIfExists: true)
-    msf_files = Channel.fromPath("${inputs.msf_files}", checkIfExists: true)
+    raw_files = Channel.fromPath("${params.raw_files}", checkIfExists: true)
+    msf_files = Channel.fromPath("${params.msf_files}", checkIfExists: true)
     // join two channels based on the file name
     msf_raw_files = joinChannelsFromFilename(raw_files, msf_files)
 
+    // these files will be used multiple times; So, we have to create a Value Channel and then, check if file exists
+    File file = new File("${params.dm_file}")
+    if ( file.exists() ) {
+        dm_file = Channel.value("${params.dm_file}")
+    } else { exit 1, "ERROR: The 'dm_file' file does not exist" }
 
     // create channels from input files
     exp_table       = Channel.fromPath("${params.exp_table}", checkIfExists: true)
@@ -141,6 +146,7 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS_1 {
     def updated_params_file = Utils.writeStrIntoFile(merged_params_str, "${params.paramdir}/params.ini")
 
     // create channel for params file
+    // these files will be used multiple times; So, we have to create a Value Channel and then, check if file exists
     params_file = Channel.value("${updated_params_file}")
 
 
@@ -154,38 +160,36 @@ workflow CREATE_INPUT_CHANNEL_PTMCOMPASS_1 {
 }
 
 workflow CREATE_INPUT_CHANNEL_REFRAG {
-    take:
-    input_files
-    params_file
-
     main:
 
-    // read the file with input parameters
-    f = new FileInputStream(new File(input_files))
-    // create yaml
-    inputs = new Yaml().load(f)
-
     // stop from the missing parameters
-    def requiredParams = ['raw_files','msf_files','dm_file']
-    printErrorMissingParams(inputs, requiredParams)
+    def requiredParams = ['raw_files','msf_files','dm_file','decoy_prefix']
+    printErrorMissingParams(params, requiredParams)
 
     // create channels from input files
-    raw_files = Channel.fromPath("${inputs.raw_files}", checkIfExists: true)
-    msf_files = Channel.fromPath("${inputs.msf_files}", checkIfExists: true)
+    raw_files = Channel.fromPath("${params.raw_files}", checkIfExists: true)
+    msf_files = Channel.fromPath("${params.msf_files}", checkIfExists: true)
     // join two channels based on the file name
     msf_raw_files = joinChannelsFromFilename(raw_files, msf_files)
 
     // these files will be used multiple times; So, we have to create a Value Channel and then, check if file exists
-    File file = new File("${inputs.dm_file}")
+    File file = new File("${params.dm_file}")
     if ( file.exists() ) {
-        dm_file = Channel.value("${inputs.dm_file}")
+        dm_file = Channel.value("${params.dm_file}")
     } else { exit 1, "ERROR: The 'dm_file' file does not exist" }
 
+    // update the given parameter into the fixed parameter file
+    def redefinedParams = ['decoy_prefix': params.decoy_prefix]
+    def updated_params_str = Utils.updateParamsFile(params.fixed_params_file, redefinedParams)
+    def fixed_params_file = Utils.writeStrIntoFile(updated_params_str, "${params.paramdir}/params.ini")
+
+    // merge the files that contain both the fixed parametes and the variable parameters
+    def merged_params_str = Utils.mergeIniFiles(fixed_params_file, params.params_file)
+    def updated_params_file = Utils.writeStrIntoFile(merged_params_str, "${params.paramdir}/params.ini")
+
     // create channel for params file
-    file = new File("${params_file}")
-    if ( file.exists() ) {
-        params_file = Channel.value("${params_file}")
-    } else { exit 1, "ERROR: The 'parameter' file does not exist" }
+    // these files will be used multiple times; So, we have to create a Value Channel and then, check if file exists
+    params_file = Channel.value("${updated_params_file}")
 
     emit:
     ch_msf_raw_files  = msf_raw_files
