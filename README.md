@@ -19,6 +19,8 @@ nextflow \
         --database "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/database.fasta" \
         --decoy_prefix "DECOY_"\
         --params_file "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/params.ini" \
+        --sitelist_file "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/sitelist.txt" \
+        --groupmaker_file "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/groupmaker.txt" \
         --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1" \
         -resume
 ```
