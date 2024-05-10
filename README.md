@@ -18,17 +18,21 @@ nextflow \
         --exp_table "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/exp_table.txt" \
         --database "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/database.fasta" \
         --decoy_prefix "DECOY_"\
-        --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/params.ini" \
-        --outdir  "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1" \
+        --params_file "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/params.ini" \
+        --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1" \
         -resume
-<!-- nextflow \
+```
+
+Adding the parameters into "inputs.yml" file
+```
+nextflow \
     -log "/tmp/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
         -profile singularity \
-        -params-file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/inputs.yml" \
-        --outdir  "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1" \
-        --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/params.ini" \
-        -resume -->
+        -params-file "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/inputs.yml" \
+        --params_file "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test1/inputs/params.ini" \
+        --outdir  "/tmp/test1" \
+        -resume
 ```
 
 Debugging using Ubuntu (Docker - backend):
@@ -51,10 +55,10 @@ nextflow \
     -log "/tmp/nf-ptm-compass.log" \
     run main.nf   \
         --wkf "ptm_compass" \
-        --inputs "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params/inputs_ptmcompass.yml" \
-        --outdir  "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2" \
-        -params-file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params/params.yml" \
-        --params_file "/home/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params/ptm-compass.ini" \
+        --inputs "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params/inputs_ptmcompass.yml" \
+        --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test2" \
+        -params-file "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params/params.yml" \
+        --params_file "/mnt/tierra/U_Proteomica/UNIDAD/DatosCrudos/jmrodriguezc/projects/nf-PTM-compass/tests/test2/params/ptm-compass.ini" \
         -resume
 
 <!--
