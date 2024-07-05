@@ -16,7 +16,7 @@ nextflow.enable.dsl = 2
 ========================================================================================
 */
 
-// Under construction
+// TODO!! Try to change the path "Groovy" libs and locate in the nf-modules
 WorkflowMain.initialise(workflow, params, log)
 
 /*

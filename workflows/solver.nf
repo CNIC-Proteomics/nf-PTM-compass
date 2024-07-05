@@ -19,17 +19,17 @@
 
 include { PROTEIN_ASSIGNER;
           PROTEIN_ASSIGNER as PROTEIN_ASSIGNER_2;
-}                               from '../nf-modules/proteinassigner/main'
-include { SCANID_GENERATOR }    from '../nf-modules/scanidgenerator/main'
-include { PEAK_ASSIGNATOR }     from '../nf-modules/shifts/peakassignator/main'
+}                               from '../nf-modules/modules/proteinassigner/main'
+include { SCANID_GENERATOR }    from '../nf-modules/modules/scanidgenerator/main'
+include { PEAK_ASSIGNATOR }     from '../nf-modules/modules/shifts/peakassignator/main'
 
-include { DM0SOLVER }           from '../nf-modules/solver/dm0solver/main'
-include { TRUNK_SOLVER }        from '../nf-modules/solver/trunksolver/main'
-include { SITELIST_MAKER }      from '../nf-modules/solver/sitelistmaker/main'
-include { SITE_SOLVER }         from '../nf-modules/solver/sitesolver/main'
-include { PDMTABLE_MAKER }      from '../nf-modules/solver/pdmtablemaker/main'
-include { GROUP_MAKER }         from '../nf-modules/solver/groupmaker/main'
-include { JOINER      }         from '../nf-modules/solver/joiner/main'
+include { DM0SOLVER }           from '../nf-modules/modules/solver/dm0solver/main'
+include { TRUNK_SOLVER }        from '../nf-modules/modules/solver/trunksolver/main'
+include { SITELIST_MAKER }      from '../nf-modules/modules/solver/sitelistmaker/main'
+include { SITE_SOLVER }         from '../nf-modules/modules/solver/sitesolver/main'
+include { PDMTABLE_MAKER }      from '../nf-modules/modules/solver/pdmtablemaker/main'
+include { GROUP_MAKER }         from '../nf-modules/modules/solver/groupmaker/main'
+include { JOINER      }         from '../nf-modules/modules/solver/joiner/main'
 
 
 

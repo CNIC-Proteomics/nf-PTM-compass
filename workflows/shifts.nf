@@ -17,15 +17,15 @@
 ========================================================================================
 */
 
-include { ADAPTER }              from '../nf-modules/shifts/adapter/main'
-include { DUPLICATE_REMOVER }    from '../nf-modules/shifts/duplicateremover/main'
-include { DM_CALIBRATOR }     from '../nf-modules/shifts/dmcalibrator/main'
-include { PEAK_MODELLER }     from '../nf-modules/shifts/peakmodeller/main'
-include { PEAK_INSPECTOR }     from '../nf-modules/shifts/peakinspector/main'
-include { PEAK_SELECTOR }     from '../nf-modules/shifts/peakselector/main'
-include { RECOM_FILTERER }     from '../nf-modules/shifts/recomfilterer/main'
-include { PEAK_ASSIGNATOR }     from '../nf-modules/shifts/peakassignator/main'
-include { PEAK_FDRER }     from '../nf-modules/shifts/peakfdrer/main'
+include { ADAPTER }              from '../nf-modules/modules/shifts/adapter/main'
+include { DUPLICATE_REMOVER }    from '../nf-modules/modules/shifts/duplicateremover/main'
+include { DM_CALIBRATOR }     from '../nf-modules/modules/shifts/dmcalibrator/main'
+include { PEAK_MODELLER }     from '../nf-modules/modules/shifts/peakmodeller/main'
+include { PEAK_INSPECTOR }     from '../nf-modules/modules/shifts/peakinspector/main'
+include { PEAK_SELECTOR }     from '../nf-modules/modules/shifts/peakselector/main'
+include { RECOM_FILTERER }     from '../nf-modules/modules/shifts/recomfilterer/main'
+include { PEAK_ASSIGNATOR }     from '../nf-modules/modules/shifts/peakassignator/main'
+include { PEAK_FDRER }     from '../nf-modules/modules/shifts/peakfdrer/main'
 
 
 /*
