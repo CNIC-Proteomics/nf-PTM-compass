@@ -17,15 +17,15 @@
 ========================================================================================
 */
 
-include { ADAPTER }              from '../modules/shifts/adapter/main'
-include { DUPLICATE_REMOVER }    from '../modules/shifts/duplicateremover/main'
-include { DM_CALIBRATOR }     from '../modules/shifts/dmcalibrator/main'
-include { PEAK_MODELLER }     from '../modules/shifts/peakmodeller/main'
-include { PEAK_INSPECTOR }     from '../modules/shifts/peakinspector/main'
-include { PEAK_SELECTOR }     from '../modules/shifts/peakselector/main'
-include { RECOM_FILTERER }     from '../modules/shifts/recomfilterer/main'
-include { PEAK_ASSIGNATOR }     from '../modules/shifts/peakassignator/main'
-include { PEAK_FDRER }     from '../modules/shifts/peakfdrer/main'
+include { ADAPTER }              from '../nf-modules/shifts/adapter/main'
+include { DUPLICATE_REMOVER }    from '../nf-modules/shifts/duplicateremover/main'
+include { DM_CALIBRATOR }     from '../nf-modules/shifts/dmcalibrator/main'
+include { PEAK_MODELLER }     from '../nf-modules/shifts/peakmodeller/main'
+include { PEAK_INSPECTOR }     from '../nf-modules/shifts/peakinspector/main'
+include { PEAK_SELECTOR }     from '../nf-modules/shifts/peakselector/main'
+include { RECOM_FILTERER }     from '../nf-modules/shifts/recomfilterer/main'
+include { PEAK_ASSIGNATOR }     from '../nf-modules/shifts/peakassignator/main'
+include { PEAK_FDRER }     from '../nf-modules/shifts/peakfdrer/main'
 
 
 /*
@@ -49,7 +49,7 @@ workflow SHIFTS {
     //
     // SUBMODULE: remove duplicates
     //
-    DUPLICATE_REMOVER('02', ADAPTER.out.ofile)
+    DUPLICATE_REMOVER('02', ADAPTER.out.ofile, params_file)
     //
     // SUBMODULE: DM calibrator
     //
