@@ -156,10 +156,13 @@ class Utils {
                 // the section from params2 are within params_data
                 if ( params_data.containsKey(section) ) {
                     params.each { key,val ->
-                        // We add the parameters from params2 into params_data if they do not exist
-                        if ( !params_data[section].containsKey(key) ) {
-                            params_data[section][key] = val
-                        }
+                        // // We add the parameters from params2 into params_data if they do not exist
+                        // if ( !params_data[section].containsKey(key) ) {
+                        //     params_data[section][key] = val
+                        // }
+                        
+                        // We add the parameters from params2 into params_data, owerwriting if exist
+                        params_data[section][key] = val
                     }
                 }
                 else { // add the new section from params2 into params_data
