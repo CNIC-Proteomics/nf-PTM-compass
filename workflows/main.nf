@@ -14,11 +14,11 @@ include { SOLVER } from './solver'
 //
 include {
     CREATE_INPUT_CHANNEL_PTMCOMPASS;
-    CREATE_INPUT_CHANNEL_PTMCOMPASS_1;
-    CREATE_INPUT_CHANNEL_REFRAG;
-    CREATE_INPUT_CHANNEL_SHIFTS;
-    CREATE_INPUT_CHANNEL_SOLVER
-} from '../nf-modules/subworkflows/create_input_channel'
+    CREATE_INPUT_CHANNEL_PTMCOMPASS_1
+} from '../nf-modules/subworkflows/ptm_compass'
+include { CREATE_INPUT_CHANNEL_REFRAG } from '../nf-modules/subworkflows/refrag'
+include { CREATE_INPUT_CHANNEL_SHIFTS } from '../nf-modules/subworkflows/shifts'
+include { CREATE_INPUT_CHANNEL_SOLVER } from '../nf-modules/subworkflows/solver'
 
 
 /*

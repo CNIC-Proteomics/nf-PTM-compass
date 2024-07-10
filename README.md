@@ -1,6 +1,8 @@
 # PTM-compass
 Nextflow pipeline for the PTM-compass workflow
 
+# Installation
+
 
 # Usage
 
