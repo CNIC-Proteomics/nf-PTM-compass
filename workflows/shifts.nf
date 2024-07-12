@@ -23,7 +23,7 @@ include { DM_CALIBRATOR }     from '../nf-modules/modules/shifts/dmcalibrator/ma
 include { PEAK_MODELLER }     from '../nf-modules/modules/shifts/peakmodeller/main'
 include { PEAK_INSPECTOR }     from '../nf-modules/modules/shifts/peakinspector/main'
 include { PEAK_SELECTOR }     from '../nf-modules/modules/shifts/peakselector/main'
-include { PEAK_SELECTOR_2 }     from '../nf-modules/modules/shifts/peakselector2/main'
+include { PEAK_SELECTOR_V2 }     from '../nf-modules/modules/shifts/peakselector2/main'
 include { RECOM_FILTERER }     from '../nf-modules/modules/shifts/recomfilterer/main'
 include { PEAK_ASSIGNATOR }     from '../nf-modules/modules/shifts/peakassignator/main'
 include { PEAK_FDRER }     from '../nf-modules/modules/shifts/peakfdrer/main'
@@ -62,7 +62,7 @@ workflow SHIFTS {
     //
     // SUBMODULE: Peak selector v2
     //
-    PEAK_SELECTOR_2('05', PEAK_MODELLER.out.oHistogram, params_file)
+    PEAK_SELECTOR_V2('05', PEAK_MODELLER.out.oHistogram, params_file)
     //
     // SUBMODULE: Recom filterer
     //
@@ -71,7 +71,7 @@ workflow SHIFTS {
     // SUBMODULE: Peak assignator
     //
     def params_sections = Channel.value(['PeakAssignator','Logging','General'])
-    PEAK_ASSIGNATOR('07', RECOM_FILTERER.out.oRecomfiltered, PEAK_SELECTOR_2.out.oApexlist, params_file, params_sections)
+    PEAK_ASSIGNATOR('07', RECOM_FILTERER.out.oRecomfiltered, PEAK_SELECTOR_V2.out.oApexlist, params_file, params_sections)
     //
     // SUBMODULE: Peak fdrer
     //
@@ -80,7 +80,7 @@ workflow SHIFTS {
     // return channels
     ch_DMtable         = PEAK_MODELLER.out.oDMtable
     ch_Histogram       = PEAK_MODELLER.out.oHistogram
-    ch_Apexlist        = PEAK_SELECTOR_2.out.oApexlist
+    ch_Apexlist        = PEAK_SELECTOR_V2.out.oApexlist
     ch_Recomfiltered   = RECOM_FILTERER.out.oRecomfiltered
     ch_Peakassign      = PEAK_ASSIGNATOR.out.oPeakassign
     ch_FDRfiltered     = PEAK_FDRER.out.oFDRfiltered
