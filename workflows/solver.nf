@@ -17,13 +17,15 @@
 ========================================================================================
 */
 
+include { DM0SOLVER;
+          DM0SOLVER as DM0SOLVER_2
+}                               from '../nf-modules/modules/solver/dm0solver/main'
 include { PROTEIN_ASSIGNER;
           PROTEIN_ASSIGNER as PROTEIN_ASSIGNER_2;
 }                               from '../nf-modules/modules/proteinassigner/main'
 include { SCANID_GENERATOR }    from '../nf-modules/modules/scanidgenerator/main'
 include { PEAK_ASSIGNATOR }     from '../nf-modules/modules/shifts/peakassignator/main'
 
-include { DM0SOLVER }           from '../nf-modules/modules/solver/dm0solver/main'
 include { TRUNK_SOLVER }        from '../nf-modules/modules/solver/trunksolver/main'
 include { SITELIST_MAKER }      from '../nf-modules/modules/solver/sitelistmaker/main'
 include { SITE_SOLVER }         from '../nf-modules/modules/solver/sitesolver/main'
@@ -53,24 +55,27 @@ workflow SOLVER {
     //
     // SUBMODULE: DM0 solver
     //
-    DM0SOLVER('01', peakfdrer, apexlist, params_file)
+    def params_sections_dm = Channel.value(['DM0Solver_Parameters','DM0Solver_DM0List','Logging','General'])
+    DM0SOLVER('01', peakfdrer, apexlist, params_file, params_sections_dm)
     //
     // SUBMODULE: protein assigner
     //
-    PROTEIN_ASSIGNER('02', DM0SOLVER.out.ofile, database, params_file)
+    def params_sections_pa = Channel.value(['ProteinAssigner'])
+    PROTEIN_ASSIGNER('02', DM0SOLVER.out.ofile, database, params_file, params_sections_pa)
     //
     // SUBMODULE: Trunk solver
     //
     TRUNK_SOLVER('03', PROTEIN_ASSIGNER.out.ofile, database, params_file)
     //
-    // SUBMODULE: protein assigner
+    // SUBMODULE: protein assigner 2º round
     //
-    PROTEIN_ASSIGNER_2('04', TRUNK_SOLVER.out.ofile, database, params_file)
+    def params_sections_pa2 = Channel.value(['ProteinAssigner_2_Round'])
+    PROTEIN_ASSIGNER_2('04', TRUNK_SOLVER.out.ofile, database, params_file, params_sections_pa2)
     //
     // SUBMODULE: Peak assignator
     //
-    def params_sections = Channel.value(['PeakAssignator_in_Solver','Logging','General'])
-    PEAK_ASSIGNATOR('05', PROTEIN_ASSIGNER_2.out.ofile, apexlist, params_file, params_sections)
+    def params_sections_pe = Channel.value(['PeakAssignator_in_Solver','Logging','General'])
+    PEAK_ASSIGNATOR('05', PROTEIN_ASSIGNER_2.out.ofile, apexlist, params_file, params_sections_pe)
     //
     // SUBMODULE: Site list maker
     //
@@ -80,21 +85,26 @@ workflow SOLVER {
     //
     SITE_SOLVER('07', PEAK_ASSIGNATOR.out.oPeakassign, sitelist_file, params_file)
     //
+    // SUBMODULE: DM0 solver 2º round
+    //
+    def params_sections_dm2 = Channel.value(['DM0Solver_Parameters_2_Round','DM0Solver_DM0List','Logging','General'])
+    DM0SOLVER_2('08', SITE_SOLVER.out.ofile, apexlist, params_file, params_sections_dm2)
+    //
     // SUBMODULE: Scan id generator
     //
-    SCANID_GENERATOR('08', SITE_SOLVER.out.ofile)
+    SCANID_GENERATOR('09', DM0SOLVER_2.out.ofile)
     //
     // SUBMODULE: PDMtable maker
     //
-    PDMTABLE_MAKER('09', SCANID_GENERATOR.out.ofile, database, params_file)
+    PDMTABLE_MAKER('10', SCANID_GENERATOR.out.ofile, database, params_file)
     //
     // SUBMODULE: Group maker
     //
-    GROUP_MAKER('10', PDMTABLE_MAKER.out.ofile, groupmaker_file, params_file)
+    GROUP_MAKER('11', PDMTABLE_MAKER.out.ofile, groupmaker_file, params_file)
     //
     // SUBMODULE: Joiner
     //
-    JOINER('11', GROUP_MAKER.out.ofile, params_file)
+    JOINER('12', GROUP_MAKER.out.ofile, params_file)
 
 
     // return channels
