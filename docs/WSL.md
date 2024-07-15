@@ -7,36 +7,36 @@ To install WSL with a specific distro on Windows 10, use these steps:
 2. **Search for Command Prompt, right-click the top result, and select the Run as administrator option**.
 
 3. **Type the following command to view a list of available WSL distros to install on Windows 10 and press Enter**:
-```
-wsl --list --online
+	```
+	wsl --list --online
 
-	The following is a list of valid distributions that can be installed.
-	Install using 'wsl.exe --install <Distro>'.
+		The following is a list of valid distributions that can be installed.
+		Install using 'wsl.exe --install <Distro>'.
 
-	NAME                                   FRIENDLY NAME
-	Ubuntu                                 Ubuntu
-	Debian                                 Debian GNU/Linux
-	kali-linux                             Kali Linux Rolling
-	Ubuntu-18.04                           Ubuntu 18.04 LTS
-	Ubuntu-20.04                           Ubuntu 20.04 LTS
-	Ubuntu-22.04                           Ubuntu 22.04 LTS
-	Ubuntu-24.04                           Ubuntu 24.04 LTS
-	OracleLinux_7_9                        Oracle Linux 7.9
-	OracleLinux_8_7                        Oracle Linux 8.7
-	OracleLinux_9_1                        Oracle Linux 9.1
-	openSUSE-Leap-15.5                     openSUSE Leap 15.5
-	SUSE-Linux-Enterprise-Server-15-SP4    SUSE Linux Enterprise Server 15 SP4
-	SUSE-Linux-Enterprise-15-SP5           SUSE Linux Enterprise 15 SP5
-	openSUSE-Tumbleweed                    openSUSE Tumbleweed
-```
-Quick note: At the time of this writing, you can install Ubuntu, Debian, Kali Linux, openSUSE, and SUSE Linux Enterprise Server.
+		NAME                                   FRIENDLY NAME
+		Ubuntu                                 Ubuntu
+		Debian                                 Debian GNU/Linux
+		kali-linux                             Kali Linux Rolling
+		Ubuntu-18.04                           Ubuntu 18.04 LTS
+		Ubuntu-20.04                           Ubuntu 20.04 LTS
+		Ubuntu-22.04                           Ubuntu 22.04 LTS
+		Ubuntu-24.04                           Ubuntu 24.04 LTS
+		OracleLinux_7_9                        Oracle Linux 7.9
+		OracleLinux_8_7                        Oracle Linux 8.7
+		OracleLinux_9_1                        Oracle Linux 9.1
+		openSUSE-Leap-15.5                     openSUSE Leap 15.5
+		SUSE-Linux-Enterprise-Server-15-SP4    SUSE Linux Enterprise Server 15 SP4
+		SUSE-Linux-Enterprise-15-SP5           SUSE Linux Enterprise 15 SP5
+		openSUSE-Tumbleweed                    openSUSE Tumbleweed
+	```
+	Quick note: At the time of this writing, you can install Ubuntu, Debian, Kali Linux, openSUSE, and SUSE Linux Enterprise Server.
 
 4. **Install the Ubuntu 22.04 from the Windows Store**.
 
-For this case, we recomend the **Ubuntu-22.04** distribution. Type the following command to install the WSL with a specific distro on Windows 10 and press Enter:
-```
-wsl --install -d Ubuntu-22.04
-```
+	For this case, we recomend the **Ubuntu-22.04** distribution. Type the following command to install the WSL with a specific distro on Windows 10 and press Enter:
+	```
+	wsl --install -d Ubuntu-22.04
+	```
 
 <!--
 ### References
