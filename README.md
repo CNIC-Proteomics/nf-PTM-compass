@@ -41,19 +41,44 @@ singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass
 
 
 
-
 # Usage
 
-Executing using Ubuntu and Singularity (WSL - backend):
+## Execute the pipeline using ReCom results as input
 
 Currently, this pipeline begins with SHIFTS.
 
 You can execute this pipeline using either ReCom results or RefMod results.
 
-1. Execute the pipeline using ReCom results as input:
+
+1. Download test files
+```
+cd tests && \
+wget https://zenodo.org/records/12744716/files/test_ReCom_1.zip?download=1 -O test_Recom_1.zip && \
+unzip test_Recom_1.zip -d test_Recom_1
+```
+
+2. Execute the pipeline using ReCom results as input:
+```
+nextflow \
+    -log "/tmp/nextflow/log/nf-ptm-compass.log" \
+    run main.nf   \
+        -profile singularity \
+        --recom_files "tests/test_Recom_1/recom_files/*" \
+        --exp_table "tests/test_Recom_1/exp_table.txt" \
+        --database "tests/test_Recom_1/database.fasta" \
+        --decoy_prefix "DECOY_"\
+        --params_file "tests/test_Recom_1/params.ini" \
+        --sitelist_file "tests/test_Recom_1/sitelist.txt" \
+        --groupmaker_file "tests/test_Recom_1/groupmaker.txt" \
+        --outdir  "tests/test_Recom_1" \
+        -resume
+```
+
+
+<!-- 
+2. Execute the pipeline using ReCom results as input:
 ```
 cd /home/jmrodriguezc/nf-PTM-compass
-
 nextflow \
     -log "/tmp/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
@@ -68,7 +93,13 @@ nextflow \
         --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1" \
         -resume
 ```
+ -->
 
+## Execute the pipeline using ReCom results as input
+
+Under construction...
+
+<!-- 
 2. Execute the pipeline using RefMod results as input:
 ```
 cd /home/jmrodriguezc/nf-PTM-compass
@@ -99,4 +130,4 @@ nextflow \
         --params_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1/inputs/params.ini" \
         -resume
 ```
-
+ -->
