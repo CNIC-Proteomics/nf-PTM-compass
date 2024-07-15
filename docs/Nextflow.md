@@ -16,7 +16,7 @@ or
 sudo apt install openjdk-19-jre-headless
 ```
 
-## Installing Nextflow
+## Set Up
 
 Installing Nextflow is straightforward. Follow these steps:
 
@@ -34,3 +34,7 @@ curl -s https://get.nextflow.io | bash
 echo 'export PATH=~/bin:$PATH' >> ~/.bashrc && \
 source ~/.bashrc
 ```
+
+### References
+
+For further information, read the [Nextflow documentation](https://www.nextflow.io/docs/latest/index.html).

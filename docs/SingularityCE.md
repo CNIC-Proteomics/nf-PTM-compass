@@ -1,10 +1,17 @@
 # Install Singularity
 
+You will need a **Linux system** to run SingularityCE natively. Options for using SingularityCE on Mac and Windows machines, along with alternate Linux installation options, are discussed in the [installation section of the admin guide](https://sylabs.io/guides/4.1/admin-guide/installation.html).
+
+If you have an existing version of SingularityCE installed from source, which you wish to upgrade or remove / uninstall, see the [installation section of the admin guide](https://sylabs.io/guides/4.1/admin-guide/installation.html).
+
+For further information, read the [SingularityCE User Guide](https://docs.sylabs.io/guides/latest/user-guide/index.html).
+
+# Prerequisites
+
 ## Install system dependencies
 You must first install development tools and libraries to your host.
 
 On Debian-based systems, including Ubuntu:
-
 ```
 sudo apt-get update
 sudo apt-get install -y \
@@ -28,7 +35,7 @@ sudo apt-get install -y \
 ```
 
 ## Install Go
-SingularityCE is written in Go, and may require a newer version of Go than is available in the repositories of your distribution. We recommend installing the latest version of Go from the official binaries (https://golang.org/dl/)
+SingularityCE is written in **Go**, and may require a newer version of Go than is available in the repositories of your distribution. We recommend installing the latest version of Go from the official binaries (https://golang.org/dl/)
 
 ```
 export VERSION=1.22.1 OS=linux ARCH=amd64 && \
@@ -68,6 +75,8 @@ Now you are ready to build SingularityCE. Dependencies will be automatically dow
 ## Using singularity run from within the Docker container
 **It is strongly recommended that you don't use the Docker container for running Singularity images**, only for creating them, since the Singularity command runs within the container as the root user.
 
+<!--
+
 However, for the purposes of this simple example, and potentially for testing/debugging purposes it is useful to know how to run a Singularity container within the Docker Singularity container. You may recall from the Running a container from the image section in the previous episode that we used the --contain switch with the singularity command. If you don’t use this switch, it is likely that you will get an error relating to /etc/localtime similar to the following:
 ```
 WARNING: skipping mount of /etc/localtime: no such file or directory
@@ -82,3 +91,8 @@ sudo cp /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 ```
 The singularity run command should now work successfully without needing to use --contain. Bear in mind that once you exit the Docker Singularity container shell and shutdown the container, this configuration will not persist.
 
+-->
+
+# References
+
+For further information, read the [SingularityCE User Guide](https://docs.sylabs.io/guides/latest/user-guide/index.html).

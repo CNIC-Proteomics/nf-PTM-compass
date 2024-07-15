@@ -38,9 +38,11 @@ For this case, we recomend the **Ubuntu-22.04** distribution. Type the following
 wsl --install -d Ubuntu-22.04
 ```
 
-<!--
 ### References
 
+For further information, read the [Microsoft documentation](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+<!--
 https://pureinfotech.com/install-windows-subsystem-linux-2-windows-10/#install_wsl_command_2004_windows10
 https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview
 https://linuxconfig.org/ubuntu-22-04-on-wsl-windows-subsystem-for-linux
