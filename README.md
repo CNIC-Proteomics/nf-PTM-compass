@@ -1,7 +1,33 @@
-# PTM-compass
-Nextflow pipeline for the PTM-compass workflow
+# nf-PTM-compass
+
+nf-PTM-compass is a [*Nextflow*](https://www.nextflow.io/) pipeline that enhances the identification and quantification of Post-Translational Modifications (PTMs).
+
+nf-PTM-compass was developed by the Cardiovascular Proteomics Lab/Proteomic Unit at The National Centre for Cardiovascular Research (CNIC, https://www.cnic.es).
+
+This application is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0) License. For further details, read the https://creativecommons.org/licenses/by-nd/4.0/.
 
 # Installation
+
+## Prerequisites
+Before you begin, ensure you have met the following requirements:
+
+- You have Linux operating system on your machine. If you have Windows operating system, read the section [*Install WSL on Windows*](docs/WSL.md)
+
+## Install Nextflow
+
+For more information, read the [*How to install Nextflow*](docs/Nextflow.md) section.
+
+## Install Singularity
+
+For more information, read the [*How to install Singularity*](docs/SingularityCE.md) section.
+
+## Download Singularity images
+
+You need to download the Singularity image for the pipeline, ensuring version compatibility with the Nextflow pipeline. See the [*versions*](VERSIONS.md) section:
+```
+singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass:0.1.0
+```
+
 
 
 # Usage
@@ -61,18 +87,4 @@ nextflow \
         --params_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1/inputs/params.ini" \
         -resume
 ```
-
-
-# Installation
-
-## Prerequisites
-
-Under construction...
-
-- Linux Operating system... In the case to use Windows, install WSL (Linux)
-
-- Install Nextflow
-
-- Install Singularity
-
 

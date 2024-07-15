@@ -5,7 +5,6 @@ You must first install development tools and libraries to your host.
 
 On Debian-based systems, including Ubuntu:
 
-
 ```
 sudo apt-get update
 sudo apt-get install -y \
@@ -74,6 +73,7 @@ However, for the purposes of this simple example, and potentially for testing/de
 WARNING: skipping mount of /etc/localtime: no such file or directory
 FATAL:   container creation failed: mount /etc/localtime->/etc/localtime error: while mounting /etc/localtime: mount source /etc/localtime doesn't exist
 ```
+
 This occurs because the /etc/localtime file that provides timezone configuration is not present within the Docker container. If you want to use the Docker container to test that your newly created image runs, you can use the --contain switch, or you can open a shell in the Docker container and add a timezone configuration as described in the Alpine Linux documentation:
 
 ```
