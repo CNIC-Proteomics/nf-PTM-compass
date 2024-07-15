@@ -1,31 +1,36 @@
 # Install Nextflow
 
-## Check prerequisites
+## Check Prerequisites
 
-Make sure 11 or later is installed on your computer by using the command:
+Make sure Java 11 or later is installed on your computer by using the command:
 ```
 java -version
 ```
-Otherwise:
+
+If not installed, use one of the following commands to install it (for Ubuntu distribution):
 ```
 sudo apt install openjdk-21-jre-headless
-  or
+```
+or
+```
 sudo apt install openjdk-19-jre-headless
 ```
 
-## Set up
-Dead easy to install
+## Installing Nextflow
 
-Enter this command in your terminal:
+Installing Nextflow is straightforward. Follow these steps:
+
+1. Enter this command in your terminal:
 ```
-mkdir -p ~/softwares/nextflow && \
-cd ~/softwares/nextflow && \
+mkdir -p ~/bin && \
+cd ~/bin && \
 curl -s https://get.nextflow.io | bash
 ```
-(it creates a file nextflow in a bin folder in your home)
+(This creates a `nextflow` file in a bin folder in your home directory.)
 
-Set the Environment variable PATH to point to ~/bin:
+
+2. Set the environment variable `PATH` to point to `~/bin`:
 ```
-echo 'export PATH=~/softwares/nextflow:$PATH' >> ~/.bashrc && \
-  source ~/.bashrc
+echo 'export PATH=~/bin:$PATH' >> ~/.bashrc && \
+source ~/.bashrc
 ```
