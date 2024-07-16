@@ -28,18 +28,6 @@ You need to download the Singularity image for the pipeline, ensuring version co
 singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass:0.1.0
 ```
 
-# Version history
-
-| Version | Description                  | Singularity image                                                                        | Tag     | Code                                                        | Version |
-|---------|------------------------------|------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------|---------|
-| 0.1.0   | First stable version         |                                                                                          |         |                                                             |         |
-|         |                              | [ptm-compass](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)  | 0.1.0   |                                                             |         |
-|         |                              |                                                                                          |         | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)         | 0.4.3   |
-|         |                              |                                                                                          |         | [SHIFTS](https://github.com/CNIC-Proteomics/SHIFTS)         | 0.4.3   |
-|         |                              |                                                                                          |         | [SOLVER](https://github.com/CNIC-Proteomics/Solvers-PTMap)  | 1.0     |
-
-
-
 # Usage
 
 ## Execute the pipeline using ReCom results as input
@@ -130,3 +118,14 @@ nextflow \
         -resume
 ```
  -->
+
+# Version history
+
+| Version | Description                  | Singularity image                                                                        | Tag     | Code                                                        | Version |
+|---------|------------------------------|------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------|---------|
+| 0.1.0   | First stable version         |                                                                                          |         |                                                             |         |
+|         |                              | [ptm-compass](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)  | 0.1.0   |                                                             |         |
+|         |                              |                                                                                          |         | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)         | 0.4.3   |
+|         |                              |                                                                                          |         | [SHIFTS](https://github.com/CNIC-Proteomics/SHIFTS)         | 0.4.3   |
+|         |                              |                                                                                          |         | [SOLVER](https://github.com/CNIC-Proteomics/Solvers-PTMap)  | 1.0     |
+
