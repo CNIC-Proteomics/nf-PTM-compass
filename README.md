@@ -37,7 +37,6 @@ singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass
 |         |                              |                                                                                          |         | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)         | 0.4.3   |
 |         |                              |                                                                                          |         | [SHIFTS](https://github.com/CNIC-Proteomics/SHIFTS)         | 0.4.3   |
 |         |                              |                                                                                          |         | [SOLVER](https://github.com/CNIC-Proteomics/Solvers-PTMap)  | 1.0     |
-| 0.1.1   | Second stable version        |                                                                                          |         |                                                             |         |
 
 
 
@@ -53,7 +52,7 @@ You can execute this pipeline using either ReCom results or RefMod results.
 1. Download test files
 ```
 cd tests && \
-wget https://zenodo.org/records/12744716/files/test_ReCom_1.zip?download=1 -O test_Recom_1.zip && \
+wget https://zenodo.org/records/12748269/files/test_ReCom_1.zip?download=1 -O test_Recom_1.zip && \
 unzip test_Recom_1.zip -d test_Recom_1
 ```
 
