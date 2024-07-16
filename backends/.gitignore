@@ -2,3 +2,5 @@
 *
 # Except this file
 !.gitignore
+!DEVELOPMENT.md
+!ptm-compass.def
