@@ -40,7 +40,7 @@ You can execute this pipeline using either ReCom results or RefMod results.
 1. Download test files
 ```
 cd tests && \
-wget https://zenodo.org/records/12748269/files/test_ReCom_1.zip?download=1 -O test_Recom_1.zip && \
+wget https://zenodo.org/records/12755225/files/test_ReCom_1.zip?download=1 -O test_Recom_1.zip && \
 unzip test_Recom_1.zip -d test_Recom_1
 ```
 
@@ -70,14 +70,14 @@ nextflow \
     -log "/tmp/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
         -profile singularity \
-        --recom_files "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1/inputs/recom_files/*" \
-        --exp_table "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1/inputs/exp_table.txt" \
-        --database "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1/inputs/database.fasta" \
+        --recom_files "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test_ReCom_1/inputs/recom_files/*" \
+        --exp_table "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test_ReCom_1/inputs/exp_table.txt" \
+        --database "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test_ReCom_1/inputs/database.fasta" \
         --decoy_prefix "DECOY_"\
-        --params_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1/inputs/params.ini" \
-        --sitelist_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1/inputs/sitelist.txt" \
-        --groupmaker_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1/inputs/groupmaker.txt" \
-        --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1" \
+        --params_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test_ReCom_1/inputs/params.ini" \
+        --sitelist_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test_ReCom_1/inputs/sitelist.txt" \
+        --groupmaker_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test_ReCom_1/inputs/groupmaker.txt" \
+        --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test_ReCom_1" \
         -resume
 ```
  -->
@@ -113,19 +113,19 @@ nextflow \
     -log "/tmp/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
         -profile singularity \
-        -params-file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1/inputs/inputs.yml" \
-        --params_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test1/inputs/params.ini" \
+        -params-file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test_ReCom_1/inputs/inputs.yml" \
+        --params_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/tests/test_ReCom_1/inputs/params.ini" \
         -resume
 ```
  -->
 
 # Version history
 
-| Version | Description                  | Singularity image                                                                        | Tag     | Code                                                        | Version |
-|---------|------------------------------|------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------|---------|
-| 0.1.0   | First stable version         |                                                                                          |         |                                                             |         |
-|         |                              | [ptm-compass](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)  | 0.1.0   |                                                             |         |
-|         |                              |                                                                                          |         | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)         | 0.4.3   |
-|         |                              |                                                                                          |         | [SHIFTS](https://github.com/CNIC-Proteomics/SHIFTS)         | 0.4.3   |
-|         |                              |                                                                                          |         | [SOLVER](https://github.com/CNIC-Proteomics/Solvers-PTMap)  | 1.0     |
+| Version | Description                  | Singularity image                                                                        			| Code                                                        | Version |
+|---------|------------------------------|------------------------------------------------------------------------------------------------|-------------------------------------------------------------|---------|
+| 0.1.0   | First stable version         |                                                                                                |                                                             |         |
+|         |                              | [ptm-compass:0.1.0](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)	|                                                             |         |
+|         |                              |                                                                                          			| [RefMod](https://github.com/CNIC-Proteomics/ReFrag)         | 0.4.3   |
+|         |                              |                                                                                          			| [SHIFTS](https://github.com/CNIC-Proteomics/SHIFTS)         | 0.4.3   |
+|         |                              |                                                                                          			| [SOLVER](https://github.com/CNIC-Proteomics/Solvers-PTMap)  | 1.0     |
 
