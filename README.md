@@ -40,16 +40,16 @@ We now install git with the following command:
 apt-get install -y git
 ```
 
-# Download (Clone) the pipeline with the latest release (stable version)
+# Download the pipeline with the latest release
 
-You can clone the latest release directly by using the following commands:
+You can clone the latest release directly using git with the following command:
 ```
 export VERSION=0.1.0 && \
   git clone https://github.com/CNIC-Proteomics/nf-PTM-compass.git --branch ${VERSION} --recursive
 ```
 With the *--recursive* parameter, the submodules repositories are cloned as well.
 
- 
+The list of releases is located on the [releases page](https://github.com/CNIC-Proteomics/nf-PTM-compass/releases).
 
 # Usage
 
