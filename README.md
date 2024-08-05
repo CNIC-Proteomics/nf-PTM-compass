@@ -13,10 +13,6 @@ Before you begin, ensure you have met the following requirements:
 
 - You have Linux operating system on your machine. If you have Windows operating system, read the section [Install WSL on Windows](docs/WSL.md)
 
-## Install Nextflow
-
-For more information, read the [How to install Nextflow](docs/Nextflow.md) section.
-
 ## Install Singularity
 
 For more information, read the [How to install Singularity](docs/SingularityCE.md) section.
@@ -27,6 +23,36 @@ You need to download the Singularity image for the pipeline, ensuring version co
 ```
 singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass:0.1.0
 ```
+
+## Install Nextflow
+
+For more information, read the [How to install Nextflow](docs/Nextflow.md) section.
+
+## Install Git
+
+To update the package list, use the following command:
+```
+sudo apt-get update
+```
+
+We now install git with the following command:
+```
+apt-get install -y git
+```
+
+# Dowload pipeline
+
+- Clone the latest release (stable version)
+
+You can clone the latest release directly by using the following commands:
+```
+export VERSION=0.1.0 && \
+  git clone https://github.com/CNIC-Proteomics/nf-PTM-compass.git --branch ${VERSION} --recursive
+```
+
+With the *--recursive* parameter, the submodules repositories are cloned as well.
+
+ 
 
 # Usage
 
