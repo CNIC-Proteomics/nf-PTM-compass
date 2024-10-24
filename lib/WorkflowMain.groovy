@@ -76,11 +76,11 @@ class WorkflowMain {
         // Check AWS batch settings
         NfcoreTemplate.awsBatch(workflow, params)
 
-        // Check input has been provided
-        if (!params.params_file) {
-            log.error "Please provide an parameter file to the pipeline e.g. '--params_file params.ini'"
-            System.exit(1)
-        }
+        // // Check input has been provided
+        // if (!params.params_file) {
+        //     log.error "Please provide an parameter file to the pipeline e.g. '--params_file params.ini'"
+        //     System.exit(1)
+        // }
 
         // Check input has been provided
         if (!params.outdir) {

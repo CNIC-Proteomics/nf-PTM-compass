@@ -60,26 +60,31 @@ workflow SHIFTS {
     //
     PEAK_MODELLER('04', DM_CALIBRATOR.out.ofile.collect(), params_file)
     //
+    // SUBMODULE: Peak inspector
+    //
+    PEAK_INSPECTOR('05', PEAK_MODELLER.out.oDMtable, params_file)
+    //
     // SUBMODULE: Peak selector v2
     //
-    PEAK_SELECTOR_V2('05', PEAK_MODELLER.out.oHistogram, params_file)
+    PEAK_SELECTOR_V2('06', PEAK_MODELLER.out.oHistogram, params_file)
     //
     // SUBMODULE: Recom filterer
     //
-    RECOM_FILTERER('06', PEAK_MODELLER.out.oDMtable, params_file)
+    RECOM_FILTERER('07', PEAK_MODELLER.out.oDMtable, params_file)
     //
     // SUBMODULE: Peak assignator
     //
     def params_sections = Channel.value(['PeakAssignator','Logging','General'])
-    PEAK_ASSIGNATOR('07', RECOM_FILTERER.out.oRecomfiltered, PEAK_SELECTOR_V2.out.oApexlist, params_file, params_sections)
+    PEAK_ASSIGNATOR('08', RECOM_FILTERER.out.oRecomfiltered, PEAK_SELECTOR_V2.out.oApexlist, params_file, params_sections)
     //
     // SUBMODULE: Peak fdrer
     //
-    PEAK_FDRER('08', PEAK_ASSIGNATOR.out.oPeakassign, exp_table, params_file)
+    PEAK_FDRER('09', PEAK_ASSIGNATOR.out.oPeakassign, exp_table, params_file)
 
     // return channels
     ch_DMtable         = PEAK_MODELLER.out.oDMtable
     ch_Histogram       = PEAK_MODELLER.out.oHistogram
+    ch_HistogramPlot   = PEAK_INSPECTOR.out.oHistogramPlot
     ch_Apexlist        = PEAK_SELECTOR_V2.out.oApexlist
     ch_Recomfiltered   = RECOM_FILTERER.out.oRecomfiltered
     ch_Peakassign      = PEAK_ASSIGNATOR.out.oPeakassign

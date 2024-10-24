@@ -17,11 +17,11 @@ From: ubuntu:22.04
     PTM_COMPASS_HOME=/opt/ptm-compass
 
     # REFMOD: Setting up the variables
-    REFMOD_VERSION=v0.4.3
+    REFMOD_VERSION=v0.4.4
     REFMOD_HOME=/opt/ptm-compass/refmod
 
     # SHIFTS: Setting up the variables
-    SHIFTS_VERSION=v0.4.3
+    SHIFTS_VERSION=v0.5.0
     SHIFTS_HOME=/opt/ptm-compass/shifts
 
     # SOLVER: Setting up the variables
