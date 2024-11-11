@@ -4,7 +4,7 @@
 ========================================================================================
 */
 
-include { RE_FRAG }               from '../nf-modules/modules/refrag/main'
+include { REF_MOD }               from '../nf-modules/modules/refmod/main'
 
 /*
 ========================================================================================
@@ -12,7 +12,7 @@ include { RE_FRAG }               from '../nf-modules/modules/refrag/main'
 ========================================================================================
 */
 
-workflow REFRAG {
+workflow REFMOD {
 
     take:
     raw_msf_files
@@ -21,12 +21,12 @@ workflow REFRAG {
 
     main:
     //
-    // SUBMODULE: execute ReFrag
+    // SUBMODULE: execute RefMod
     //
-    RE_FRAG('01', raw_msf_files, dm_file, params_file)
+    REF_MOD('01', raw_msf_files, dm_file, params_file)
 
     // return channels
-    ch_ofile         = RE_FRAG.out.ofile
+    ch_ofile         = REF_MOD.out.ofile
 
     emit:
     ofile       = ch_ofile

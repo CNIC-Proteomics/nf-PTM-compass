@@ -17,16 +17,15 @@
 ========================================================================================
 */
 
-include { ADAPTER }              from '../nf-modules/modules/shifts/adapter/main'
-include { DUPLICATE_REMOVER }    from '../nf-modules/modules/shifts/duplicateremover/main'
-include { DM_CALIBRATOR }     from '../nf-modules/modules/shifts/dmcalibrator/main'
-include { PEAK_MODELLER }     from '../nf-modules/modules/shifts/peakmodeller/main'
-include { PEAK_INSPECTOR }     from '../nf-modules/modules/shifts/peakinspector/main'
-include { PEAK_SELECTOR }     from '../nf-modules/modules/shifts/peakselector/main'
-include { PEAK_SELECTOR_V2 }     from '../nf-modules/modules/shifts/peakselector2/main'
-include { RECOM_FILTERER }     from '../nf-modules/modules/shifts/recomfilterer/main'
+include { ADAPTER }             from '../nf-modules/modules/shifts/adapter/main'
+include { DUPLICATE_REMOVER }   from '../nf-modules/modules/shifts/duplicateremover/main'
+include { DM_CALIBRATOR }       from '../nf-modules/modules/shifts/dmcalibrator/main'
+include { PEAK_MODELLER }       from '../nf-modules/modules/shifts/peakmodeller/main'
+include { PEAK_INSPECTOR }      from '../nf-modules/modules/shifts/peakinspector/main'
+include { PEAK_SELECTOR }       from '../nf-modules/modules/shifts/peakselector/main'
+include { RECOM_FILTERER }      from '../nf-modules/modules/shifts/recomfilterer/main'
 include { PEAK_ASSIGNATOR }     from '../nf-modules/modules/shifts/peakassignator/main'
-include { PEAK_FDRER }     from '../nf-modules/modules/shifts/peakfdrer/main'
+include { PEAK_FDRER }          from '../nf-modules/modules/shifts/peakfdrer/main'
 
 
 /*
@@ -40,6 +39,7 @@ workflow SHIFTS {
     take:
     re_files
     exp_table
+    peak_file
     params_file
 
     main:
@@ -60,46 +60,44 @@ workflow SHIFTS {
     //
     PEAK_MODELLER('04', DM_CALIBRATOR.out.ofile.collect(), params_file)
     //
-    // SUBMODULE: Peak inspector
-    //
-    PEAK_INSPECTOR('05', PEAK_MODELLER.out.oDMtable, params_file)
-    //
     // SUBMODULE: Peak selector v2
     //
-    PEAK_SELECTOR_V2('06', PEAK_MODELLER.out.oHistogram, params_file)
+    PEAK_SELECTOR('05', PEAK_MODELLER.out.oHistogram, params_file)
     //
-    // SUBMODULE: Recom filterer
+    // SUBMODULE: Peak inspector
     //
-    RECOM_FILTERER('07', PEAK_MODELLER.out.oDMtable, params_file)
+    PEAK_INSPECTOR('06', PEAK_SELECTOR.out.oHistogram, peak_file, params_file)
     //
     // SUBMODULE: Peak assignator
     //
     def params_sections = Channel.value(['PeakAssignator','Logging','General'])
-    PEAK_ASSIGNATOR('08', RECOM_FILTERER.out.oRecomfiltered, PEAK_SELECTOR_V2.out.oApexlist, params_file, params_sections)
+    PEAK_ASSIGNATOR('07', PEAK_MODELLER.out.oDMtable, PEAK_SELECTOR.out.oApexlist, params_file, params_sections)
     //
     // SUBMODULE: Peak fdrer
     //
-    PEAK_FDRER('09', PEAK_ASSIGNATOR.out.oPeakassign, exp_table, params_file)
+    PEAK_FDRER('08', PEAK_ASSIGNATOR.out.oPeakassign, PEAK_SELECTOR.out.oApexlist, exp_table, params_file)
 
     // return channels
     ch_DMtable         = PEAK_MODELLER.out.oDMtable
     ch_Histogram       = PEAK_MODELLER.out.oHistogram
+    ch_Plot            = PEAK_MODELLER.out.oPlot
+    ch_Apexlist        = PEAK_SELECTOR.out.oApexlist
     ch_HistogramPlot   = PEAK_INSPECTOR.out.oHistogramPlot
-    ch_Apexlist        = PEAK_SELECTOR_V2.out.oApexlist
-    ch_Recomfiltered   = RECOM_FILTERER.out.oRecomfiltered
     ch_Peakassign      = PEAK_ASSIGNATOR.out.oPeakassign
     ch_FDRfiltered     = PEAK_FDRER.out.oFDRfiltered
+
 
     emit:
     DMtable         = ch_DMtable
     Histogram       = ch_Histogram
+    Plot            = ch_Plot
     Apexlist        = ch_Apexlist
-    Recomfiltered   = ch_Recomfiltered
+    HistogramPlot   = ch_HistogramPlot
     Peakassign      = ch_Peakassign
     FDRfiltered     = ch_FDRfiltered
 }
 
-workflow SHIFTS_BAK {
+workflow SHIFTS_RECOM {
 
     take:
     re_files
@@ -126,41 +124,51 @@ workflow SHIFTS_BAK {
     //
     // SUBMODULE: Peak inspector
     //
-    // PEAK_INSPECTOR('05', PEAK_MODELLER.out.oDMtable, params_file)
+    PEAK_INSPECTOR('05', PEAK_MODELLER.out.oHistogram)
     //
-    // SUBMODULE: Peak selector
+    // SUBMODULE: Peak selector v2
     //
     PEAK_SELECTOR('06', PEAK_MODELLER.out.oHistogram, params_file)
     //
+    // SUBMODULE: Peak inspector
+    //
+    PEAK_INSPECTOR_2('07', PEAK_SELECTOR.out.oHistogram)
+    //
     // SUBMODULE: Recom filterer
     //
-    RECOM_FILTERER('07', PEAK_MODELLER.out.oDMtable, params_file)
+    RECOM_FILTERER('08', PEAK_MODELLER.out.oDMtable, params_file)
     //
     // SUBMODULE: Peak assignator
     //
     def params_sections = Channel.value(['PeakAssignator','Logging','General'])
-    PEAK_ASSIGNATOR('08', RECOM_FILTERER.out.oRecomfiltered, PEAK_SELECTOR.out.oApexlist, params_file, params_sections)
+    PEAK_ASSIGNATOR('09', RECOM_FILTERER.out.oRecomfiltered, PEAK_SELECTOR.out.oApexlist, params_file, params_sections)
     //
     // SUBMODULE: Peak fdrer
     //
-    PEAK_FDRER('09', PEAK_ASSIGNATOR.out.oPeakassign, exp_table, params_file)
+    PEAK_FDRER('10', PEAK_ASSIGNATOR.out.oPeakassign, exp_table, params_file)
 
     // return channels
     ch_DMtable         = PEAK_MODELLER.out.oDMtable
     ch_Histogram       = PEAK_MODELLER.out.oHistogram
+    ch_Plot            = PEAK_MODELLER.out.oPlot
+    ch_HistogramPlot   = PEAK_INSPECTOR.out.oHistogramPlot
     ch_Apexlist        = PEAK_SELECTOR.out.oApexlist
-    ch_Recomfiltered   = RECOM_FILTERER.out.oRecomfiltered
+    ch_HistogramPlot2   = PEAK_INSPECTOR_2.out.oHistogramPlot
+    // ch_Recomfiltered   = RECOM_FILTERER.out.oRecomfiltered
     ch_Peakassign      = PEAK_ASSIGNATOR.out.oPeakassign
     ch_FDRfiltered     = PEAK_FDRER.out.oFDRfiltered
 
     emit:
     DMtable         = ch_DMtable
     Histogram       = ch_Histogram
+    Plot            = ch_Plot
+    HistogramPlot   = ch_HistogramPlot
     Apexlist        = ch_Apexlist
-    Recomfiltered   = ch_Recomfiltered
+    // Recomfiltered   = ch_Recomfiltered
     Peakassign      = ch_Peakassign
     FDRfiltered     = ch_FDRfiltered
 }
+
 
 /*
 ========================================================================================

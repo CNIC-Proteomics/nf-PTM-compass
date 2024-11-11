@@ -4,7 +4,7 @@
 ========================================================================================
 */
 
-include { REFRAG } from './refrag'
+include { REFMOD } from './refmod'
 include { SHIFTS } from './shifts'
 include { SOLVER } from './solver'
 
@@ -14,9 +14,10 @@ include { SOLVER } from './solver'
 //
 include {
     CREATE_INPUT_CHANNEL_PTMCOMPASS;
-    CREATE_INPUT_CHANNEL_PTMCOMPASS_1
+    CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD;
+    CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM
 } from '../nf-modules/subworkflows/ptm_compass'
-include { CREATE_INPUT_CHANNEL_REFRAG } from '../nf-modules/subworkflows/refrag'
+include { CREATE_INPUT_CHANNEL_REFMOD } from '../nf-modules/subworkflows/refmod'
 include { CREATE_INPUT_CHANNEL_SHIFTS } from '../nf-modules/subworkflows/shifts'
 include { CREATE_INPUT_CHANNEL_SOLVER } from '../nf-modules/subworkflows/solver'
 
@@ -28,7 +29,7 @@ include { CREATE_INPUT_CHANNEL_SOLVER } from '../nf-modules/subworkflows/solver'
 */
 
 //
-// WORKFLOW: Run main analysis pipeline
+// WORKFLOW: Run main analysis pipeline using the MSFragger adaptor
 //
 
 workflow PTM_COMPASS_WORKFLOW {
@@ -37,18 +38,12 @@ workflow PTM_COMPASS_WORKFLOW {
     //
     CREATE_INPUT_CHANNEL_PTMCOMPASS()
     //
-    // WORKFLOW: ReFrag analysis
-    //
-    REFRAG(
-        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_msf_raw_files,
-        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_dm_file,
-        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_params_file
-    )
     // WORKFLOW: Run SHIFTS analysis pipeline
     //
     SHIFTS(
-        REFRAG.out.ofile.collect(),
+        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_msf_files,
         CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_exp_table,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_peak_file,
         CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_params_file
     )
     //
@@ -64,17 +59,31 @@ workflow PTM_COMPASS_WORKFLOW {
     )
 }
 
-workflow PTM_COMPASS_WORKFLOW_1 {
+//
+// WORKFLOW: Run main analysis pipeline using RefMod
+//
+
+workflow PTM_COMPASS_WORKFLOW_REFMOD {
     //
-    // SUBWORKFLOW: Create input channel
+    // SUBWORKFLOW: Create input channels
     //
-    CREATE_INPUT_CHANNEL_PTMCOMPASS_1()
+    CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD()
+    //
+    // WORKFLOW: RefMod analysis
+    //
+    REFMOD(
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_msf_raw_files,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_dm_file,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_params_file
+    )
+    //
     // WORKFLOW: Run SHIFTS analysis pipeline
     //
     SHIFTS(
-        CREATE_INPUT_CHANNEL_PTMCOMPASS_1.out.ch_re_files,
-        CREATE_INPUT_CHANNEL_PTMCOMPASS_1.out.ch_exp_table,
-        CREATE_INPUT_CHANNEL_PTMCOMPASS_1.out.ch_params_file
+        REFMOD.out.ofile,  // REFMOD.out.ofile.collect(),
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_exp_table,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_peak_file,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_params_file
     )
     //
     // WORKFLOW: Run SOLVER analysis pipeline
@@ -82,25 +91,56 @@ workflow PTM_COMPASS_WORKFLOW_1 {
     SOLVER(
         SHIFTS.out.FDRfiltered,
         SHIFTS.out.Apexlist,
-        CREATE_INPUT_CHANNEL_PTMCOMPASS_1.out.ch_database,
-        CREATE_INPUT_CHANNEL_PTMCOMPASS_1.out.ch_sitelist_file,
-        CREATE_INPUT_CHANNEL_PTMCOMPASS_1.out.ch_groupmaker_file,
-        CREATE_INPUT_CHANNEL_PTMCOMPASS_1.out.ch_params_file
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_database,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_sitelist_file,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_groupmaker_file,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_params_file
     )
 }
 
-workflow REFRAG_WORKFLOW {
+//
+// WORKFLOW: Run main analysis pipeline using ReCom
+//
+
+workflow PTM_COMPASS_WORKFLOW_RECOM {
+    //
+    // SUBWORKFLOW: Create input channel
+    //
+    CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM()
+    //
+    // WORKFLOW: Run SHIFTS analysis pipeline
+    //
+    SHIFTS_RECOM(
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_re_files,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_exp_table,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_peak_file,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_params_file
+    )
+    //
+    // WORKFLOW: Run SOLVER analysis pipeline
+    //
+    SOLVER(
+        SHIFTS_RECOM.out.FDRfiltered,
+        SHIFTS_RECOM.out.Apexlist,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_database,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_sitelist_file,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_groupmaker_file,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_params_file
+    )
+}
+
+workflow REFMOD_WORKFLOW {
     //
     // SUBWORKFLOW: Create input channels
     //
-    CREATE_INPUT_CHANNEL_REFRAG ()
+    CREATE_INPUT_CHANNEL_REFMOD ()
     //
-    // WORKFLOW: ReFrag analysis
+    // WORKFLOW: RefMod analysis
     //
-    REFRAG(
-        CREATE_INPUT_CHANNEL_REFRAG.out.ch_msf_raw_files,
-        CREATE_INPUT_CHANNEL_REFRAG.out.ch_dm_file,
-        CREATE_INPUT_CHANNEL_REFRAG.out.ch_params_file
+    REFMOD(
+        CREATE_INPUT_CHANNEL_REFMOD.out.ch_msf_raw_files,
+        CREATE_INPUT_CHANNEL_REFMOD.out.ch_dm_file,
+        CREATE_INPUT_CHANNEL_REFMOD.out.ch_params_file
     )
 }
 
@@ -109,11 +149,13 @@ workflow SHIFTS_WORKFLOW {
     // SUBWORKFLOW: Create input channel
     //
     CREATE_INPUT_CHANNEL_SHIFTS()
+    //
     // WORKFLOW: Run SHIFTS analysis pipeline
     //
     SHIFTS(
         CREATE_INPUT_CHANNEL_SHIFTS.out.ch_re_files,
         CREATE_INPUT_CHANNEL_SHIFTS.out.ch_exp_table,
+        CREATE_INPUT_CHANNEL_SHIFTS.out.ch_peak_file,
         CREATE_INPUT_CHANNEL_SHIFTS.out.ch_params_file
     )
 }

@@ -20,8 +20,9 @@ WorkflowMain.initialise(workflow, params, log)
 
 include {
     PTM_COMPASS_WORKFLOW;
-    PTM_COMPASS_WORKFLOW_1;
-    REFRAG_WORKFLOW;
+    PTM_COMPASS_WORKFLOW_REFMOD;
+    PTM_COMPASS_WORKFLOW_RECOM;
+    REFMOD_WORKFLOW;
     SHIFTS_WORKFLOW;
     SOLVER_WORKFLOW
 } from './workflows/main'
@@ -40,8 +41,14 @@ def multiqc_report = []
 // WORKFLOW: Execute the named workflow for the pipeline
 //
 workflow {
-    // Execute main workflow
-    PTM_COMPASS_WORKFLOW_1()
+
+    // Execute main workflow based on the given input
+    if ( params.containsKey('search_engine') && params.search_engine == 'comet' ) {
+        PTM_COMPASS_WORKFLOW_RECOM()
+    } else {
+        PTM_COMPASS_WORKFLOW()
+        // PTM_COMPASS_WORKFLOW_REFMOD()  
+    }
 }
 
 /*
