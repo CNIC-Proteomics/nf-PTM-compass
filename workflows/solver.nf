@@ -88,21 +88,17 @@ workflow SOLVER {
     //
     SITE_SOLVER('07', PEAK_ASSIGNATOR.out.oPeakassign, sitelist_file, params_file)
     //
-    // SUBMODULE: Scan id generator
-    //
-    SCANID_GENERATOR('08', SITE_SOLVER.out.ofile, params_file)
-    //
     // SUBMODULE: PDMtable maker
     //
-    PDMTABLE_MAKER('09', SCANID_GENERATOR.out.ofile, database, params_file)
+    PDMTABLE_MAKER('08', SITE_SOLVER.out.ofile, database, params_file)
     //
     // SUBMODULE: Group maker
     //
-    GROUP_MAKER('10', PDMTABLE_MAKER.out.ofile, groupmaker_file, params_file)
+    GROUP_MAKER('09', PDMTABLE_MAKER.out.ofile, groupmaker_file, params_file)
     //
     // SUBMODULE: Joiner
     //
-    JOINER('11', GROUP_MAKER.out.ofile, params_file)
+    JOINER('10', GROUP_MAKER.out.ofile, params_file)
 
 
     // return channels
