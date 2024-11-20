@@ -8,25 +8,19 @@ From: ubuntu:22.04
 %help
     This Singularity container is used for the PTM pipelines:
     1. RefMod
-    2. SHIFTS
-    3. SOLVER
+    2. PTM-compass
 
 %arguments
     # Declare variables
     # PTM-COMPASS ---------------------------------------------------------------------------------------------
+
+    # PTM_COMPASS_HOME: Setting up the variables
+    PTM_COMPASS_VERSION=1.0
     PTM_COMPASS_HOME=/opt/ptm-compass
 
     # REFMOD: Setting up the variables
     REFMOD_VERSION=v0.4.4
-    REFMOD_HOME=/opt/ptm-compass/refmod
-
-    # SHIFTS: Setting up the variables
-    SHIFTS_VERSION=v0.5.0
-    SHIFTS_HOME=/opt/ptm-compass/shifts
-
-    # SOLVER: Setting up the variables
-    SOLVER_VERSION=v1.0
-    SOLVER_HOME=/opt/ptm-compass/solver
+    REFMOD_HOME=/opt/ptm-compass/src/refmod
 
 
 %environment
@@ -34,8 +28,8 @@ From: ubuntu:22.04
     # export MSF_HOME RAWPARSER_HOME
 
 %setup
-    # Create the home
-    mkdir -p "${SINGULARITY_ROOTFS}{{PTM_COMPASS_HOME}}"
+    # # Create the home
+    # mkdir -p "${SINGULARITY_ROOTFS}{{PTM_COMPASS_HOME}}"
 
 %files
 
@@ -63,6 +57,21 @@ From: ubuntu:22.04
 
 
     #
+    # PTM_COMPASS ---------------------------------------------------------------------------------------------
+    #
+
+    # Clone the repository
+    git clone https://github.com/CNIC-Proteomics/PTM-compass.git  --branch {{PTM_COMPASS_VERSION}}  {{PTM_COMPASS_HOME}}
+
+    # Python environment --
+    cd {{PTM_COMPASS_HOME}} && python -m venv env
+    . {{PTM_COMPASS_HOME}}/env/bin/activate && pip install -r {{PTM_COMPASS_HOME}}/python_requirements.txt
+
+    RUN cd ${PTM_COMPASS_HOME} && python -m venv env
+    RUN cd ${PTM_COMPASS_HOME} && /bin/bash -c "source ${PTM_COMPASS_HOME}/env/bin/activate && pip install -r ${PTM_COMPASS_HOME}/python_requirements.txt"
+
+
+    #
     # REFMOD ---------------------------------------------------------------------------------------------
     #
 
@@ -72,33 +81,6 @@ From: ubuntu:22.04
     # Python environment --
     cd {{REFMOD_HOME}} && python -m venv env
     . {{REFMOD_HOME}}/env/bin/activate && pip install -r {{REFMOD_HOME}}/python_requirements.txt
-
-
-    #
-    # SHIFTS ---------------------------------------------------------------------------------------------
-    #
-
-    # Clone the repository
-    git clone https://github.com/CNIC-Proteomics/SHIFTS.git  --branch {{SHIFTS_VERSION}}  {{SHIFTS_HOME}}
-
-    # Python environment --
-    cd {{SHIFTS_HOME}} && python -m venv env
-    . {{SHIFTS_HOME}}/env/bin/activate && pip install -r {{SHIFTS_HOME}}/python_requirements.txt
-
-    RUN cd ${SHIFTS_HOME} && python -m venv env
-    RUN cd ${SHIFTS_HOME} && /bin/bash -c "source ${SHIFTS_HOME}/env/bin/activate && pip install -r ${SHIFTS_HOME}/python_requirements.txt"
-
-
-    #
-    # SOLVER ---------------------------------------------------------------------------------------------
-    #
-
-    # Clone the repository
-    git clone https://github.com/CNIC-Proteomics/Solvers-PTMap.git  --branch {{SOLVER_VERSION}}  {{SOLVER_HOME}}
-
-    # Python environment --
-    cd {{SOLVER_HOME}} && python -m venv env
-    . {{SOLVER_HOME}}/env/bin/activate && pip install -r {{SOLVER_HOME}}/python_requirements.txt
 
 
 
@@ -150,10 +132,10 @@ From: ubuntu:22.04
         exit 1
     fi
 
-    # SHIFTS ---------------------------------------------------------------------------------------------
+    # PTM_COMPASS ---------------------------------------------------------------------------------------------
 
-    # Check if SHIFTS has been installed
-    DIR={{SHIFTS_HOME}}
+    # Check if PTM_COMPASS has been installed
+    DIR={{PTM_COMPASS_HOME}}
     if [ -d "${DIR}" ]; then
         echo "The ${DIR} directory exists."
     else
@@ -161,32 +143,12 @@ From: ubuntu:22.04
         exit 1
     fi
 
-    # Check if SHIFTS has been installed
-    SHIFTS_test=$(cd {{SHIFTS_HOME}} && . env/bin/activate && python SHIFTSadapter.py 2>&1 | grep "usage:")
-    if [ "${SHIFTS_test}" != "" ]; then
-        echo "SHIFTS ${SHIFTS_test} has been installed as expected."
+    # Check if PTM_COMPASS has been installed
+    PTM_COMPASS_test=$(cd {{PTM_COMPASS_HOME}} && . env/bin/activate && python src/shifts/SHIFTSadapter.py 2>&1 | grep "usage:")
+    if [ "${PTM_COMPASS_test}" != "" ]; then
+        echo "PTM_COMPASS ${PTM_COMPASS_test} has been installed as expected."
     else
-        echo "SHIFTS has not been installed."
+        echo "PTM_COMPASS has not been installed."
         exit 1
     fi
 
-
-    # SOLVER ---------------------------------------------------------------------------------------------
-
-    # Check if SOLVER has been installed
-    DIR={{SOLVER_HOME}}
-    if [ -d "${DIR}" ]; then
-        echo "The ${DIR} directory exists."
-    else
-        echo "The ${DIR} directory does not exit."
-        exit 1
-    fi
-
-    # Check if SOLVER has been installed
-    SOLVER_test=$(cd {{SOLVER_HOME}} && . env/bin/activate && python DM0SOlver_V2.py 2>&1 | grep "usage:")
-    if [ "${SOLVER_test}" != "" ]; then
-        echo "SOLVER ${SOLVER_test} has been installed as expected."
-    else
-        echo "SOLVER has not been installed."
-        exit 1
-    fi

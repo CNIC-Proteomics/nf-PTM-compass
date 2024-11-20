@@ -14,6 +14,8 @@ DATE: 2024_11
 
 + Update the workflow to accept the MSFragger results.
 
++ SHIFTadapter: Added a module that inserts the ScanID into search engine results.
+
 ### Image Version history
 
 | Version | Singularity image                                                                                    | Code                                                          | Version |

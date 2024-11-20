@@ -2,7 +2,7 @@
 
 Building containers from SingularityCE definition files
 ```
-sudo singularity  build  ptm-compass.sif  ptm-compass.def
+sudo singularity  build  ptm-compass_0.1.1.sif  ptm-compass.def
 ```
 
 Building container in sandbox from SingularityCE definition files
@@ -22,7 +22,7 @@ By default, when you run SingularityCE, you are the same user inside the contain
 
 Using a fake root (for non-admin users)
 ```
-singularity build --fakeroot ptm-compass.sif ptm-compass.def
+singularity build --fakeroot ptm-compass_0.1.1.sif ptm-compass.def
 ```
 
 
@@ -30,7 +30,7 @@ singularity build --fakeroot ptm-compass.sif ptm-compass.def
 The shell command allows you to spawn a new shell within your container and interact with it as though it were a virtual machine.
 
 ```
-singularity shell ptm-compass.sif
+singularity shell ptm-compass_0.1.1.sif
 ```
 
 Enable to write in folder container (sandbox)
@@ -40,12 +40,12 @@ sudo singularity shell --writable /tmp/ptm-compass
 
 Enable to write in file container
 ```
-sudo singularity shell --writable-tmpfs ptm-compass.sif
+sudo singularity shell --writable-tmpfs ptm-compass_0.1.1.sif
 ```
 
 Bind disk
 ```
-singularity shell --bind /mnt/tierra:/mnt/tierra ptm-compass.sif
+singularity shell --bind /mnt/tierra:/mnt/tierra ptm-compass_0.1.1.sif
 ```
 
 # Singularity Hub
@@ -91,7 +91,7 @@ singularity remote login
 
 Sign your image locally using Singularity CLI.
 ```
-singularity sign compass.sif
+singularity sign ptm-compass_0.1.1.sif
 No OpenPGP signing keys found, autogenerate? [Y/n]
 Enter your name (e.g., John Doe) : John Doe
 Enter your email address (e.g., john.doe@example.com) : john.doe@example.com
@@ -102,7 +102,7 @@ Enter encryption passphrase :
 
 Verifying an image is quite easy, just run the verify command within your terminal.
 ```
-singularity verify compass.sif
+singularity verify ptm-compass_0.1.1.sif
 Verifying image: image.sif
 Data integrity checked, authentic and signed by:
 John Doe <john.doe@example.com>, KeyID 284972D6D4FC6713
@@ -110,7 +110,7 @@ John Doe <john.doe@example.com>, KeyID 284972D6D4FC6713
 
 Push image
 ```
-singularity push ptm-compass.sif library://proteomicscnic/next-launcher/ptm-compass:0.1.0
+singularity push ptm-compass_0.1.1.sif library://proteomicscnic/next-launcher/ptm-compass:0.1.1
 ```
 
 

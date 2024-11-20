@@ -24,7 +24,7 @@
 			"properties": {
 				"recom_files": {
 					"title": "ReCom results",
-					"description": "ReFrag result files",
+					"description": "ReCom result files",
 					"help_text": "Under construction...",
 					"fa_icon": "pi pi-folder",
 					"type": "string",
