@@ -1,14 +1,10 @@
 /*
 ========================================================================================
-    VALIDATE INPUTS
+    IMPORT MODULES
 ========================================================================================
 */
 
-/*
-========================================================================================
-    CONFIG FILES
-========================================================================================
-*/
+include { createParamStrChannel } from '../nf-modules/lib/Utils'
 
 
 /*
@@ -50,32 +46,31 @@ workflow SHIFTS {
     //
     // SUBMODULE: remove duplicates
     //
-    DUPLICATE_REMOVER('02', ADAPTER.out.ofile, params_file)
+    DUPLICATE_REMOVER('02', ADAPTER.out.ofile, createParamStrChannel(params_file, ['DuplicateRemover','Logging','General'])) // generate string with the current parameters from the given file
     //
     // SUBMODULE: DM calibrator
     //
-    DM_CALIBRATOR('03', DUPLICATE_REMOVER.out.ofile, params_file)
+    DM_CALIBRATOR('03', DUPLICATE_REMOVER.out.ofile, createParamStrChannel(params_file, ['DMcalibrator','Aminoacids','Fixed Modifications','Masses','Logging', 'General']))
     //
     // SUBMODULE: Peak modelller
     //
-    PEAK_MODELLER('04', DM_CALIBRATOR.out.ofile.collect(), params_file)
+    PEAK_MODELLER('04', DM_CALIBRATOR.out.ofile.collect(), createParamStrChannel(params_file, ['PeakModeller','Logging','General']))
     //
     // SUBMODULE: Peak selector v2
     //
-    PEAK_SELECTOR('05', PEAK_MODELLER.out.oHistogram, params_file)
+    PEAK_SELECTOR('05', PEAK_MODELLER.out.oHistogram, createParamStrChannel(params_file, ['PeakSelector','Logging','General']))
     //
     // SUBMODULE: Peak inspector
     //
-    PEAK_INSPECTOR('06', PEAK_SELECTOR.out.oHistogram, peak_file, params_file)
+    PEAK_INSPECTOR('06', PEAK_SELECTOR.out.oHistogram, peak_file, createParamStrChannel(params_file, ['Plot 1','Plot 2','Logging','General']))
     //
     // SUBMODULE: Peak assignator
     //
-    def params_sections = Channel.value(['PeakAssignator','Logging','General'])
-    PEAK_ASSIGNATOR('07', PEAK_MODELLER.out.oDMtable, PEAK_SELECTOR.out.oApexlist, params_file, params_sections)
+    PEAK_ASSIGNATOR('07', PEAK_MODELLER.out.oDMtable, PEAK_SELECTOR.out.oApexlist, createParamStrChannel(params_file, ['PeakAssignator','Logging','General']))
     //
     // SUBMODULE: Peak fdrer
     //
-    PEAK_FDRER('08', PEAK_ASSIGNATOR.out.oPeakassign, PEAK_SELECTOR.out.oApexlist, exp_table, params_file)
+    PEAK_FDRER('08', PEAK_ASSIGNATOR.out.oPeakassign, PEAK_SELECTOR.out.oApexlist, exp_table, createParamStrChannel(params_file, ['PeakFDRer','PeakAssignator','Logging','General']))
 
     // return channels
     ch_DMtable         = PEAK_MODELLER.out.oDMtable
@@ -97,6 +92,7 @@ workflow SHIFTS {
     FDRfiltered     = ch_FDRfiltered
 }
 
+/* OBSOLETE */
 workflow SHIFTS_RECOM {
 
     take:

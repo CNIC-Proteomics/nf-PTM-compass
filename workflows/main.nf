@@ -52,6 +52,7 @@ workflow PTM_COMPASS_WORKFLOW {
     SOLVER(
         SHIFTS.out.FDRfiltered,
         SHIFTS.out.Apexlist,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_exp_table,
         CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_database,
         CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_sitelist_file,
         CREATE_INPUT_CHANNEL_PTMCOMPASS.out.ch_groupmaker_file,
@@ -91,6 +92,7 @@ workflow PTM_COMPASS_WORKFLOW_REFMOD {
     SOLVER(
         SHIFTS.out.FDRfiltered,
         SHIFTS.out.Apexlist,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_exp_table,
         CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_database,
         CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_sitelist_file,
         CREATE_INPUT_CHANNEL_PTMCOMPASS_REFMOD.out.ch_groupmaker_file,
@@ -122,6 +124,7 @@ workflow PTM_COMPASS_WORKFLOW_RECOM {
     SOLVER(
         SHIFTS_RECOM.out.FDRfiltered,
         SHIFTS_RECOM.out.Apexlist,
+        CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_exp_table,
         CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_database,
         CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_sitelist_file,
         CREATE_INPUT_CHANNEL_PTMCOMPASS_RECOM.out.ch_groupmaker_file,
@@ -171,6 +174,7 @@ workflow SOLVER_WORKFLOW {
     SOLVER(
         CREATE_INPUT_CHANNEL_SOLVER.out.ch_peakfdr_file,
         CREATE_INPUT_CHANNEL_SOLVER.out.ch_apexlist_file,
+        CREATE_INPUT_CHANNEL_SOLVER.out.ch_exp_table,
         CREATE_INPUT_CHANNEL_SOLVER.out.ch_database,
         CREATE_INPUT_CHANNEL_SOLVER.out.ch_sitelist_file,
         CREATE_INPUT_CHANNEL_SOLVER.out.ch_groupmaker_file,

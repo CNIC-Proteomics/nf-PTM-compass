@@ -1,14 +1,10 @@
 /*
 ========================================================================================
-    VALIDATE INPUTS
+    IMPORT MODULES
 ========================================================================================
 */
 
-/*
-========================================================================================
-    CONFIG FILES
-========================================================================================
-*/
+include { createParamStrChannel } from '../nf-modules/lib/Utils'
 
 
 /*
@@ -17,15 +13,16 @@
 ========================================================================================
 */
 
-include { DM0SOLVER }                   from '../nf-modules/modules/solver/dm0solver/main'
 include { PROTEIN_ASSIGNER;
           PROTEIN_ASSIGNER as PROTEIN_ASSIGNER_2;
 }                                       from '../nf-modules/modules/proteinassigner/main'
 include { SCANID_GENERATOR }            from '../nf-modules/modules/scanidgenerator/main'
+include { EXPERIMENT_SEPARATOR }        from '../nf-modules/modules/expseparator/main'
+
 include { PEAK_ASSIGNATOR }             from '../nf-modules/modules/shifts/peakassignator/main'
 
+include { DM0SOLVER }                   from '../nf-modules/modules/solver/dm0solver/main'
 include { TRUNK_SOLVER }                from '../nf-modules/modules/solver/trunksolver/main'
-// include { SITELIST_MAKER }              from '../nf-modules/modules/solver/sitelistmaker/main'
 include { BINOMIAL_SITELIST_MAKER }     from '../nf-modules/modules/solver/binomialsitelistmaker/main'
 include { SITE_SOLVER }                 from '../nf-modules/modules/solver/sitesolver/main'
 include { PDMTABLE_MAKER }              from '../nf-modules/modules/solver/pdmtablemaker/main'
@@ -45,6 +42,7 @@ workflow SOLVER {
     take:
     peakfdrer
     apexlist
+    exp_table
     database
     sitelist_file
     groupmaker_file
@@ -54,51 +52,47 @@ workflow SOLVER {
     //
     // SUBMODULE: DM0 solver
     //
-    def params_sections_dm = Channel.value(['DM0Solver_Parameters','DM0Solver_DM0List','Logging','General'])
-    DM0SOLVER('01', peakfdrer, apexlist, params_file, params_sections_dm)
+    DM0SOLVER('01', peakfdrer, apexlist, createParamStrChannel(params_file, ['DM0Solver_Parameters','DM0Solver_DM0List','Logging','General']))
     //
     // SUBMODULE: protein assigner
     //
-    def params_sections_pa = Channel.value(['ProteinAssigner'])
-    PROTEIN_ASSIGNER('02', DM0SOLVER.out.ofile, database, params_file, params_sections_pa)
+    PROTEIN_ASSIGNER('02', DM0SOLVER.out.ofile, database, createParamStrChannel(params_file, ['ProteinAssigner','Logging','General']))
     //
     // SUBMODULE: Trunk solver
     //
-    TRUNK_SOLVER('03', PROTEIN_ASSIGNER.out.ofile, database, params_file)
+    TRUNK_SOLVER('03', PROTEIN_ASSIGNER.out.ofile, database, createParamStrChannel(params_file, ['TrunkSolver_Parameters','TrunkSolver_CombList','Aminoacids','Fixed Modifications','Masses','Logging','General']))
     //
     // SUBMODULE: protein assigner 2º round
     //
-    def params_sections_pa2 = Channel.value(['ProteinAssigner_2_Round'])
-    PROTEIN_ASSIGNER_2('04', TRUNK_SOLVER.out.ofile, database, params_file, params_sections_pa2)
+    PROTEIN_ASSIGNER_2('04', TRUNK_SOLVER.out.ofile, database, createParamStrChannel(params_file, ['ProteinAssigner_2_Round','Logging','General'], [['\\[ProteinAssigner_2_Round\\]', '[ProteinAssigner]']]))
     //
     // SUBMODULE: Peak assignator
     //
-    def params_sections_pe = Channel.value(['PeakAssignator_in_Solver','Logging','General'])
-    PEAK_ASSIGNATOR('05', PROTEIN_ASSIGNER_2.out.ofile, apexlist, params_file, params_sections_pe)
-    // //
-    // // SUBMODULE: Site list maker
-    // //
-    // SITELIST_MAKER('06', PEAK_ASSIGNATOR.out.oPeakassign, params_file)
+    PEAK_ASSIGNATOR('05', PROTEIN_ASSIGNER_2.out.ofile, apexlist, createParamStrChannel(params_file, ['PeakAssignator_in_Solver','Logging','General'], [['\\[PeakAssignator_in_Solver\\]', '[PeakAssignator]']]))
     //
     // SUBMODULE: Bionomial Site list maker
     //
-    BINOMIAL_SITELIST_MAKER('06', PEAK_ASSIGNATOR.out.oPeakassign, params_file)
+    BINOMIAL_SITELIST_MAKER('06', PEAK_ASSIGNATOR.out.oPeakassign, createParamStrChannel(params_file, ['BinomialSiteListMaker_Parameters','Logging','General']))
     //
     // SUBMODULE: Site solver
     //
-    SITE_SOLVER('07', PEAK_ASSIGNATOR.out.oPeakassign, sitelist_file, params_file)
+    SITE_SOLVER('07', PEAK_ASSIGNATOR.out.oPeakassign, sitelist_file, createParamStrChannel(params_file, ['SiteSolver_Parameters','Logging','General']))
+    //
+    // SUBMODULE: Experiment separator
+    //
+    EXPERIMENT_SEPARATOR('08', SITE_SOLVER.out.ofile, exp_table)
     //
     // SUBMODULE: PDMtable maker
     //
-    PDMTABLE_MAKER('08', SITE_SOLVER.out.ofile, database, params_file)
+    PDMTABLE_MAKER('09', SITE_SOLVER.out.ofile, database, createParamStrChannel(params_file, ['PDMTableMaker_Parameters','PDMTableMaker_Conditions','Logging','General']))
     //
     // SUBMODULE: Group maker
     //
-    GROUP_MAKER('09', PDMTABLE_MAKER.out.ofile, groupmaker_file, params_file)
+    GROUP_MAKER('10', PDMTABLE_MAKER.out.ofile, groupmaker_file, createParamStrChannel(params_file, ['GroupMaker_Parameters','Logging','General']))
     //
     // SUBMODULE: Joiner
     //
-    JOINER('10', GROUP_MAKER.out.ofile, params_file)
+    JOINER('11', GROUP_MAKER.out.ofile, createParamStrChannel(params_file, ['Joiner_Parameters','Joiner_Columns','Logging','General']))
 
 
     // return channels
@@ -108,6 +102,7 @@ workflow SOLVER {
     ch_PeakAssign             = PEAK_ASSIGNATOR.out.oPeakassign
     ch_SiteList               = BINOMIAL_SITELIST_MAKER.out.ofile
     ch_SiteSolver             = SITE_SOLVER.out.ofile
+    ch_SiteSolverExp          = EXPERIMENT_SEPARATOR.out.ofile
     ch_PDMtable               = PDMTABLE_MAKER.out.ofile
     ch_GroupMaker             = GROUP_MAKER.out.ofile
     ch_GroupJoiner            = JOINER.out.ofile
@@ -119,6 +114,7 @@ workflow SOLVER {
     Peakassign            = ch_PeakAssign
     SiteList              = ch_SiteList
     SiteSolver            = ch_SiteSolver
+    SiteSolverExp         = ch_SiteSolverExp
     PDMtable              = ch_PDMtable
     GroupMaker            = ch_GroupMaker
     GroupJoiner           = ch_GroupJoiner
