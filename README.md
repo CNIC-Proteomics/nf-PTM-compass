@@ -26,6 +26,11 @@ You need to download the Singularity image for the pipeline, ensuring version co
 singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass:0.1.1
 ```
 
+Create a symbolic link
+```
+ln -s ptm-compass_0.1.1.sif ptm-compass.sif
+```
+
 ## Install Nextflow
 
 For more information, read the [How to install Nextflow](docs/Nextflow.md) section.
@@ -88,7 +93,7 @@ nextflow \
 |---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
 | 0.1.1   |                                                                                                      |                                                               |         |
 |         | [ptm-compass:0.1.1](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
-|         |                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.3   |
-|         |                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.0     |
+|         |                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.1     |
+|         |                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.4   |
 
 For more information, read the [changelog](changelog.md) for the current version.

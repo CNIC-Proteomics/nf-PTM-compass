@@ -1,8 +1,10 @@
 # Build in Singularity
 
 Building containers from SingularityCE definition files
+Create a symbolic link
 ```
 sudo singularity  build  ptm-compass_0.1.1.sif  ptm-compass.def
+ln -s ptm-compass_0.1.1.sif ptm-compass.sif
 ```
 
 Building container in sandbox from SingularityCE definition files

@@ -1,7 +1,7 @@
 ___
 ## 0.1.1
 ```
-DATE: 2024_11
+DATE: 2024_12
 ```
 
 ### Highlights
@@ -22,8 +22,8 @@ DATE: 2024_11
 |---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
 | 0.1.1   |                                                                                                      |                                                               |         |
 |         | [ptm-compass:0.1.1](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
-|         |                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.3   |
-|         |                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.0     |
+|         |                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.1     |
+|         |                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.4   |
 
 
 ___
