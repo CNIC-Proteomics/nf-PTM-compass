@@ -8,6 +8,7 @@ nf-PTM-compass was developed by the Cardiovascular Proteomics Lab/Proteomic Unit
 
 This application is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0) License. For further details, read the https://creativecommons.org/licenses/by-nd/4.0/.
 
+
 # Installation
 
 ## Prerequisites
@@ -32,16 +33,17 @@ For more information, read the [How to install Nextflow](docs/Nextflow.md) secti
 
 For more information, read the [How to install Git](docs/Git.md) section.
 
+
 # Download the pipeline with the latest release
 
 Export an environment variable to define the version:
 ```
-export PTMCOMPASS_VERSION=0.1.1
+export PIPELINE_VERSION=0.1.1
 ```
 
 You can clone the latest release directly using git with the following command:
 ```
-git clone https://github.com/CNIC-Proteomics/nf-PTM-compass.git --branch ${PTMCOMPASS_VERSION} --recursive
+git clone https://github.com/CNIC-Proteomics/nf-PTM-compass.git --branch ${PIPELINE_VERSION} --recursive
 ```
 With the *--recursive* parameter, the submodules repositories are cloned as well.
 
@@ -56,18 +58,19 @@ cd nf-PTM-compass/backends
 
 You need to download the Singularity image for the pipeline, ensuring version compatibility with the Nextflow pipeline. See the above *versions* section:
 ```
-singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass:${PTMCOMPASS_VERSION}
+singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass:${PIPELINE_VERSION}
 ```
 
 Create a symbolic link
 ```
-ln -s ptm-compass_${PTMCOMPASS_VERSION}.sif ptm-compass.sif
+ln -s ptm-compass_${PIPELINE_VERSION}.sif ptm-compass.sif
 ```
 
 
 # Usage
 
-## Execute the pipeline using MSFragger results as input
+## Execute the pipeline with test samples
+
 
 1. Download test files
 ```
@@ -95,6 +98,6 @@ nextflow \
 ```
 
 
-### Image Version history
+# Image Version History
 
-For more information, read the [changelog](changelog.md) for the current version.
+For more information about the program version included within the Singularity version, refer to the [changelog](changelog.md) for the current version.
