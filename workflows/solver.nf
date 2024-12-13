@@ -27,8 +27,8 @@ include { BINOMIAL_SITELIST_MAKER }     from '../nf-modules/modules/solver/binom
 include { SITE_SOLVER }                 from '../nf-modules/modules/solver/sitesolver/main'
 include { PDMTABLE_MAKER }              from '../nf-modules/modules/solver/pdmtablemaker/main'
 include { GROUP_MAKER }                 from '../nf-modules/modules/solver/groupmaker/main'
-include { JOINER      }                 from '../nf-modules/modules/solver/joiner/main'
-
+include { JOINER }                      from '../nf-modules/modules/solver/joiner/main'
+include { FREQ_PROCESSOR }              from '../nf-modules/modules/solver/freqprocessor/main'
 
 
 /*
@@ -52,47 +52,51 @@ workflow SOLVER {
     //
     // SUBMODULE: DM0 solver
     //
-    DM0SOLVER('01', peakfdrer, apexlist, createParamStrChannel(params_file, ['DM0Solver_Parameters','DM0Solver_DM0List','Logging','General']))
+    DM0SOLVER('09', peakfdrer, apexlist, createParamStrChannel(params_file, ['DM0Solver_Parameters','DM0Solver_DM0List','Logging','General']))
     //
     // SUBMODULE: protein assigner
     //
-    PROTEIN_ASSIGNER('02', DM0SOLVER.out.ofile, database, createParamStrChannel(params_file, ['ProteinAssigner','Logging','General']))
+    PROTEIN_ASSIGNER('10', DM0SOLVER.out.ofile, database, createParamStrChannel(params_file, ['ProteinAssigner','Logging','General']))
     //
     // SUBMODULE: Trunk solver
     //
-    TRUNK_SOLVER('03', PROTEIN_ASSIGNER.out.ofile, database, createParamStrChannel(params_file, ['TrunkSolver_Parameters','TrunkSolver_CombList','Aminoacids','Fixed Modifications','Masses','Logging','General']))
+    TRUNK_SOLVER('11', PROTEIN_ASSIGNER.out.ofile, database, createParamStrChannel(params_file, ['TrunkSolver_Parameters','TrunkSolver_CombList','Aminoacids','Fixed Modifications','Masses','Logging','General']))
     //
     // SUBMODULE: protein assigner 2º round
     //
-    PROTEIN_ASSIGNER_2('04', TRUNK_SOLVER.out.ofile, database, createParamStrChannel(params_file, ['ProteinAssigner_2_Round','Logging','General'], [['\\[ProteinAssigner_2_Round\\]', '[ProteinAssigner]']]))
+    PROTEIN_ASSIGNER_2('12', TRUNK_SOLVER.out.ofile, database, createParamStrChannel(params_file, ['ProteinAssigner_2_Round','Logging','General'], [['\\[ProteinAssigner_2_Round\\]', '[ProteinAssigner]']]))
     //
     // SUBMODULE: Peak assignator
     //
-    PEAK_ASSIGNATOR('05', PROTEIN_ASSIGNER_2.out.ofile, apexlist, createParamStrChannel(params_file, ['PeakAssignator_in_Solver','Logging','General'], [['\\[PeakAssignator_in_Solver\\]', '[PeakAssignator]']]))
+    PEAK_ASSIGNATOR('13', PROTEIN_ASSIGNER_2.out.ofile, apexlist, createParamStrChannel(params_file, ['PeakAssignator_in_Solver','Logging','General'], [['\\[PeakAssignator_in_Solver\\]', '[PeakAssignator]']]))
     //
     // SUBMODULE: Bionomial Site list maker
     //
-    BINOMIAL_SITELIST_MAKER('06', PEAK_ASSIGNATOR.out.oPeakassign, createParamStrChannel(params_file, ['BinomialSiteListMaker_Parameters','Logging','General']))
+    BINOMIAL_SITELIST_MAKER('14', PEAK_ASSIGNATOR.out.oPeakassign, createParamStrChannel(params_file, ['BinomialSiteListMaker_Parameters','Logging','General']))
     //
     // SUBMODULE: Site solver
     //
-    SITE_SOLVER('07', PEAK_ASSIGNATOR.out.oPeakassign, sitelist_file, createParamStrChannel(params_file, ['SiteSolver_Parameters','Logging','General']))
+    SITE_SOLVER('15', PEAK_ASSIGNATOR.out.oPeakassign, sitelist_file, createParamStrChannel(params_file, ['SiteSolver_Parameters','Logging','General']))
     //
     // SUBMODULE: Experiment separator
     //
-    EXPERIMENT_SEPARATOR('08', SITE_SOLVER.out.ofile, exp_table)
+    EXPERIMENT_SEPARATOR('16', SITE_SOLVER.out.ofile, exp_table)
     //
     // SUBMODULE: PDMtable maker
     //
-    PDMTABLE_MAKER('09', SITE_SOLVER.out.ofile, database, createParamStrChannel(params_file, ['PDMTableMaker_Parameters','PDMTableMaker_Conditions','Logging','General']))
+    PDMTABLE_MAKER('17', EXPERIMENT_SEPARATOR.out.ofile.flatten(), database, createParamStrChannel(params_file, ['PDMTableMaker_Parameters','PDMTableMaker_Conditions','Logging','General']))    
     //
     // SUBMODULE: Group maker
     //
-    GROUP_MAKER('10', PDMTABLE_MAKER.out.ofile, groupmaker_file, createParamStrChannel(params_file, ['GroupMaker_Parameters','Logging','General']))
+    GROUP_MAKER('18', PDMTABLE_MAKER.out.ofile, groupmaker_file, createParamStrChannel(params_file, ['GroupMaker_Parameters','Logging','General']))
     //
     // SUBMODULE: Joiner
     //
-    JOINER('11', GROUP_MAKER.out.ofile, createParamStrChannel(params_file, ['Joiner_Parameters','Joiner_Columns','Logging','General']))
+    JOINER('19', GROUP_MAKER.out.ofile, createParamStrChannel(params_file, ['Joiner_Parameters','Joiner_Columns','Logging','General']))
+    //
+    // SUBMODULE: Get the frequencies
+    //
+    FREQ_PROCESSOR('20', JOINER.out.ofile)
 
 
     // return channels
@@ -106,6 +110,9 @@ workflow SOLVER {
     ch_PDMtable               = PDMTABLE_MAKER.out.ofile
     ch_GroupMaker             = GROUP_MAKER.out.ofile
     ch_GroupJoiner            = JOINER.out.ofile
+    ch_PDMFrequency           = FREQ_PROCESSOR.out.ofilePdm
+    ch_PGMFrequency           = FREQ_PROCESSOR.out.ofilePgm
+
 
     emit:
     DM0solver             = ch_DM0solver
@@ -118,6 +125,8 @@ workflow SOLVER {
     PDMtable              = ch_PDMtable
     GroupMaker            = ch_GroupMaker
     GroupJoiner           = ch_GroupJoiner
+    PDMFrequency          = ch_PDMFrequency
+    PGMFrequency          = ch_PGMFrequency
 }
 
 /*
