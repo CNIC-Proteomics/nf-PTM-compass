@@ -1,4 +1,28 @@
 ___
+## 0.1.2
+```
+DATE: 2024_12
+```
+
+### Highlights
+
++ New release of PTM-compass (v1.2)
+
+### Changes
+
++ New release of PTM-compass (v1.2)
+
+
+### Image Version history
+
+| Version | Singularity image                                                                                    | Code                                                          | Version |
+|---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
+| 0.1.2   |                                                                                                      |                                                               |         |
+|         | [ptm-compass:0.1.2](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
+|         |                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.2     |
+|         |                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.4   |
+
+___
 ## 0.1.1
 ```
 DATE: 2024_12

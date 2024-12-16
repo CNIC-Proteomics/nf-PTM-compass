@@ -38,7 +38,7 @@ For more information, read the [How to install Git](docs/Git.md) section.
 
 Export an environment variable to define the version:
 ```
-export PIPELINE_VERSION=0.1.1
+export PIPELINE_VERSION=0.1.2
 ```
 
 You can clone the latest release directly using git with the following command:
@@ -69,14 +69,14 @@ ln -s ptm-compass_${PIPELINE_VERSION}.sif ptm-compass.sif
 
 # Usage
 
-## Execute the pipeline with test samples
+## Execute the pipeline with samples
 
 
-1. Download test files
+1. Download sample files
 ```
-cd tests && \
-wget https://zenodo.org/records/14276923/files/test_Heteroplasmic_muscle.zip?download=1 -O test_Heteroplasmic_muscle.zip && \
-unzip test_Heteroplasmic_muscle.zip && \
+cd samples && \
+wget https://zenodo.org/records/14446572/files/nf-PTM-compass_Heteroplasmic_Muscle.zip?download=1 -O nf-PTM-compass_Heteroplasmic_Muscle.zip && \
+unzip nf-PTM-compass_Heteroplasmic_Muscle.zip && \
 cd ..
 ```
 
@@ -86,14 +86,14 @@ nextflow \
     -log "/tmp/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
         -profile singularity \
-        --msf_files "tests/test_Heteroplasmic_muscle/inputs/msfragger/*.tsv" \
-        --exp_table "tests/test_Heteroplasmic_muscle/inputs/experimental_table.tsv" \
-        --database "tests/test_Heteroplasmic_muscle/inputs/database.fasta" \
+        --msf_files "samples/heteroplasmic_muscle/inputs/msfragger/*.tsv" \
+        --exp_table "samples/heteroplasmic_muscle/inputs/experimental_table.tsv" \
+        --database "samples/heteroplasmic_muscle/inputs/database.fasta" \
         --decoy_prefix "DECOY_"\
-        --params_file "tests/test_Heteroplasmic_muscle/inputs/params.ini" \
-        --sitelist_file "tests/test_Heteroplasmic_muscle/inputs/site_solver_list.txt" \
-        --groupmaker_file "tests/test_Heteroplasmic_muscle/inputs/group_maker_list.txt" \
-        --outdir  "tests/test_Heteroplasmic_muscle/results" \
+        --params_file "samples/heteroplasmic_muscle/inputs/params.ini" \
+        --sitelist_file "samples/heteroplasmic_muscle/inputs/site_solver_list.txt" \
+        --groupmaker_file "samples/heteroplasmic_muscle/inputs/group_maker_list.txt" \
+        --outdir  "samples/heteroplasmic_muscle/results" \
         -resume
 ```
 
