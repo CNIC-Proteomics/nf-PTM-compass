@@ -15,7 +15,7 @@ From: ubuntu:22.04
     # PTM-COMPASS ---------------------------------------------------------------------------------------------
 
     # PTM_COMPASS_HOME: Setting up the variables
-    PTM_COMPASS_VERSION=1.1
+    PTM_COMPASS_VERSION=1.2
     PTM_COMPASS_HOME=/opt/ptm-compass
 
     # REFMOD: Setting up the variables
