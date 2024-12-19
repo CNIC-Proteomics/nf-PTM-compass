@@ -1,4 +1,30 @@
 ___
+## 0.1.3
+
+### Date 📅 *2024_12*
+
+### Highlights
+
++ Include the parameter files.
+
+### Changes in detail
+
++ Include the parameter files for: TMT_10-plex, TMT_11-plex, TMT_16-plex, TMT_19-plex, Label-Free.
+
++ Fixing a bug prividing the "database" parameter.
+
+
+### Image Version history
+
+| Version | Singularity image                                                                                    | Code                                                          | Version |
+|---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
+| 0.1.2   |                                                                                                      |                                                               |         |
+|         | [ptm-compass:0.1.2](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
+|         |                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.2     |
+|         |                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.4   |
+
+
+___
 ## 0.1.2
 ```
 DATE: 2024_12
@@ -21,6 +47,7 @@ DATE: 2024_12
 |         | [ptm-compass:0.1.2](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
 |         |                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.2     |
 |         |                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.4   |
+
 
 ___
 ## 0.1.1

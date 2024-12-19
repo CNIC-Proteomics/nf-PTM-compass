@@ -38,7 +38,7 @@ For more information, read the [How to install Git](docs/Git.md) section.
 
 Export an environment variable to define the version:
 ```
-export PIPELINE_VERSION=0.1.2
+export PIPELINE_VERSION=0.1.3
 ```
 
 You can clone the latest release directly using git with the following command:
