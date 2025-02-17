@@ -67,8 +67,6 @@ From: ubuntu:22.04
     cd {{PTM_COMPASS_HOME}} && python -m venv env
     . {{PTM_COMPASS_HOME}}/env/bin/activate && pip install -r {{PTM_COMPASS_HOME}}/python_requirements.txt
 
-    RUN cd ${PTM_COMPASS_HOME} && python -m venv env
-    RUN cd ${PTM_COMPASS_HOME} && /bin/bash -c "source ${PTM_COMPASS_HOME}/env/bin/activate && pip install -r ${PTM_COMPASS_HOME}/python_requirements.txt"
 
 
     #
