@@ -61,6 +61,12 @@ You need to download the Singularity image for the pipeline, ensuring version co
 singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass:${PIPELINE_VERSION}
 ```
 
+You might see warning messages like the following. You can discard or ignore them:
+
+    WARNING: failed to get key material: 404 Not Found: entity not found
+    WARNING: integrity: signature object 5 not valid: openpgp: signature made by unknown entity
+    WARNING: Skipping container verification
+
 Create a symbolic link
 ```
 ln -s ptm-compass_${PIPELINE_VERSION}.sif ptm-compass.sif
