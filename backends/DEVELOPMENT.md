@@ -50,9 +50,95 @@ singularity push ptm-compass_${DEF_VERSION}.sif library://proteomicscnic/next-la
 ```
 
 
+## How to push your fingerprint
+
+In order to obtain the fingerprint from the key you just created, list again your keys:
+```
+singularity keys list
+```
+This will list the keys you have created. In this list, you will find your key's fingerprint next to "F:", for example:
+0) U: John Doe (my key) <johndoe@sylabs.io>
+C: 2018-08-21 20:14:39 +0200 CEST
+F: D87FE3AF5C1F063FCBCC9B02F812842B5EEE5934
+L: 4096
+
+
+Copy your fingerprint ( e.g. from the previous example the fingerprint would be D87FE3AF5C1F063FCBCC9B02F812842B5EEE5934 ) and then add it to your keystore by doing:
+```
+singularity keys push <Your key's fingerprint>
+```
+From the previous example it would be:
+```
+singularity keys push D87FE3AF5C1F063FCBCC9B02F812842B5EEE5934
+```
+
+
+
+
+## How to generate a new keypair
+
+Open a command line and check for your generated keys:
+```
+singularity keys list
+```
+
+If you already have a generated key just skip the next step and go to the third one, to obtain your key's fingerprint. Otherwise, if you need to generate a key just run:
+```
+singularity keys newpair
+```
+
+In order to obtain the fingerprint from the key you just created, list again your keys:
+```
+singularity keys list
+This will list the keys you have created. In this list, you will find your key's fingerprint next to "F:", for example:
+0) U: John Doe (my key) <johndoe@sylabs.io>
+C: 2018-08-21 20:14:39 +0200 CEST
+F: D87FE3AF5C1F063FCBCC9B02F812842B5EEE5934
+L: 4096
+```
+
+Copy your fingerprint ( e.g. from the previous example the fingerprint would be D87FE3AF5C1F063FCBCC9B02F812842B5EEE5934 ) and then add it to your keystore by doing:
+```
+singularity keys push <Your key's fingerprint>
+```
+
+From the previous example it would be:
+```
+singularity keys push D87FE3AF5C1F063FCBCC9B02F812842B5EEE5934
+```
+
+
+
+
+
+
+
 
 
 # FOR MORE INFORMATION
+
+# Import the  public key to verify the container's signature
+
+Locate the Key
+You can list the keys in your local keyring to find the public key:
+```
+singularity key list
+```
+Look for the key with the above fingerprint.
+
+Export the Public Key
+Once you've identified the key, you can export it to a file like this:
+```
+singularity key export public_key.asc
+```
+
+Import the Key (if needed on another machine)
+On a different machine, you can then import the key:
+```
+singularity key import public_key.asc
+```
+
+
 
 # Build in Singularity
 
