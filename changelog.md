@@ -1,4 +1,24 @@
 ___
+## 0.1.4
+
+### Date 📅 *2025_01*
+
+### Changes in detail
+
++ Fixing a bug: The fixed parameter contains the TMT delta masses for the 'TrunkSolver_CombList'.
+
+
+### Image Version history
+
+| Version | Singularity image                                                                                    | Code                                                          | Version |
+|---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
+| 0.1.3   |                                                                                                      |                                                               |         |
+|         | [ptm-compass:0.1.3](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
+|         |                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.2     |
+|         |                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.4   |
+
+
+___
 ## 0.1.3
 
 ### Date 📅 *2024_12*

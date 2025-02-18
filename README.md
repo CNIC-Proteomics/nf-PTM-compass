@@ -38,8 +38,9 @@ For more information, read the [How to install Git](docs/Git.md) section.
 
 Export an environment variable to define the version:
 ```
-export PIPELINE_VERSION=0.1.3
+export PIPELINE_VERSION=0.1.4
 ```
+Note: The list of releases is located on the [releases page](https://github.com/CNIC-Proteomics/nf-PTM-compass/releases).
 
 You can clone the latest release directly using git with the following command:
 ```
@@ -47,9 +48,14 @@ git clone https://github.com/CNIC-Proteomics/nf-PTM-compass.git --branch ${PIPEL
 ```
 With the *--recursive* parameter, the submodules repositories are cloned as well.
 
-The list of releases is located on the [releases page](https://github.com/CNIC-Proteomics/nf-PTM-compass/releases).
 
 # Download Singularity images
+
+Export an environment variable to define the version of singularity image:
+```
+export IMAGE_VERSION=0.1.3
+```
+Note: The list of releases is located on the [singularity repository page](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass).
 
 Navigate to the backends folder:
 ```
@@ -58,7 +64,7 @@ cd nf-PTM-compass/backends
 
 You need to download the Singularity image for the pipeline, ensuring version compatibility with the Nextflow pipeline. See the above *versions* section:
 ```
-singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass:${PIPELINE_VERSION}
+singularity pull --arch amd64 library://proteomicscnic/next-launcher/ptm-compass:${IMAGE_VERSION}
 ```
 
 You might see warning messages like the following. You can discard or ignore them:
@@ -69,7 +75,7 @@ You might see warning messages like the following. You can discard or ignore the
 
 Create a symbolic link
 ```
-ln -s ptm-compass_${PIPELINE_VERSION}.sif ptm-compass.sif
+ln -s ptm-compass_${IMAGE_VERSION}.sif ptm-compass.sif
 ```
 
 
