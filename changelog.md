@@ -1,4 +1,27 @@
 ___
+## 0.1.5
+
+### Date 📅 *2025_02*
+
+### Changes in detail
+
++ 'base.config' file is deprecated.
+
+### Image Version history
+
++ PTM-compass (1.3):
+  - Fixed a bug in the 'PeakSelector' related to the bin width.
+
+
+| Singularity image (version)                                                                          | Code                                                          | Version |
+|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
+|                                                                                                      |                                                               |         |
+| [ptm-compass:0.1.4](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
+|                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.3     |
+|                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.4   |
+
+
+___
 ## 0.1.4
 
 ### Date 📅 *2025_01*
@@ -7,15 +30,14 @@ ___
 
 + Fixing a bug: The fixed parameter contains the TMT delta masses for the 'TrunkSolver_CombList'.
 
-
 ### Image Version history
 
-| Version | Singularity image                                                                                    | Code                                                          | Version |
-|---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
-| 0.1.3   |                                                                                                      |                                                               |         |
-|         | [ptm-compass:0.1.3](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
-|         |                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.2     |
-|         |                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.4   |
+| Singularity image (version)                                                                          | Code                                                          | Version |
+|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
+|                                                                                                      |                                                               |         |
+| [ptm-compass:0.1.3](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
+|                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.2     |
+|                                                                                                      | [RefMod](https://github.com/CNIC-Proteomics/ReFrag)           | 0.4.4   |
 
 
 ___
