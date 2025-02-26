@@ -44,6 +44,11 @@ Data integrity checked, authentic and signed by:
 John Doe <john.doe@example.com>, KeyID 284972D6D4FC6713
 ```
 
+TIP: You can Push Unsigned images with 
+```
+singularity push -U ptm-compass_${IMAGE_VERSION}.sif library://proteomicscnic/next-launcher/ptm-compass:${IMAGE_VERSION}
+```
+
 Push image
 ```
 singularity push ptm-compass_${IMAGE_VERSION}.sif library://proteomicscnic/next-launcher/ptm-compass:${IMAGE_VERSION}
