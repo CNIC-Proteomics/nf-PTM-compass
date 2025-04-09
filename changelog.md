@@ -1,4 +1,24 @@
 ___
+## 0.1.6
+
+### Date 📅 *2025_04*
+
+### Changes in detail
+
++ The ReFrag (REFMOD) code is deprecated here. It will be used in the `nf-SearchEngine` pipeline.
++ Updated the documentation and test guide.
++ Fixed a bug related to saving log files.
+
+### Image Version history
+
+| Singularity image (version)                                                                          | Code                                                          | Version |
+|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
+|                                                                                                      |                                                               |         |
+| [ptm-compass:0.1.5](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
+|                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.4     |
+
+
+___
 ## 0.1.5
 
 ### Date 📅 *2025_02*
@@ -10,7 +30,9 @@ ___
 ### Image Version history
 
 + PTM-compass (1.3):
-  - Fixed a bug in the 'PeakSelector' related to the bin width.
+  + PeakSelector:
+    - Fixed a bug in the 'PeakSelector' related to the bin width.
+    - Duplicate bin params in config
 
 
 | Singularity image (version)                                                                          | Code                                                          | Version |
