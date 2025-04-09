@@ -3,7 +3,7 @@ From: ubuntu:22.04
 
 %labels
     Author jmrodriguezc@cnic.es
-    Version v0.1.4
+    Version v0.1.5
 
 %help
     This Singularity container is used for the PTM pipelines:
@@ -14,7 +14,7 @@ From: ubuntu:22.04
     # PTM-COMPASS ---------------------------------------------------------------------------------------------
 
     # PTM_COMPASS_HOME: Setting up the variables
-    PTM_COMPASS_VERSION=1.3
+    PTM_COMPASS_VERSION=1.4
     PTM_COMPASS_HOME=/opt/ptm-compass
 
 %environment
@@ -85,26 +85,6 @@ From: ubuntu:22.04
         echo "Python ${PYTHON_VER} has been installed as expected."
     else
         echo "Python has not been installed."
-        exit 1
-    fi
-
-    # REFMOD ---------------------------------------------------------------------------------------------
-
-    # Check if REFMOD has been installed
-    DIR={{REFMOD_HOME}}
-    if [ -d "${DIR}" ]; then
-        echo "The ${DIR} directory exists."
-    else
-        echo "The ${DIR} directory does not exit."
-        exit 1
-    fi
-
-    # Check if REFMOD has been installed
-    REFMOD_test=$(cd {{REFMOD_HOME}} && . env/bin/activate && python ReFrag.py 2>&1 | grep "usage:")
-    if [ "${REFMOD_test}" != "" ]; then
-        echo "REFMOD ${REFMOD_test} has been installed as expected."
-    else
-        echo "REFMOD has not been installed."
         exit 1
     fi
 
