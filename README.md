@@ -83,12 +83,13 @@ ln -s ptm-compass_${IMAGE_VERSION}.sif ptm-compass.sif
 
 ## Execute the pipeline with samples
 
+The input files provided are open search results for mouse heteroplasmy (`heart tissue`) at the following URL:
 
-1. Download sample files:
+https://zenodo.org/records/15182445/files/heteroplasmic_liver.zip?download=1
 
-The input files provided are open search results for mouse heteroplasmy (`heart tissue`).
 These files are intended for use with nf-PTM-compass and are derived from the study by Bagwan N., Bonzon-Kulichenko E., Calvo E., et al. [1]. The results were generated using the `nf-SearchEngine` pipeline (MSFragger [2]).
 
+1. Download sample files:
 ```
 cd samples && \
 wget https://zenodo.org/records/15182537/files/heteroplasmic_heart.zip?download=1 -O heteroplasmic_heart.zip && \
