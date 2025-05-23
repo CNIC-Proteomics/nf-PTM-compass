@@ -1,16 +1,16 @@
 d	a	g	Comment
--608.414292		NM	2 x TMT loss
--607.410937		NM	2 x TMT loss
--606.407582		NM	2 x TMT loss
--304.207146		NM	1 x TMT loss
--303.203791		NM	1 x TMT loss
--302.200436		NM	1 x TMT loss
--247.185682		NM	1 x  TMT loss + IAM (Lys)
--246.182327		NM	1 x  TMT loss + IAM (Lys)
--245.178972		NM	1 x  TMT loss + IAM (Lys)
--190.164219		-190.164219	Ubiquitination (Lys) + 1 x TMT loss
--189.160864		-190.164219	Ubiquitination (Lys) + 1 x TMT loss
--188.157509		-190.164219	Ubiquitination (Lys) + 1 x TMT loss
+-608.414292		NM	2 x -TMT
+-607.410937		NM	2 x -TMT
+-606.407582		NM	2 x -TMT
+-304.207146		NM	1 x -TMT
+-303.203791		NM	1 x -TMT
+-302.200436		NM	1 x -TMT
+-247.185682		NM	1 x -TMT + IAM (Lys)
+-246.182327		NM	1 x -TMT + IAM (Lys)
+-245.178972		NM	1 x -TMT + IAM (Lys)
+-190.164219		-190.164219	Ubiquitination (Lys) + 1 x -TMT
+-189.160864		-190.164219	Ubiquitination (Lys) + 1 x -TMT
+-188.157509		-190.164219	Ubiquitination (Lys) + 1 x -TMT
 304.207146		NM	1 x TMT
 305.210501		NM	1 x TMT
 306.213856		NM	1 x TMT

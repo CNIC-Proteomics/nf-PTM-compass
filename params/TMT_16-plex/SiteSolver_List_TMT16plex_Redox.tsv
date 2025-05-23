@@ -1,7 +1,7 @@
 DM	Residue	Comments
--190.164219	K	Ubiquitination (Lys) + 1 x TMT loss
--189.160864	K	Ubiquitination (Lys) + 1 x TMT loss
--188.157509	K	Ubiquitination (Lys) + 1 x TMT loss
+-190.164219	K	Ubiquitination (Lys) + 1 x -TMT
+-189.160864	K	Ubiquitination (Lys) + 1 x -TMT
+-188.157509	K	Ubiquitination (Lys) + 1 x -TMT
 80.969686	" S,T,Y"	Phospho
 79.966331	"S,T,Y"	Phospho
 4.99827	W	Kynurenin
