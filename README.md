@@ -34,15 +34,15 @@ For more information, read the [How to install Nextflow](docs/Nextflow.md) secti
 For more information, read the [How to install Git](docs/Git.md) section.
 
 
-# Download the pipeline with the latest release
+# Download the pipeline (latest release)
 
-Export an environment variable to define the version:
+You can download the pipeline by specifying a release version:
 ```
-export PIPELINE_VERSION=0.1.6
+export PIPELINE_VERSION=0.1.7
 ```
-Note: The list of releases is located on the [releases page](https://github.com/CNIC-Proteomics/nf-PTM-compass/releases).
+To see the full list of available versions, visit the [releases page](https://github.com/CNIC-Proteomics/nf-PTM-compass/releases).
 
-You can clone the latest release directly using git with the following command:
+Clone the specified release directly using Git:
 ```
 git clone https://github.com/CNIC-Proteomics/nf-PTM-compass.git --branch ${PIPELINE_VERSION} --recursive
 ```

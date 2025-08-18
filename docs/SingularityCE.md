@@ -54,6 +54,9 @@ You have installed also GCC with the build-essential package. This will install 
 ## Install Go
 SingularityCE is written in **Go**, and may require a newer version of Go than is available in the repositories of your distribution. We recommend installing the latest version of Go from the official binaries (https://golang.org/dl/)
 
+The version of Go that we have tested is 1.22.1.
+
+After deciding on a release to install, run the following commands to proceed with the installation.
 ```
 export VERSION=1.22.1 OS=linux ARCH=amd64 && \
   cd /tmp && \
@@ -62,7 +65,7 @@ export VERSION=1.22.1 OS=linux ARCH=amd64 && \
   rm go$VERSION.$OS-$ARCH.tar.gz
 ```
 
-Set the Environment variable PATH to point to Go:
+Next, update your environment variable PATH to point to Go:
 ```
 echo 'export PATH=/usr/local/go/bin:${PATH}' >> ~/.bashrc
 source ~/.bashrc
@@ -71,7 +74,9 @@ source ~/.bashrc
 ## Download SingularityCE from a release
 You can download SingularityCE from one of the releases. To see a full list, visit the GitHub release page (https://github.com/sylabs/singularity/releases).
 
-After deciding on a release to install, you can run the following commands to proceed with the installation.
+The version of SingularityCE that we have tested is 4.1.2.
+
+After choosing a release to install, run the following commands.
 ```
 mkdir -p ${HOME}/softwares && \
 cd ${HOME}/softwares && \
