@@ -1,4 +1,32 @@
 ___
+## 0.1.7
+
+### Date 📅 *2025_08*
+
+### Changes in detail
+
++ Unassigned modifications are now displayed in the *BinomialSiteListMaker*.
+
++ Parameter update: by default, users can no longer modify the show_unassigned parameter in *BinomialSiteListMaker*.
+
++ Updated the deltamass lists in *DM0Solver* and *GroupMaker*.
+
++ Updated the **proteincolumn** of DMcalibrator because MSFragger 4.2 renamed the *protein* column to *proteins*.
+
++ Updated the deltamass lists for *DM0Solver* in the fixed parameters.
+
+
+
+### Image Version history
+
+| Singularity image (version)                                                                          | Code                                                          | Version |
+|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
+|                                                                                                      |                                                               |         |
+| [ptm-compass:0.1.5](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
+|                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.4     |
+
+
+___
 ## 0.1.6
 
 ### Date 📅 *2025_04*
