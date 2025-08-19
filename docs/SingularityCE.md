@@ -52,9 +52,7 @@ If GCC is already installed on your system, the command will list the version in
 You have installed also GCC with the build-essential package. This will install GCC as well as other popular packages such as make, which is often used with GCC to automate the compilation process of bigger software.
 
 ## Install Go
-SingularityCE is written in **Go**, and may require a newer version of Go than is available in the repositories of your distribution. We recommend installing the latest version of Go from the official binaries (https://golang.org/dl/)
-
-The version of Go that we have tested is 1.22.1.
+SingularityCE is written in Go, and may require a newer version of Go than is available in the repositories of your distribution. We recommend installing the latest version of Go from the official binaries (https://golang.org/dl/)
 
 After deciding on a release to install, run the following commands to proceed with the installation.
 ```
@@ -64,6 +62,7 @@ export VERSION=1.22.1 OS=linux ARCH=amd64 && \
   sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz && \
   rm go$VERSION.$OS-$ARCH.tar.gz
 ```
+**Note**: Set the desired version in the `VERSION` environment variable.
 
 Next, update your environment variable PATH to point to Go:
 ```
@@ -74,8 +73,6 @@ source ~/.bashrc
 ## Download SingularityCE from a release
 You can download SingularityCE from one of the releases. To see a full list, visit the GitHub release page (https://github.com/sylabs/singularity/releases).
 
-The version of SingularityCE that we have tested is 4.1.2.
-
 After choosing a release to install, run the following commands.
 ```
 mkdir -p ${HOME}/softwares && \
@@ -85,6 +82,7 @@ export VERSION=4.1.2 && \
   tar -xzf singularity-ce-${VERSION}.tar.gz && \
   cd singularity-ce-${VERSION}
 ```
+**Note**: Set the desired version in the `VERSION` environment variable.
 
 ## Compile the SingularityCE source code
 Now you are ready to build SingularityCE. Dependencies will be automatically downloaded. You can build SingularityCE using the following commands:

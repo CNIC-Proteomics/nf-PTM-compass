@@ -314,8 +314,27 @@ class NfcoreTemplate {
         return "-${colors.dim}----------------------------------------------------${colors.reset}-"
     }
 
+    // //
+    // // nf-core logo
+    // //
+    // public static String logo(workflow, monochrome_logs) {
+    //     Map colors = logColours(monochrome_logs)
+    //     String workflow_version = NfcoreTemplate.version(workflow)
+    //     String.format(
+    //         """\n
+    //         ${dashedLine(monochrome_logs)}
+    //                                                 ${colors.green},--.${colors.black}/${colors.green},-.${colors.reset}
+    //         ${colors.blue}        ___     __   __   __   ___     ${colors.green}/,-._.--~\'${colors.reset}
+    //         ${colors.blue}  |\\ | |__  __ /  ` /  \\ |__) |__         ${colors.yellow}}  {${colors.reset}
+    //         ${colors.blue}  | \\| |       \\__, \\__/ |  \\ |___     ${colors.green}\\`-._,-`-,${colors.reset}
+    //                                                 ${colors.green}`._,._,\'${colors.reset}
+    //         ${colors.purple}  ${workflow.manifest.name} ${workflow_version}${colors.reset}
+    //         ${dashedLine(monochrome_logs)}
+    //         """.stripIndent()
+    //     )
+    // }
     //
-    // nf-core logo
+    // nf-cnic logo
     //
     public static String logo(workflow, monochrome_logs) {
         Map colors = logColours(monochrome_logs)
@@ -323,14 +342,15 @@ class NfcoreTemplate {
         String.format(
             """\n
             ${dashedLine(monochrome_logs)}
-                                                    ${colors.green},--.${colors.black}/${colors.green},-.${colors.reset}
-            ${colors.blue}        ___     __   __   __   ___     ${colors.green}/,-._.--~\'${colors.reset}
-            ${colors.blue}  |\\ | |__  __ /  ` /  \\ |__) |__         ${colors.yellow}}  {${colors.reset}
-            ${colors.blue}  | \\| |       \\__, \\__/ |  \\ |___     ${colors.green}\\`-._,-`-,${colors.reset}
-                                                    ${colors.green}`._,._,\'${colors.reset}
-            ${colors.purple}  ${workflow.manifest.name} ${workflow_version}${colors.reset}
+            ${colors.cyan} ${workflow.manifest.name} ${workflow_version}${colors.reset}
+            
+            ${colors.green} Nextflow${colors.reset} pipeline developed by the${colors.reset}
+                               ${colors.bired}   __             __   ${colors.reset}
+                               ${colors.bired}  /  `  |\\ |  |  /  `   ${colors.reset}
+            ${colors.purple} Proteomic Unit${colors.yellow} at ${colors.bired}  \\__   | \\|  |  \\__  ${colors.reset}
             ${dashedLine(monochrome_logs)}
             """.stripIndent()
         )
     }
+
 }
