@@ -311,7 +311,7 @@ class NfcoreTemplate {
     //
     public static String dashedLine(monochrome_logs) {
         Map colors = logColours(monochrome_logs)
-        return "-${colors.dim}----------------------------------------------------${colors.reset}-"
+        return "-${colors.dim}------------------------------------------------------${colors.reset}-"
     }
 
     // //
@@ -342,12 +342,10 @@ class NfcoreTemplate {
         String.format(
             """\n
             ${dashedLine(monochrome_logs)}
-            ${colors.cyan} ${workflow.manifest.name} ${workflow_version}${colors.reset}
-            
-            ${colors.green} Nextflow${colors.reset} pipeline developed by the${colors.reset}
-                               ${colors.bired}   __             __   ${colors.reset}
-                               ${colors.bired}  /  `  |\\ |  |  /  `   ${colors.reset}
-            ${colors.purple} Proteomic Unit${colors.yellow} at ${colors.bired}  \\__   | \\|  |  \\__  ${colors.reset}
+            ${colors.cyan} ${workflow.manifest.name} ${colors.reset}            
+                                                ${colors.bired} __             __   ${colors.reset}
+                                                ${colors.bired}/  `  |\\ |  |  /  `   ${colors.reset}
+            ${colors.reset} developed by the ${colors.purple}Proteomic Unit${colors.yellow} at ${colors.bired}\\__   | \\|  |  \\__  ${colors.reset}
             ${dashedLine(monochrome_logs)}
             """.stripIndent()
         )
