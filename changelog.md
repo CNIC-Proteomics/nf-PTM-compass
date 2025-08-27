@@ -1,4 +1,34 @@
 ___
+## 0.1.8
+
+### Date 📅 *2025_08*
+
+### Changes in detail
+
+**rc1**
++ Updated documentation:
+  - Highlighting the Singularity and Nextflow versions.
+  - Hardware specifications and execution time.
+  - Summary log in the pipeline execution (nextflow).
+**rc2**
++ Updated summary log in the pipeline execution (nextflow).
+**rc3**
++ Moved the process container attribute from the modules.config file to nextflow.config.
+**rc4,rc5,rc6**
++ Fixing the bug in the nextflow.config for the process container.
+**rc7**
++ Redefine the process container attribute.
+
+### Image Version history
+
+| Singularity image (version)                                                                          | Code                                                          | Version |
+|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
+|                                                                                                      |                                                               |         |
+| [ptm-compass:0.1.5](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
+|                                                                                                      | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.4     |
+
+
+___
 ## 0.1.7
 
 ### Date 📅 *2025_08*
