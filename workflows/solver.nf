@@ -25,7 +25,7 @@ include { DM0SOLVER }                   from '../nf-modules/modules/solver/dm0so
 include { TRUNK_SOLVER }                from '../nf-modules/modules/solver/trunksolver/main'
 include { BINOMIAL_SITELIST_MAKER }     from '../nf-modules/modules/solver/binomialsitelistmaker/main'
 include { SITE_SOLVER }                 from '../nf-modules/modules/solver/sitesolver/main'
-include { PDMTABLE_MAKER }              from '../nf-modules/modules/solver/pdmtablemaker/main'
+include { PGMTABLE_MAKER }              from '../nf-modules/modules/solver/pdmtablemaker/main'
 include { GROUP_MAKER }                 from '../nf-modules/modules/solver/groupmaker/main'
 include { JOINER }                      from '../nf-modules/modules/solver/joiner/main'
 include { FREQ_PROCESSOR }              from '../nf-modules/modules/solver/freqprocessor/main'
@@ -82,13 +82,13 @@ workflow SOLVER {
     //
     EXPERIMENT_SEPARATOR('16', SITE_SOLVER.out.ofile, exp_table)
     //
-    // SUBMODULE: PDMtable maker
+    // SUBMODULE: PGMtable maker
     //
-    PDMTABLE_MAKER('17', EXPERIMENT_SEPARATOR.out.ofile.flatten(), database, createParamStrChannel(params_file, ['PDMTableMaker_Parameters','PDMTableMaker_Conditions','Logging','General']))    
+    PGMTABLE_MAKER('17', EXPERIMENT_SEPARATOR.out.ofile.flatten(), database, createParamStrChannel(params_file, ['PDMTableMaker_Parameters','PDMTableMaker_Conditions','Logging','General']))    
     //
     // SUBMODULE: Group maker
     //
-    GROUP_MAKER('18', PDMTABLE_MAKER.out.ofile, groupmaker_file, createParamStrChannel(params_file, ['GroupMaker_Parameters','Logging','General']))
+    GROUP_MAKER('18', PGMTABLE_MAKER.out.ofile, groupmaker_file, createParamStrChannel(params_file, ['GroupMaker_Parameters','Logging','General']))
     //
     // SUBMODULE: Joiner
     //
@@ -107,10 +107,10 @@ workflow SOLVER {
     ch_SiteList               = BINOMIAL_SITELIST_MAKER.out.ofile
     ch_SiteSolver             = SITE_SOLVER.out.ofile
     ch_SiteSolverExp          = EXPERIMENT_SEPARATOR.out.ofile
-    ch_PDMtable               = PDMTABLE_MAKER.out.ofile
+    ch_PGMtable               = PGMTABLE_MAKER.out.ofile
     ch_GroupMaker             = GROUP_MAKER.out.ofile
     ch_GroupJoiner            = JOINER.out.ofile
-    ch_PDMFrequency           = FREQ_PROCESSOR.out.ofilePdm
+    ch_PGMFrequency           = FREQ_PROCESSOR.out.ofilePdm
     ch_PGMFrequency           = FREQ_PROCESSOR.out.ofilePgm
 
 
@@ -122,10 +122,10 @@ workflow SOLVER {
     SiteList              = ch_SiteList
     SiteSolver            = ch_SiteSolver
     SiteSolverExp         = ch_SiteSolverExp
-    PDMtable              = ch_PDMtable
+    PGMtable              = ch_PGMtable
     GroupMaker            = ch_GroupMaker
     GroupJoiner           = ch_GroupJoiner
-    PDMFrequency          = ch_PDMFrequency
+    PGMFrequency          = ch_PGMFrequency
     PGMFrequency          = ch_PGMFrequency
 }
 
