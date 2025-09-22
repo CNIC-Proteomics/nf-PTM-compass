@@ -1,4 +1,30 @@
 ___
+## 1.9
+
+### Date 📅 *2025_09*
+
+### Changes in detail
+
+**rc1**
++ Upgraded Nextflow modules.
++ Updated singularity image.
++ Updated documentation: Zenodo repository.
++ Version format reduced from three segments to two (major.minor).
+
+### Image Version history
+
++ Updated to the new version:
+  - PTM-compass 1.5
+
+| Singularity image (version)                                                                        | Code                                                          | Version |
+|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
+|                                                                                                    |                                                               |         |
+| [ptm-compass:1.5](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
+|                                                                                                    | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.5     |
+
+
+
+___
 ## 0.1.8
 
 ### Date 📅 *2025_08*
