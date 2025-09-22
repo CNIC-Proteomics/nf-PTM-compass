@@ -44,7 +44,7 @@ For more information, read the [How to install Git](docs/Git.md) section.
 
 You can download the pipeline by specifying a release version:
 ```
-export PIPELINE_VERSION=0.1.7
+export PIPELINE_VERSION=1.9
 ```
 To see the full list of available versions, visit the [releases page](https://github.com/CNIC-Proteomics/nf-PTM-compass/releases).
 
@@ -59,7 +59,7 @@ With the *--recursive* parameter, the submodules repositories are cloned as well
 
 Export an environment variable to define the version of singularity image:
 ```
-export IMAGE_VERSION=0.1.5
+export IMAGE_VERSION=1.5
 ```
 Note: The list of releases is located on the [singularity repository page](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass).
 
@@ -91,14 +91,14 @@ ln -s ptm-compass_${IMAGE_VERSION}.sif ptm-compass.sif
 
 The input files provided are open search results for mouse heteroplasmy (`heart tissue`) at the following URL:
 
-https://zenodo.org/records/15182537/files/heteroplasmic_heart.zip?download=1
+https://zenodo.org/records/17159646/files/heteroplasmic_heart.zip?download=1
 
 These files are intended for use with nf-PTM-compass and are derived from the study by Bagwan N., Bonzon-Kulichenko E., Calvo E., et al. [1]. The results were generated using the `nf-SearchEngine` pipeline (MSFragger [2]).
 
 1. Download sample files:
 ```
 cd samples && \
-wget https://zenodo.org/records/15182537/files/heteroplasmic_heart.zip?download=1 -O heteroplasmic_heart.zip && \
+wget https://zenodo.org/records/17159646/files/heteroplasmic_heart.zip?download=1 -O heteroplasmic_heart.zip && \
 unzip heteroplasmic_heart.zip && \
 cd ..
 ```
@@ -119,23 +119,6 @@ nextflow \
         --outdir  "samples/heteroplasmic_heart/results" \
         -resume
 ```
-<!--
-2. Execute the pipeline IN LOCAL using MSFragger results as input:
-```
-nextflow \
-    -log "/tmp/nextflow/log/nf-ptm-compass.log" \
-    run main.nf   \
-        --msf_files "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_heart/inputs/msfragger/*.tsv" \
-        --exp_table "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_heart/inputs/experimental_table.tsv" \
-        --database "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_heart/inputs/database.fasta" \
-        --decoy_prefix "DECOY_"\
-        --params_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_heart/inputs/params.ini" \
-        --sitelist_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_heart/inputs/site_solver_list.txt" \
-        --groupmaker_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_heart/inputs/group_maker_list.txt" \
-        --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_heart/results" \
-        -resume
-```
--->
 
 ### Hardware specifications
 
@@ -152,60 +135,23 @@ The execution trace for the sample dataset was generated using the `nextflow` co
 
 The trace log shows the execution of each module along with the corresponding **execution time**.
 
-![Execution time screenshot](docs/execution_time_screenshot.png)
+![Execution time screenshot](docs/images/execution_time_screenshot.png)
 
 
 ## Download more samples
 
 + You can download the input files for this `liver` sample from the study by Bagwan N, Bonzon-Kulichenko E, Calvo E, et al. [1] at the following URL:
 
-https://zenodo.org/records/15182445/files/heteroplasmic_liver.zip?download=1
+https://zenodo.org/records/17159646/files/heteroplasmic_liver.zip?download=1
 
 To execute the pipeline, follow the same steps as in Sample 1.
-
-<!--
-2. Execute the pipeline IN LOCAL using MSFragger results as input:
-```
-nextflow \
-    -log "/tmp/nextflow/log/nf-ptm-compass.log" \
-    run main.nf   \
-        --msf_files "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_liver/inputs/msfragger/*.tsv" \
-        --exp_table "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_liver/inputs/experimental_table.tsv" \
-        --database "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_liver/inputs/database.fasta" \
-        --decoy_prefix "DECOY_"\
-        --params_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_liver/inputs/params.ini" \
-        --sitelist_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_liver/inputs/site_solver_list.txt" \
-        --groupmaker_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_liver/inputs/group_maker_list.txt" \
-        --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_liver/results" \
-        -resume
-```
--->
-
 
 + You can download the input files for this `muscle` sample from the study by Bagwan N, Bonzon-Kulichenko E, Calvo E, et al. [1] at the following URL:
 
-https://zenodo.org/records/15182445/files/heteroplasmic_muscle.zip?download=1
+https://zenodo.org/records/17159646/files/heteroplasmic_muscle.zip?download=1
 
 To execute the pipeline, follow the same steps as in Sample 1.
 
-
-<!--
-2. Execute the pipeline IN LOCAL using MSFragger results as input:
-```
-nextflow \
-    -log "/tmp/nextflow/log/nf-ptm-compass.log" \
-    run main.nf   \
-        --msf_files "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_muscle/inputs/msfragger/*.tsv" \
-        --exp_table "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_muscle/inputs/experimental_table.tsv" \
-        --database "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_muscle/inputs/database.fasta" \
-        --decoy_prefix "DECOY_"\
-        --params_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_muscle/inputs/params.ini" \
-        --sitelist_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_muscle/inputs/site_solver_list.txt" \
-        --groupmaker_file "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_muscle/inputs/group_maker_list.txt" \
-        --outdir  "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_muscle/results" \
-        -resume
-```
--->
 
 
 ## References
@@ -213,6 +159,8 @@ nextflow \
 [1] Bagwan N, Bonzon-Kulichenko E, Calvo E, et al. Comprehensive Quantification of the Modified Proteome Reveals Oxidative Heart Damage in Mitochondrial Heteroplasmy. Cell Reports. 2018;23(12):3685-3697.e4. https://doi.org/10.1016/j.celrep.2018.05.080
 
 [2] Kong, A., Leprevost, F., Avtonomov, D. et al. MSFragger: ultrafast and comprehensive peptide identification in mass spectrometry–based proteomics. Nat Methods 14, 513–520 (2017). https://doi.org/10.1038/nmeth.4256
+
+
 
 # Image Version History
 
