@@ -11,6 +11,9 @@ ___
 + Updated documentation: Zenodo repository.
 + Version format reduced from three segments to two (major.minor).
 
+**rc2**
++ Upgraded Nextflow modules.
+
 ### Image Version history
 
 + Updated to the new version:
