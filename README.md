@@ -109,7 +109,7 @@ nextflow \
     -log "/tmp/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
         -profile singularity \
-        --msf_files "samples/heteroplasmic_heart/inputs/msfragger/*.tsv" \
+        --sch_files "samples/heteroplasmic_heart/inputs/msfragger/*.tsv" \
         --exp_table "samples/heteroplasmic_heart/inputs/experimental_table.tsv" \
         --database "samples/heteroplasmic_heart/inputs/database.fasta" \
         --decoy_prefix "DECOY_"\
