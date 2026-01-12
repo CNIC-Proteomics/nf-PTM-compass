@@ -100,33 +100,33 @@ workflow SOLVER {
 
 
     // return channels
-    ch_DM0solver              = DM0SOLVER.out.ofile
-    ch_MProtein               = PROTEIN_ASSIGNER.out.ofile
-    ch_TrunkSolver            = TRUNK_SOLVER.out.ofile
-    ch_PeakAssign             = PEAK_ASSIGNATOR.out.oPeakassign
-    ch_SiteList               = BINOMIAL_SITELIST_MAKER.out.ofile
-    ch_SiteSolver             = SITE_SOLVER.out.ofile
-    ch_SiteSolverExp          = EXPERIMENT_SEPARATOR.out.ofile
-    ch_PGMtable               = PGMTABLE_MAKER.out.ofile
-    ch_GroupMaker             = GROUP_MAKER.out.ofile
-    ch_GroupJoiner            = JOINER.out.ofile
-    ch_PGMFrequency           = FREQ_PROCESSOR.out.ofilePdm
-    ch_PGMFrequency           = FREQ_PROCESSOR.out.ofilePgm
+    DM0solver              = DM0SOLVER.out.ofile
+    MProtein               = PROTEIN_ASSIGNER.out.ofile
+    TrunkSolver            = TRUNK_SOLVER.out.ofile
+    PeakAssign             = PEAK_ASSIGNATOR.out.oPeakassign
+    SiteList               = BINOMIAL_SITELIST_MAKER.out.ofile
+    SiteSolver             = SITE_SOLVER.out.ofile
+    SiteSolverExp          = EXPERIMENT_SEPARATOR.out.ofile
+    PGMtable               = PGMTABLE_MAKER.out.ofile
+    GroupMaker             = GROUP_MAKER.out.ofile
+    GroupJoiner            = JOINER.out.ofile
+    PDMFrequency           = FREQ_PROCESSOR.out.ofilePdm
+    PGMFrequency           = FREQ_PROCESSOR.out.ofilePgm
 
 
     emit:
-    DM0solver             = ch_DM0solver
-    MProtein              = ch_MProtein
-    TrunkSolver           = ch_TrunkSolver
-    Peakassign            = ch_PeakAssign
-    SiteList              = ch_SiteList
-    SiteSolver            = ch_SiteSolver
-    SiteSolverExp         = ch_SiteSolverExp
-    PGMtable              = ch_PGMtable
-    GroupMaker            = ch_GroupMaker
-    GroupJoiner           = ch_GroupJoiner
-    PGMFrequency          = ch_PGMFrequency
-    PGMFrequency          = ch_PGMFrequency
+    DM0solver
+    MProtein
+    TrunkSolver
+    PeakAssign
+    SiteList
+    SiteSolver
+    SiteSolverExp
+    PGMtable
+    GroupMaker
+    GroupJoiner
+    PDMFrequency
+    PGMFrequency
 }
 
 /*

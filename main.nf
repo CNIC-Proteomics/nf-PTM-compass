@@ -18,14 +18,7 @@ WorkflowMain.initialise(workflow, params, log)
 ========================================================================================
 */
 
-include {
-    PTM_COMPASS_WORKFLOW;
-    PTM_COMPASS_WORKFLOW_REFMOD;
-    PTM_COMPASS_WORKFLOW_RECOM;
-    REFMOD_WORKFLOW;
-    SHIFTS_WORKFLOW;
-    SOLVER_WORKFLOW
-} from './workflows/main'
+include { PTM_COMPASS_WORKFLOW } from './workflows/main'
 
 
 /*
@@ -42,30 +35,9 @@ def multiqc_report = []
 //
 workflow {
 
-    // Execute main workflow based on the given input
-    if ( params.containsKey('search_engine') && params.search_engine == 'comet' ) {
-        PTM_COMPASS_WORKFLOW_RECOM()
-    } else {
-        PTM_COMPASS_WORKFLOW()
-        // PTM_COMPASS_WORKFLOW_REFMOD()  
-    }
+    PTM_COMPASS_WORKFLOW()
+
 }
-
-/*
-========================================================================================
-    COMPLETION EMAIL AND SUMMARY
-========================================================================================
-*/
-
-// workflow.onComplete {
-//     if (params.email || params.email_on_fail) {
-//         NfcoreTemplate.email(workflow, params, summary_params, projectDir, log, multiqc_report)
-//     }
-//     NfcoreTemplate.summary(workflow, params, log)
-//     if (params.hook_url) {
-//         NfcoreTemplate.IM_notification(workflow, params, summary_params, projectDir, log)
-//     }
-// }
 
 /*
 ========================================================================================
