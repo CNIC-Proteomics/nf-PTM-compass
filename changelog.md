@@ -1,4 +1,32 @@
 ___
+## 1.10
+
+### Date 📅 *2026_XX*
+
+### Changes in detail
+
+**rc1**
++ Add the fixed parameter file when the inputs are derived from REFMOD results.
++ Change the parameter key in the command line for the search engine result files.
++ Refine and simplify the code by removing obsolete code.
++ Discard nextflow schema file from nf-core. It is saved in the "pipeline" folder of next-Launcher.
+
+**rc2**
++ Added caldeltamh_column parameter to PeakModeller.
+
+### Image Version history
+
++ Updated to the new version:
+  - PTM-compass 1.7
+
+| Singularity image (version)                                                                        | Code                                                          | Version |
+|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------|
+|                                                                                                    |                                                               |         |
+| [ptm-compass:1.7](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass)        |                                                               |         |
+|                                                                                                    | [PTM-compass](https://github.com/CNIC-Proteomics/PTM-compass) | 1.7     |
+
+
+___
 ## 1.9
 
 ### Date 📅 *2025_09*

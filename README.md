@@ -44,7 +44,7 @@ For more information, read the [How to install Git](docs/Git.md) section.
 
 You can download the pipeline by specifying a release version:
 ```
-export PIPELINE_VERSION=1.9
+export PIPELINE_VERSION=1.10
 ```
 To see the full list of available versions, visit the [releases page](https://github.com/CNIC-Proteomics/nf-PTM-compass/releases).
 
@@ -59,7 +59,7 @@ With the *--recursive* parameter, the submodules repositories are cloned as well
 
 Export an environment variable to define the version of singularity image:
 ```
-export IMAGE_VERSION=1.5
+export IMAGE_VERSION=1.7
 ```
 Note: The list of releases is located on the [singularity repository page](https://cloud.sylabs.io/library/proteomicscnic/next-launcher/ptm-compass).
 
