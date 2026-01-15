@@ -1,7 +1,7 @@
 ___
 ## 1.10
 
-### Date 📅 *2026_XX*
+### Date 📅 *2026_01*
 
 ### Changes in detail
 
