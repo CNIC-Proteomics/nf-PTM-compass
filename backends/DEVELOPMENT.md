@@ -20,7 +20,7 @@ ln -s ptm-compass_${IMAGE_VERSION}.sif ptm-compass.sif
 
 Login to Singularity Hub
 ```
-singularity remote login
+singularity remote login SylabsCloud
 ```
 
 Sign your image locally using Singularity CLI.
