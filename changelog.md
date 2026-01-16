@@ -14,6 +14,9 @@ ___
 **rc2**
 + Added caldeltamh_column parameter to PeakModeller.
 
+**rc3**
++ Upgrade the Python version to 3.12 in the singularity image using the default Python version from Ubuntu 24.04.
+
 ### Image Version history
 
 + Updated to the new version:
