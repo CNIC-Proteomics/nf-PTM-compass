@@ -17,6 +17,9 @@ ___
 **rc3**
 + Upgrade the Python version to 3.12 in the singularity image using the default Python version from Ubuntu 24.04.
 
+**rc4**
++ Fixed a bug in the 'refmod' parameter flag.
+
 ### Image Version history
 
 + Updated to the new version:
