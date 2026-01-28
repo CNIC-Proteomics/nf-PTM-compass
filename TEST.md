@@ -63,7 +63,7 @@ nextflow \
     -log "/tmp/nextflow/log/nf-ptm-compass.log" \
     run main.nf   \
         -profile singularity \
-        --search_engine refmod \
+        --is_refmod_input true \
         --sch_files "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_heart/inputs/refmod/*.tsv" \
         --exp_table "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_heart/inputs/experimental_table.tsv" \
         --database "/mnt/tierra/U_Proteomica/UNIDAD/Softwares/jmrodriguezc/nf-PTM-compass/samples/heteroplasmic_heart/inputs/database.fasta" \
